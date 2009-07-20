@@ -29,4 +29,7 @@ src_install() {
     exeinto /bin
     doexe arch/linux.*/bin/ksh
     newman arch/linux.*/man/man1/sh.1 ksh.1
+    for f in src/cmd/ksh93/{RELEASE{88,93,},TYPES}; do
+        dodoc $f
+    done
 }
