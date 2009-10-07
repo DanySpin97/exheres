@@ -5,8 +5,8 @@ require ksh
 
 UPSTREAM_CHANGELOG="http://www.research.att.com/~gsf/download/gen/ast-ksh.html#ksh93%20changes"
 DOWNLOADS="
-    http://I%20accept%20www.opensource.org%2Flicenses%2Fcpl:.@www.research.att.com/~gsf/download/tgz/${KSH_PNV}.tgz
-    http://I%20accept%20www.opensource.org%2Flicenses%2Fcpl:.@www.research.att.com/~gsf/download/tgz/${INIT_PNV}.tgz
+    http://I%20accept%20www.opensource.org%2Flicenses%2Fcpl:.@www.research.att.com/sw/download/beta/${INIT_PNV}.tgz
+    http://I%20accept%20www.opensource.org%2Flicenses%2Fcpl:.@www.research.att.com/sw/download/beta/${KSH_PNV}.tgz
 "
 
 PLATFORMS="~amd64"

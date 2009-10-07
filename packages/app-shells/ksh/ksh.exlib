@@ -1,0 +1,32 @@
+# Copyright 2009 Elias Pipping <elias@pipping.org>
+# Distributed under the terms of the GNU General Purpose License v2
+
+export_exlib_phases src_compile src_install
+
+KSH_PNV=ast-${PN}.$(ever replace_all -)
+INIT_PNV=INIT.$(ever replace_all -)
+
+SUMMARY="The Korn Shell"
+HOMEPAGE="http://www.research.att.com/~gsf/download/gen/ast-ksh.html#ksh93"
+
+LICENCES="CPL-1.0"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+WORK="${WORKBASE}"
+
+ksh_src_compile() {
+    ./bin/package make CCFLAGS="${CFLAGS}"
+}
+
+ksh_src_install() {
+    exeinto /bin
+    doexe arch/linux.*/bin/ksh
+    newman arch/linux.*/man/man1/sh.1 ksh.1
+    for f in src/cmd/ksh93/{RELEASE{88,93,},TYPES}; do
+        dodoc $f
+    done
+}
+
