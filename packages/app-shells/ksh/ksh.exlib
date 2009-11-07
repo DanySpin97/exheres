@@ -3,11 +3,14 @@
 
 export_exlib_phases src_compile src_install
 
-KSH_PNV=ast-${PN}.$(ever replace_all -)
-INIT_PNV=INIT.$(ever replace_all -)
-
 SUMMARY="The Korn Shell"
 HOMEPAGE="http://www.research.att.com/~gsf/download/gen/ast-ksh.html#ksh93"
+DOWNLOADS="
+    http://dev.exherbo.org/~pipping/ast-ksh.$(ever replace_all -).tgz
+    http://dev.exherbo.org/~pipping/INIT.$(ever replace_all -).tgz
+"
+
+UPSTREAM_CHANGELOG="http://www.research.att.com/~gsf/download/gen/ast-ksh.html#ksh93%20changes"
 
 LICENCES="CPL-1.0"
 SLOT="0"
