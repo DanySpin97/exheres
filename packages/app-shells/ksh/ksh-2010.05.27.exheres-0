@@ -1,0 +1,7 @@
+# Copyright 2009 Elias Pipping <elias@pipping.org>
+# Distributed under the terms of the GNU General Public License v2
+
+require ksh
+
+PLATFORMS="~amd64 ~x86"
+
