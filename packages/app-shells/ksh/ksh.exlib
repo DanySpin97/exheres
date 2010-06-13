@@ -1,8 +1,6 @@
 # Copyright 2009 Elias Pipping <elias@pipping.org>
 # Distributed under the terms of the GNU General Public License v2
 
-export_exlib_phases src_compile src_install
-
 SUMMARY="The Korn Shell"
 HOMEPAGE="http://www.research.att.com/~gsf/download/gen/ast-ksh.html#ksh93"
 DOWNLOADS="
@@ -20,11 +18,11 @@ DEPENDENCIES=""
 
 WORK="${WORKBASE}"
 
-ksh_src_compile() {
-    ./bin/package make CCFLAGS="${CFLAGS}"
+src_compile() {
+    edo ./bin/package make CCFLAGS="${CFLAGS}"
 }
 
-ksh_src_install() {
+src_install() {
     exeinto /bin
     doexe arch/linux.*/bin/ksh
     newman arch/linux.*/man/man1/sh.1 ksh.1
