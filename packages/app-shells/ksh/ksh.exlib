@@ -4,8 +4,8 @@
 SUMMARY="The Korn Shell"
 HOMEPAGE="http://www.research.att.com/~gsf/download/gen/ast-ksh.html#ksh93"
 DOWNLOADS="
-    http://dev.exherbo.org/~pipping/ast-ksh.$(ever replace_all -).tgz
-    http://dev.exherbo.org/~pipping/INIT.$(ever replace_all -).tgz
+    http://dev.exherbo.org/~pipping/distfiles/ast-ksh.$(ever replace_all -).tgz
+    http://dev.exherbo.org/~pipping/distfiles/INIT.$(ever replace_all -).tgz
 "
 
 UPSTREAM_CHANGELOG="http://www.research.att.com/~gsf/download/gen/ast-ksh.html#ksh93%20changes"
