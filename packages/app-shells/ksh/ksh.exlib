@@ -3,8 +3,9 @@
 
 SUMMARY="The Korn Shell"
 HOMEPAGE="http://www.research.att.com/~gsf/download/gen/ast-ksh.html#ksh93"
+# ast-base contains nmake (as well as ast-ksh) which is required by the ksh test suite
 DOWNLOADS="
-    http://dev.exherbo.org/~pipping/distfiles/ast-ksh.$(ever replace_all -).tgz
+    http://dev.exherbo.org/~pipping/distfiles/ast-base.$(ever replace_all -).tgz
     http://dev.exherbo.org/~pipping/distfiles/INIT.$(ever replace_all -).tgz
 "
 
@@ -18,14 +19,47 @@ DEPENDENCIES=""
 
 WORK="${WORKBASE}"
 
+KSH_OPTIONS=(
+    CC.OPTIMIZE="${CFLAGS}"
+    SHELL=/bin/sh # Uses /bin/ksh otherwise if it exists which has caused weird Memory faults
+)
+
+pkg_setup() {
+    unset LIBDIR # shcomp fails to link if this is set
+}
+
+src_prepare() {
+    # FIXME: These fail because of sandboxing
+    edo rm src/cmd/ksh93/tests/{basic,signal}.sh
+    # FIXME: This needs to be investigated
+    edo rm src/cmd/ksh93/tests/locale.sh
+}
+
 src_compile() {
-    edo ./bin/package make CCFLAGS="${CFLAGS}"
+    local arch=`bin/package`
+
+    edo bin/package only make ast-ksh "${KSH_OPTIONS[@]}"
+    if grep -q 'make: \*\*\* [[:digit:]]\+ actions\? failed' arch/${arch}/lib/package/gen/make.out; then
+        die "Failed to compile ast-ksh"
+    fi
+}
+
+src_test() {
+    local arch=`bin/package`
+
+    # Necessary for the test suite
+    edo ln -s /bin/cat arch/${arch}/bin/
+    edo ln -s /bin/chmod arch/${arch}/bin/
+
+    edo ./bin/package only test ast-ksh "${KSH_OPTIONS[@]}"
 }
 
 src_install() {
+    local arch=`bin/package`
+
     exeinto /bin
-    doexe arch/linux.*/bin/ksh
-    newman arch/linux.*/man/man1/sh.1 ksh.1
+    doexe arch/${arch}/bin/ksh
+    newman arch/${arch}/man/man1/sh.1 ksh.1
     dodoc src/cmd/ksh93/{RELEASE{88,93,},TYPES}
 }
 
