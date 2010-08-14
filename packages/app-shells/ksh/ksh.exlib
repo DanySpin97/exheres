@@ -21,7 +21,8 @@ WORK="${WORKBASE}"
 
 KSH_OPTIONS=(
     CC.OPTIMIZE="${CFLAGS}"
-    SHELL=/bin/sh # Uses /bin/ksh otherwise if it exists which has caused weird Memory faults
+    # Using /bin/ksh resulted in a Memory fault with older versions of ksh
+    SHELL=/bin/sh
 )
 
 pkg_setup() {
