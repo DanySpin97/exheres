@@ -15,31 +15,30 @@ LICENCES="CPL-1.0"
 SLOT="0"
 MYOPTIONS=""
 
-DEPENDENCIES=""
+DEPENDENCIES="
+    test:
+        app-shells/ksh
+"
 
 WORK="${WORKBASE}"
 
-KSH_OPTIONS=(
-    CC.OPTIMIZE="${CFLAGS}"
-    # Using /bin/ksh resulted in a Memory fault with older versions of ksh
-    SHELL=/bin/sh
-)
-
 pkg_setup() {
     unset LIBDIR # shcomp fails to link if this is set
+    export CC.OPTIMIZE="${CFLAGS}"
 }
 
 src_prepare() {
     # FIXME: These fail because of sandboxing
-    edo rm src/cmd/ksh93/tests/{basic,signal}.sh
-    # FIXME: This needs to be investigated
+    edo rm src/cmd/ksh93/tests/{basic,pty,signal}.sh
+    # FIXME: This needs to be investigated (pty.sh, too)
     edo rm src/cmd/ksh93/tests/locale.sh
 }
 
 src_compile() {
     local arch=`bin/package`
 
-    edo bin/package only make ast-ksh "${KSH_OPTIONS[@]}"
+    # Using /bin/ksh resulted in a Memory fault with older versions of ksh
+    edo bin/package only make SHELL=/bin/sh
     if grep -q 'make: \*\*\* [[:digit:]]\+ actions\? failed' arch/${arch}/lib/package/gen/make.out; then
         die "Failed to compile ast-ksh"
     fi
@@ -48,11 +47,8 @@ src_compile() {
 src_test() {
     local arch=`bin/package`
 
-    # Necessary for the test suite
-    edo ln -s /bin/cat arch/${arch}/bin/
-    edo ln -s /bin/chmod arch/${arch}/bin/
-
-    edo ./bin/package only test ast-ksh "${KSH_OPTIONS[@]}"
+    # bin/regress assumes ksh for a shell
+    edo ./bin/package only test ast-ksh SHELL=/bin/ksh
 }
 
 src_install() {
