@@ -24,7 +24,7 @@ WORK="${WORKBASE}"
 
 pkg_setup() {
     unset LIBDIR # shcomp fails to link if this is set
-    export CC.OPTIMIZE="${CFLAGS}"
+    export CC.OPTIMIZE=${CFLAGS}
 }
 
 src_prepare() {
@@ -48,7 +48,7 @@ src_test() {
     local arch=`bin/package`
 
     # bin/regress assumes ksh for a shell
-    edo ./bin/package only test ast-ksh SHELL=/bin/ksh
+    edo bin/package only test ast-ksh SHELL=/bin/ksh
 }
 
 src_install() {
