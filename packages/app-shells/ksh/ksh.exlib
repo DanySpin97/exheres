@@ -24,7 +24,6 @@ WORK="${WORKBASE}"
 
 pkg_setup() {
     unset LIBDIR # shcomp fails to link if this is set
-    export CC.OPTIMIZE=${CFLAGS}
 }
 
 src_prepare() {
@@ -38,7 +37,7 @@ src_compile() {
     local arch=`bin/package`
 
     # Using /bin/ksh resulted in a Memory fault with older versions of ksh
-    edo bin/package only make SHELL=/bin/sh
+    edo bin/package only make SHELL=/bin/sh CC.OPTIMIZE="${CFLAGS}"
     if grep -q 'make: \*\*\* [[:digit:]]\+ actions\? failed' arch/${arch}/lib/package/gen/make.out; then
         die "Failed to compile ast-ksh"
     fi
