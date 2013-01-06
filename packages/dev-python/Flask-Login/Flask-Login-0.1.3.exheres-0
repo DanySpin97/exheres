@@ -1,0 +1,22 @@
+# Copyright 2013 Markus Rothe
+# Distributed under the terms of the GNU General Public License v2
+
+require setuptools pypi
+
+SUMMARY="User session management for Flask"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/Flask
+    test:
+        dev-python/Attest
+"
+
+# released tarball is missing tests/static/style.css
+RESTRICT="test"
+
