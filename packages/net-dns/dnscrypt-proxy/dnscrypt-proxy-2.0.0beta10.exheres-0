@@ -1,0 +1,19 @@
+# Copyright Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="A modern client implementation of the DNSCrypt protocol."
+HOMEPAGE="https://github.com/jedisct1/dnscrypt-proxy"
+DOWNLOADS="https://github.com/jedisct1/${PN}/releases/download/${PV}/${PN}-linux_x86_64-${PV}.tar.gz"
+
+SLOT="0"
+PLATFORMS="~amd64"
+
+DEPENDENCIES=""
+
+WORK="${WORKBASE}/linux-x86_64"
+
+src_install() {
+    dobin dnscrypt-proxy
+    insinto /etc
+    doins dnscrypt-proxy.toml
+}

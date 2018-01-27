@@ -1,0 +1,21 @@
+# Copyright 2017 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v3
+# Based in part upon 'yadm-1.12.0.ebuild', which is:
+#     Copyright 1999-2017 Gentoo Foundation
+
+require github [ user='TheLocehiliosan' ]
+
+export_exlib_phases src_install
+
+SUMMARY="Yet Another Dotfiles Manager"
+HOMEPAGE="https://github.com/TheLocehiliosan/yadm"
+
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+yadm_src_install(){
+    dobin ${PN}
+    doman ${PN}.1
+}

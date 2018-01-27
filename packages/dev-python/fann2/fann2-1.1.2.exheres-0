@@ -1,0 +1,9 @@
+# Copyright 2017 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require setup-py [ import='setuptools' ] pypi
+
+SUMMARY="Fast Artificial Neural Network Library (FANN) Python bindings."
+
+SLOT="0"
+PLATFORMS="~amd64"

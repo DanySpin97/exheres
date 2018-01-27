@@ -1,0 +1,24 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='fulhax' ] cmake
+
+SUMMARY="ncurses PulseAudio Mixer"
+HOMEPAGE="https://github.com/fulhax/ncpamixer"
+
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/cmake
+        sys-libs/ncurses
+    build+run:
+        media-sound/pulseaudio
+"
+
+WORK="${WORK}/src"
+
+BUGS_TO="danyspin97@protonmail.com"
