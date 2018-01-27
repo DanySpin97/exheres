@@ -1,0 +1,24 @@
+# Copyright 2017 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='jarun' tag=v${PV} ]
+
+SUMMARY="Powerful command-line bookmark manager. Your mini web!"
+HOMEPAGE="https://github.com/jarun/Buku"
+
+SLOT="0"
+PLATFORMS="~amd64"
+
+WORK="${WORKBASE}/Buku-${PV}"
+
+DEPENDENCIES="
+    build+run:
+        dev-lang/python[>=3.4]
+        dev-python/urllib3
+        dev-python/cryptography
+        dev-python/beautifulsoup4
+"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX="/usr/$(exhost --target)"
+)
