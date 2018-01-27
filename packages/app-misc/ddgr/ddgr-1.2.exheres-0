@@ -1,0 +1,19 @@
+# Copyright 2017 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='jarun' tag=v${PV} ]
+
+SUMMARY="🦆 DuckDuckGo from the terminal"
+HOMEPAGE="https://github.com/jarun/ddgr"
+
+SLOT="0"
+PLATFORMS="~amd64"
+
+DEPENDENCIES="
+    run:
+        dev-lang/python[>=3.4]
+"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX="/usr/$(exhost --target)"
+)
