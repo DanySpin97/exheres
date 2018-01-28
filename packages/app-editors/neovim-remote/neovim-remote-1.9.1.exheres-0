@@ -4,12 +4,15 @@
 require github [ user='mhinz' tag=v${PV} ] setup-py [ import='setuptools' ]
 
 SUMMARY="Support for --remote and friends."
-HOMEPAGE="https://github.com/mhinz/neovim-remote"
 
+LICENCES="MIT"
 SLOT="0"
 PLATFORMS="~amd64"
 
 DEPENDENCIES="
     build+run:
-        dev-python/psutil
+        dev-python/psutil[python_abis:*(-)?]
 "
+
+MYOPTIONS=""
+
