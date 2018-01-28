@@ -3,17 +3,20 @@
 
 require github [ user='jarun' tag=v${PV} ]
 
-SUMMARY="🦆 DuckDuckGo from the terminal"
-HOMEPAGE="https://github.com/jarun/ddgr"
+SUMMARY="DuckDuckGo from the terminal"
 
+LINCENCES="GPL-3.0"
 SLOT="0"
 PLATFORMS="~amd64"
 
+MYOPTIONS=""
+
 DEPENDENCIES="
     run:
-        dev-lang/python[>=3.4]
+        dev-lang/python:*[>=3.4]
 "
 
 DEFAULT_SRC_INSTALL_PARAMS=(
     PREFIX="/usr/$(exhost --target)"
 )
+
