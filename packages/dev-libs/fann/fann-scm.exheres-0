@@ -1,9 +1,15 @@
-# Copyright 2008 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='libfann' ] cmake
+require github [ user='libfann' ] cmake [ api=2 ]
 
 SUMMARY="Official github repository for Fast Artificial Neural Network Library (FANN)"
 
+LICENCES="LGPL-2.0"
 SLOT="0"
 PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
