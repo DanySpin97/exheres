@@ -8,9 +8,10 @@ require github [ user='TheLocehiliosan' ]
 export_exlib_phases src_install
 
 SUMMARY="Yet Another Dotfiles Manager"
-HOMEPAGE="https://github.com/TheLocehiliosan/yadm"
 
+LICENCES="GPL-3.0"
 SLOT="0"
+
 MYOPTIONS=""
 
 DEPENDENCIES=""
@@ -19,3 +20,4 @@ yadm_src_install(){
     dobin ${PN}
     doman ${PN}.1
 }
+
