@@ -4,19 +4,22 @@
 require github [ user='jarun' tag=v${PV} ]
 
 SUMMARY="Powerful command-line bookmark manager. Your mini web!"
-HOMEPAGE="https://github.com/jarun/Buku"
 
+LICENCES="GPL-3.0"
 SLOT="0"
 PLATFORMS="~amd64"
 
+MYOPTIONS=""
+
 DEPENDENCIES="
     build+run:
-        dev-lang/python[>=3.4]
-        dev-python/urllib3
-        dev-python/cryptography
-        dev-python/beautifulsoup4
+        dev-lang/python[>=3.4][python_abis:*(-)?]
+        dev-python/urllib3[python_abis:*(-)?]
+        dev-python/cryptography[python_abis:*(-)?]
+        dev-python/beautifulsoup4[python_abis:*(-)?]
 "
 
 DEFAULT_SRC_INSTALL_PARAMS=(
     PREFIX="/usr/$(exhost --target)"
 )
+
