@@ -4,28 +4,24 @@
 require github [ user='graysky2' tag=v${PV} ]
 
 SUMMARY="Symlinks and syncs user specified dirs to RAM thus reducing HDD/SDD calls and speeding-up the system."
-HOMEPAGE="https://wiki.archlinux.org/index.php/Anything-sync-daemon"
 
+LICENCES="MIT"
 PLATFORMS="~amd64"
 SLOT="0"
-MYOPTIONS="
-    providers:
-        systemd
-"
+
+MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
         net-misc/rsync
-        systemd? (
-            sys-apps/systemd
-        )
 "
 
+# TODO Add systemd support
 DEFAULT_SRC_INSTALL_PARAMS=(
-    BINDIR="/usr/$(exhost --target)/bin"
+    PREFIX="/usr/$(exhost --target)"
     install-bin
     install-man
-    systemd? install-systemd
 )
 
 BUGS_TO="danyspin97@protonmail.com"
+
