@@ -10,18 +10,21 @@ LICENCES="Apache-2.0"
 SLOT="0"
 PLATFORMS="~amd64"
 
+MYOPTIONS=""
+
 DEPENDENCIES="
     build+run:
-    media-libs/freetype
-    media-libs/fontconfig
-    sys-libs/zlib
+        media-libs/freetype:=
+        media-libs/fontconfig
+        sys-libs/zlib
 
-    x11-libs/libX11
-    x11-libs/libXxf86vm
-    x11-libs/libXi
-    x11-dri/mesa
+        x11-libs/libX11
+        x11-libs/libXxf86vm
+        x11-libs/libXi
+        x11-dri/mesa
 
-    x11-utils/xclip
+        x11-utils/xclip
 "
 
 BUGS_TO="danyspin97@protonmail.com"
+
