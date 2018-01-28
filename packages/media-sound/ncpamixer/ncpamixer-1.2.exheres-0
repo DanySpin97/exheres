@@ -20,6 +20,5 @@ DEPENDENCIES="
 
 CMAKE_SOURCE="${WORKBASE}/${PNV}/src"
 
-
 BUGS_TO="danyspin97@protonmail.com"
 
