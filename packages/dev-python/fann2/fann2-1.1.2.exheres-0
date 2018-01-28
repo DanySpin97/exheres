@@ -5,5 +5,13 @@ require setup-py [ import='setuptools' ] pypi
 
 SUMMARY="Fast Artificial Neural Network Library (FANN) Python bindings."
 
+LICENCES="LGPL-2.1"
 SLOT="0"
 PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    dev-libs/fann
+"
+
