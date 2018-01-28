@@ -9,8 +9,6 @@ HOMEPAGE="https://github.com/jarun/Buku"
 SLOT="0"
 PLATFORMS="~amd64"
 
-WORK="${WORKBASE}/Buku-${PV}"
-
 DEPENDENCIES="
     build+run:
         dev-lang/python[>=3.4]
