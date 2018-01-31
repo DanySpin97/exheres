@@ -1,0 +1,18 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='Kuniwak' tag=v${PV} ] setup-py [ import='setuptools' ]
+
+SUMMARY="Fast and Highly Extensible Vim script Language Lint implemented by Python."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    dev-python/PyYAML[python_abis:*(-)?][>=3.11]
+    dev-python/ansicolor[python_abis:*(-)?][=0.2.4]
+    dev-python/chardet[python_abis:*(-)?][>=2.3.0]
+"
