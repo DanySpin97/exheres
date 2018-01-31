@@ -1,0 +1,14 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='richq' tag=v${PV} ] setup-py [ import='setuptools' ]
+
+SUMMARY="Check for coding style issues in CMake files"
+
+LICENCES="Apache-2.0"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
