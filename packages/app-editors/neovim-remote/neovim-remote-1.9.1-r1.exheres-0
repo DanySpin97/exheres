@@ -1,7 +1,7 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='mhinz' tag=v${PV} ] setup-py [ import='setuptools' ]
+require github [ user='mhinz' tag=v${PV} ] setup-py [ import='setuptools' blacklist='2.7' ]
 
 SUMMARY="Support for --remote and friends."
 
