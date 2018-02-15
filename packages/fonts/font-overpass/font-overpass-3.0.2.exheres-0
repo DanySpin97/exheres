@@ -1,0 +1,21 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='RedHatBrand' pn='Overpass' ]
+
+
+SUMMARY="Overpass open source web font family — Sponsored by Red Hat"
+
+LICENCES="OFL-1.1"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+src_install(){
+    insinto /usr/share/fonts/X11/overpass
+    doins desktop-fonts/overpass*/*.otf
+}
+
