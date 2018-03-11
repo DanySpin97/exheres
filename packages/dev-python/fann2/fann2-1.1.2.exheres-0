@@ -12,6 +12,8 @@ PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    dev-libs/fann
+    build+run:
+        dev-lang/swig
+        dev-libs/fann
 "
 
