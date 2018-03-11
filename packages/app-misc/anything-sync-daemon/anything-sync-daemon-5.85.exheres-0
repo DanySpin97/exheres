@@ -3,7 +3,7 @@
 
 require github [ user='graysky2' tag=v${PV} ]
 
-SUMMARY="Symlinks and syncs user specified dirs to RAM thus reducing HDD/SDD calls and speeding-up the system."
+SUMMARY="Symlinks and syncs user specified dirs to RAM reducing HDD/SDD calls."
 
 LICENCES="MIT"
 PLATFORMS="~amd64"
