@@ -14,12 +14,13 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-lang/python[>=3.4][python_abis:*(-)?]
-        dev-python/urllib3[python_abis:*(-)?]
-        dev-python/cryptography[python_abis:*(-)?]
         dev-python/beautifulsoup4[python_abis:*(-)?]
+        dev-python/cryptography[python_abis:*(-)?]
+        dev-python/urllib3[python_abis:*(-)?]
 "
 
 DEFAULT_SRC_INSTALL_PARAMS=(
-    PREFIX="/usr/$(exhost --target)"
+    PREFIX="/usr"
+    BINDIR="${IMAGE}/usr/$(exhost --target)/bin"
 )
 
