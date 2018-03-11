@@ -1,0 +1,39 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='kovidgoyal' tag=v${PV} ]
+
+require python [ has_bin=true blacklist='2.7 3.4' ]
+
+SUMMARY="A cross-platform, fast, feature full, GPU based terminal emulator"
+
+LICENCES="GPL-3.0"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        x11-apps/xrandr
+        x11-dri/mesa
+        x11-proto/xorgproto
+        x11-utils/xcb-util-cursor
+        x11-utils/xcb-util
+    build+run:
+        media-gfx/ImageMagick
+        media-libs/fontconfig
+        media-libs/libpng
+        sys-libs/zlib
+        x11-libs/harfbuzz[>=1.5.0]
+"
+
+src_compile(){
+    PKGCONFIG_EXE=${PKG_CONFIG} edo python setup.py linux-package \
+        --prefix "${IMAGE}/usr/$(exhost --target)"
+}
+
+src_install(){
+    edo mv "${IMAGE}/usr/$(exhost --target)/share/" "${IMAGE}/usr/"
+}
+
