@@ -14,7 +14,10 @@ SLOT="0"
 
 MYOPTIONS=""
 
-DEPENDENCIES=""
+DEPENDENCIES="
+    test:
+        dev-util/bats
+"
 
 yadm_src_install(){
     dobin ${PN}
