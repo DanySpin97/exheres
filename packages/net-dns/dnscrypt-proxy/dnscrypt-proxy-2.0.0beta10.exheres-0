@@ -7,7 +7,7 @@ SUMMARY="A modern client implementation of the DNSCrypt protocol."
 DOWNLOADS="https://github.com/jedisct1/${PN}/releases/download/${PV}/${PN}-linux_x86_64-${PV}.tar.gz"
 
 LICENCES="ISC"
-SLOT="0"
+SLOT="2"
 PLATFORMS="~amd64"
 
 MYOPTIONS=""
