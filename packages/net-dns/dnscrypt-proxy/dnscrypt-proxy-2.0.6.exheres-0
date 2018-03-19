@@ -1,0 +1,40 @@
+# Copyright Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='jedisct1' ]
+
+SUMMARY="A modern client implementation of the DNSCrypt protocol."
+
+LICENCES="ISC"
+SLOT="2"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+WORK="${WORKBASE}"
+
+src_configure(){
+    edo cd "${WORK}"
+    edo mv "${PNV}" src
+}
+
+src_compile(){
+    edo cd src/${PN}
+    GOPATH="${WORK}" edo go build -ldflags="-s -w" -o "${WORK}"/dnscrypt-proxy
+}
+
+src_install() {
+    edo cd "${WORK}"
+    dobin dnscrypt-proxy
+
+    insinto /etc/dnscrypt
+    edo cd "${WORK}/src/${PN}"
+    for i in example-*; do edo mv $i ${i/example-/}; done
+    doins *.txt
+    doins dnscrypt-proxy.toml
+    # TODO install systemd service
+    # optionq(systemd) && edo cp systemd/* /etc/systemd
+}
+
