@@ -1,0 +1,29 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+PNV="lua-${PNV}"
+require github [ user='mpx' pn='lua-cjson' ]
+require lua [ multibuild=true multiunpack=true whitelist='5.1 5.2 5.3' ]
+
+SUMMARY="Lua CJSON is a fast JSON encoding/parsing module for Lua."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+compile_one_multibuild(){
+    emake \
+        PREFIX="/usr/$(exhost --target)" \
+        LUA_VERSION="$(lua_get_abi)" \
+        LUA_INCLUDE_DIR="/usr/$(exhost --target)/include/lua$(lua_get_abi)" \
+        TARGET="${WORKBASE}/LUA_ABIS/$(lua_get_abi)/cjson.so"
+}
+
+install_one_multibuild(){
+    lua_install_cmodule "${WORKBASE}/LUA_ABIS/$(lua_get_abi)/cjson.so"
+}
+
