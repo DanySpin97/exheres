@@ -1,0 +1,31 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='michael-lazar' tag=v${PV} ]
+require setup-py [ import=setuptools ]
+
+SUMMARY="Browse Reddit from your terminal"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/beautifulsoup4[python_abis:*(-)?]
+        dev-python/decorator[python_abis:*(-)?]
+        dev-python/kitchen[python_abis:*(-)?]
+        dev-python/requests[python_abis:*(-)?]
+        dev-python/six[python_abis:*(-)?]
+"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX="/usr"
+    BINDIR="${IMAGE}/usr/$(exhost --target)/bin"
+)
+
+# TODO Add all test dependency
+RESTRICT="test"
+
