@@ -1,0 +1,19 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='cheshirekow' tag=v${PV} ]
+require setup-py [ import='setuptools' ]
+
+SUMMARY="Source code formatter for cmake listfiles."
+
+LICENCES="GLP-3.0"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/PyYAML[python_abis:*(-)?]
+"
+
