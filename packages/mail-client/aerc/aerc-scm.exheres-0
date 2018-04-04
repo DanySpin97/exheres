@@ -1,0 +1,28 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='SirCmpwn' ] cmake [ api=2 ]
+
+SUMMARY="Asynchronous email client for your terminal"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS="
+    providers: openssl
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/libtsm
+        dev-python/termbox
+        providers:openssl? ( dev-libs/openssl )
+    test:
+        dev-util/cmocka
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+CMAKE_SRC_CONFIGURE_PARAMS=( -DCMAKE_INSTALL_SYSCONFDIR=/usr/share )
+
