@@ -16,7 +16,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build+run:
         dev-libs/libtsm
-        dev-python/termbox
+        dev-libs/termbox
         providers:openssl? ( dev-libs/openssl )
     test:
         dev-util/cmocka
