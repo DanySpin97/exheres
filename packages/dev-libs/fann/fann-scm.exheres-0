@@ -3,9 +3,9 @@
 
 require github [ user='libfann' ] cmake [ api=2 ]
 
-SUMMARY="Official github repository for Fast Artificial Neural Network Library (FANN)"
+SUMMARY="Open source neural network library."
 
-LICENCES="LGPL-2.0"
+LICENCES="LGPL-2.1"
 SLOT="0"
 PLATFORMS="~amd64"
 
