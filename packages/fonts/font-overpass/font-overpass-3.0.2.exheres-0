@@ -3,7 +3,6 @@
 
 require github [ user='RedHatBrand' pn='Overpass' ]
 
-
 SUMMARY="Overpass open source web font family — Sponsored by Red Hat"
 
 LICENCES="OFL-1.1"
