@@ -1,8 +1,7 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-PNV="lua-${PNV}"
-require github [ user='mpx' pn='lua-cjson' ]
+require github [ user='mpx' ]
 require lua [ multibuild=true multiunpack=true whitelist='5.1 5.2 5.3' ]
 
 SUMMARY="Lua CJSON is a fast JSON encoding/parsing module for Lua."
