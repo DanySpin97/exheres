@@ -16,8 +16,8 @@ DEPENDENCIES="
         app-arch/libarchive
         dev-db/sqlite:3
         kde-frameworks/extra-cmake-modules
-        x11-libs/qtbase[>=5.5.1]
-        x11-libs/qtwebkit
+        x11-libs/qtbase:5[>=5.5.1]
+        x11-libs/qtwebkit:5
         X? (
             x11-utils/xcb-util-keysyms
         )
