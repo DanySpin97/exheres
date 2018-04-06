@@ -21,11 +21,6 @@ DEPENDENCIES="
         dev-python/six[python_abis:*(-)?]
 "
 
-DEFAULT_SRC_INSTALL_PARAMS=(
-    PREFIX="/usr"
-    BINDIR="${IMAGE}/usr/$(exhost --target)/bin"
-)
-
 # TODO Add all test dependency
 RESTRICT="test"
 
