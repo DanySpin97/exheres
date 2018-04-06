@@ -23,5 +23,6 @@ DEPENDENCIES="
 BUGS_TO="danyspin97@protonmail.com"
 
 # Install example configuration files in /usr/share
+# Needed by CMakeLists.txt
 CMAKE_SRC_CONFIGURE_PARAMS=( -DCMAKE_INSTALL_SYSCONFDIR=/usr/share )
 
