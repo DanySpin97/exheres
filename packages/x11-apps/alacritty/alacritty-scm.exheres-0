@@ -4,10 +4,10 @@
 require github [ user='jwilm' ] cargo
 
 SUMMARY="A cross-platform, GPU-accelerated terminal emulator"
-DESCRIPTION="Alacritty is focused on simplicity and performance. The \
-performance goal means it should be faster than any other terminal emulator \
-available. The simplicity goal means that it doesn't have features such as \
-tabs or splits (which can be better provided by a window manager or terminal \
+DESCRIPTION="Alacritty is focused on simplicity and performance. The
+performance goal means it should be faster than any other terminal emulator
+available. The simplicity goal means that it doesn't have features such as
+tabs or splits (which can be better provided by a window manager or terminal
 multiplexer) nor niceties like a GUI config editor."
 
 LICENCES="Apache-2.0"
@@ -29,11 +29,11 @@ DEPENDENCIES="
         x11-utils/xclip
 "
 
+BUGS_TO="danyspin97@protonmail.com"
+
 src_install(){
     default
     insinto /usr/share/applications
     doins Alacritty.desktop
 }
-
-BUGS_TO="danyspin97@protonmail.com"
 
