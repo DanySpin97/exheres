@@ -14,6 +14,15 @@ MYOPTIONS=""
 DEPENDENCIES=""
 
 src_install(){
-    edo ./install.sh "${IMAGE}/usr/$(exhost --target)"
+    dobin bin/*
+
+    insinto /usr/$(exhost --target)/libexec
+    doins libexec/*
+
+    insinto /usr/share/man/man1
+    doins man/bats.1
+
+    insinto /usr/share/man/man7
+    doins man/bats.7
 }
 
