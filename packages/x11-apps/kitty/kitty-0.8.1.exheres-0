@@ -3,7 +3,7 @@
 
 require github [ user='kovidgoyal' tag=v${PV} ]
 
-require python [ has_bin=true blacklist='2.7 3.4' ]
+require python [ has_bin=true blacklist='2.7 3.4' has_lib=false ]
 
 SUMMARY="A cross-platform, fast, feature full, GPU based terminal emulator"
 
