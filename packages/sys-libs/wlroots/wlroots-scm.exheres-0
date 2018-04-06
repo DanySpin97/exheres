@@ -36,16 +36,17 @@ DEPENDENCIES="
         x11-dri/libdrm
         x11-libs/libxkbcommon
         x11-libs/pixman
-        providers:systemd? ( sys-apps/systemd )
-        providers:eudev? ( sys-apps/eudev )
         caps? ( sys-libs/libcap )
+        providers:elogind? ( sys-auth/elogind )
+        providers:eudev? ( sys-apps/eudev )
+        providers:systemd? ( sys-apps/systemd )
 "
 
 MESON_SRC_CONFIGURE_OPTION_ENABLES=(
-    'providers:systemd systemd'
-    'providers:elogind elogind'
     'caps libcap'
-    xwayland
     'X x11_backend'
+    xwayland
+    'providers:elogind elogind'
+    'providers:systemd systemd'
 )
 
