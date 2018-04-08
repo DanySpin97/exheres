@@ -6,7 +6,7 @@ require github [ user='jedisct1' ]
 SUMMARY="A modern client implementation of the DNSCrypt protocol."
 
 LICENCES="ISC"
-SLOT="2"
+SLOT="0"
 PLATFORMS="~amd64"
 
 MYOPTIONS=""
