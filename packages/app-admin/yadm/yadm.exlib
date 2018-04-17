@@ -9,7 +9,7 @@ export_exlib_phases src_install
 
 SUMMARY="Yet Another Dotfiles Manager"
 
-LICENCES="GPL-3.0"
+LICENCES="GPL-3"
 SLOT="0"
 
 MYOPTIONS=""
