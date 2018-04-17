@@ -23,7 +23,7 @@ DEPENDENCIES="
     build+run:
         media-gfx/ImageMagick
         media-libs/fontconfig
-        media-libs/libpng
+        media-libs/libpng:1.6
         sys-libs/zlib
         x11-libs/harfbuzz[>=1.5.0]
 "
