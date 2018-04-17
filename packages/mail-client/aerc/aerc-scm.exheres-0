@@ -9,7 +9,9 @@ LICENCES="MIT"
 SLOT="0"
 PLATFORMS="~amd64"
 
-MYOPTIONS="crypto"
+MYOPTIONS="
+    crypto [[ description = [ Enable SSL support ] ]]
+"
 
 DEPENDENCIES="
     build+run:
@@ -22,7 +24,11 @@ DEPENDENCIES="
 
 BUGS_TO="danyspin97@protonmail.com"
 
-# Install example configuration files in /usr/share
+# Install example configuration files in /etc
 # Needed by CMakeLists.txt
-CMAKE_SRC_CONFIGURE_PARAMS=( -DCMAKE_INSTALL_SYSCONFDIR=/usr/share )
+CMAKE_SRC_CONFIGURE_PARAMS=( -DCMAKE_INSTALL_SYSCONFDIR=/etc )
+
+CMAKE_SRC_CONFIGURE_OPTIONS=(
+    'crypto enable-openssl'
+)
 
