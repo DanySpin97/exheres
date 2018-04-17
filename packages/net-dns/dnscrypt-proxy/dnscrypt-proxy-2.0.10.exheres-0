@@ -11,13 +11,15 @@ PLATFORMS="~amd64"
 
 MYOPTIONS=""
 
-DEPENDENCIES=""
+DEPENDENCIES="
+    dev-lang/go
+"
 
 WORK="${WORKBASE}"
 
 src_configure(){
     edo cd "${WORK}"
-    edo mv "${PNV}" src
+    edo mv ${PNV} src
 }
 
 src_compile(){
@@ -30,7 +32,7 @@ src_install() {
     dobin dnscrypt-proxy
 
     insinto /etc/dnscrypt
-    edo cd "${WORK}/src/${PN}"
+    edo cd "${WORK}"/src/${PN}
     for i in example-*; do edo mv $i ${i/example-/}; done
     doins *.txt
     doins dnscrypt-proxy.toml
