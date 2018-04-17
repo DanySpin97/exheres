@@ -5,7 +5,7 @@ require github [ user='zealdocs' tag=v${PV} ] cmake [ api=2 ]
 
 SUMMARY="Offline documentation browser inspired by Dash"
 
-LICENCES="GLP-3.0"
+LICENCES="GLP-3"
 SLOT="0"
 PLATFORMS="~amd64"
 
@@ -18,9 +18,9 @@ DEPENDENCIES="
         kde-frameworks/extra-cmake-modules
         x11-libs/qtbase:5[>=5.5.1]
         x11-libs/qtwebkit:5
-        X? (
-            x11-utils/xcb-util-keysyms
-        )
+    suggestion:
+        x11-libs/qtx11extras:5
+        x11-utils/xcb-util-keysyms
 "
 
 BUGS_TO="danyspin97@protonmail.com"
