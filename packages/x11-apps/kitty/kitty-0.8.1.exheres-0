@@ -7,7 +7,7 @@ require python [ has_bin=true blacklist='2.7 3.4' has_lib=false ]
 
 SUMMARY="A cross-platform, fast, feature full, GPU based terminal emulator"
 
-LICENCES="GPL-3.0"
+LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
 
@@ -29,7 +29,7 @@ DEPENDENCIES="
 "
 
 src_compile(){
-    PKGCONFIG_EXE=${PKG_CONFIG} edo python setup.py linux-package \
+    PKGCONFIG_EXE=${PKG_CONFIG} edo python$(python_get_abi) setup.py linux-package \
         --prefix "${IMAGE}/usr/$(exhost --target)"
 }
 
