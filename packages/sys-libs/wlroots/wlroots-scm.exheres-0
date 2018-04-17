@@ -12,7 +12,6 @@ PLATFORMS="~amd64"
 
 MYOPTIONS="
     caps [[ description = [ for capability support ] ]]
-    doc
     xwayland [[ description = [ Enable support X11 applications ] ]]
     X [[ description = [ Enable X11 backend ] ]]
     ( providers: systemd elogind ) [[
@@ -23,8 +22,6 @@ MYOPTIONS="
 "
 
 DEPENDENCIES="
-    build:
-        doc? ( app-doc/asciidoc )
     build+run:
         sys-libs/libinput[>=1.7.0]
         sys-libs/wayland
