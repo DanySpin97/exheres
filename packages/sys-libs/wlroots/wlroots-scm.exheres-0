@@ -13,16 +13,13 @@ PLATFORMS="~amd64"
 MYOPTIONS="
     caps [[ description = [ for capability support ] ]]
     doc
-    xwayland
-    X
+    xwayland [[ description = [ Enable support X11 applications ] ]]
+    X [[ description = [ Enable X11 backend ] ]]
     ( providers: systemd elogind ) [[
         *description = [ Logind support ]
         number-selected = at-most-one
     ]]
-    ( providers: systemd eudev ) [[
-        *description = [ Logind support ]
-        number-selected = exactly-one
-    ]]
+    ( providers: systemd eudev ) [[ number-selected = exactly-one ]]
 "
 
 DEPENDENCIES="
@@ -34,7 +31,7 @@ DEPENDENCIES="
         sys-libs/wayland-protocols[>=1.12]
         x11-dri/mesa[wayland][X]
         x11-dri/libdrm
-        x11-libs/libxkbcommon
+        x11-libs/libxkbcommon[wayland][X]
         x11-libs/pixman
         caps? ( sys-libs/libcap )
         providers:elogind? ( sys-auth/elogind )
