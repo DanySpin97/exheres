@@ -5,7 +5,7 @@ require github [ user='jarun' tag=v${PV} ]
 
 SUMMARY="Powerful command-line bookmark manager. Your mini web!"
 
-LICENCES="GPL-3.0"
+LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
 
