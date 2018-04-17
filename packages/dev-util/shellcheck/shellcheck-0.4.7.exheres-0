@@ -5,7 +5,7 @@ require github [ user='koalaman' tag=v${PV} ] cabal [ has_bin=true ]
 
 SUMMARY="ShellCheck, a static analysis tool for shell scripts."
 
-LICENCES="GPL-3.0"
+LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
 
