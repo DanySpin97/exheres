@@ -1,7 +1,7 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='RedHatBrand' pn='Overpass' ]
+require github [ user='RedHatBrand' pn='Overpass' ] xfont
 
 SUMMARY="Overpass open source web font family — Sponsored by Red Hat"
 
