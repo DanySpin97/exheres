@@ -26,9 +26,9 @@ DEPENDENCIES="
         sys-libs/libinput[>=1.7.0]
         sys-libs/wayland
         sys-libs/wayland-protocols[>=1.12]
-        x11-dri/mesa[wayland][X]
+        x11-dri/mesa[wayland][X?]
         x11-dri/libdrm
-        x11-libs/libxkbcommon[wayland][X]
+        x11-libs/libxkbcommon[wayland][X?]
         x11-libs/pixman
         caps? ( sys-libs/libcap )
         providers:elogind? ( sys-auth/elogind )
