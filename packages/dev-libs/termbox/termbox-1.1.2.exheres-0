@@ -1,7 +1,7 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require python [ blacklist=" " with_opt=true ]
+require python [ blacklist=none with_opt=true ]
 require github [ user='nsf' tag=v${PV} ] waf
 
 SUMMARY="Library for writing text-based user interfaces"
@@ -24,4 +24,6 @@ src_install(){
             --prefix=/usr/$(exhost --target)
     done
 }
+
+RESTRICT="test"
 
