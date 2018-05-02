@@ -1,0 +1,10 @@
+image: exherbo/exherbo_ci
+
+variables:
+  REPO: danyspin97-exheres
+  REPO_NAMESPACE: DanySpin97
+
+build:
+  script:
+    - buildtest
+
