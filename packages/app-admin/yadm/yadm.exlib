@@ -4,23 +4,36 @@
 #     Copyright 1999-2017 Gentoo Foundation
 
 require github [ user='TheLocehiliosan' ]
+require bash-completion zsh-completion
 
 export_exlib_phases src_install
 
 SUMMARY="Yet Another Dotfiles Manager"
+HOMEPAGE="https://thelocehiliosan.github.io/yadm/"
 
 LICENCES="GPL-3"
 SLOT="0"
-
 MYOPTIONS=""
 
 DEPENDENCIES="
+    build+run:
+        dev-scm/git
+    suggestion:
+        app-crypt/gnupg [[
+            description = [ Support for encrypting confidential files ]
+        ]]
     test:
         dev-util/bats
 "
 
-yadm_src_install(){
-    dobin ${PN}
-    doman ${PN}.1
+BASH_COMPLETIONS=( "completion/${PN}.bash_completion" )
+ZSH_COMPLETIONS=( "completion/${PN}.zsh_completion" )
+
+yadm_src_install() {
+    dobin "${PN}"
+    doman "${PN}.1"
+
+    bash-completion_src_install
+    zsh-completion_src_install
 }
 
