@@ -24,6 +24,7 @@ DEPENDENCIES="
         ]]
     test:
         dev-util/bats
+        dev-util/shellcheck
 "
 
 BASH_COMPLETIONS=( "completion/${PN}.bash_completion" )
