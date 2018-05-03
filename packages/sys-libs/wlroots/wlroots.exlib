@@ -1,0 +1,47 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='swaywm' ] meson
+
+SUMMARY="A modular Wayland compositor library"
+DESCRIPTION="Pluggable, composable modules for building a Wayland compositor"
+
+LICENCES="MIT"
+SLOT="0"
+
+MYOPTIONS="
+    caps [[ description = [ for capability support ] ]]
+    logind 
+    xwayland [[ description = [ Enable support X11 applications ] ]]
+    X [[ description = [ Enable X11 backend ] ]]
+    ( providers: eudev systemd ) [[ number-selected = exactly-one ]]
+    ( logind providers: elogind ) [[
+        *description = [ Logind support ]
+        number-selected = at-most-one
+    ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        sys-libs/libinput[>=1.7.0]
+        sys-libs/wayland
+        sys-libs/wayland-protocols[>=1.12]
+        x11-dri/mesa[wayland][X?]
+        x11-dri/libdrm
+        x11-libs/libxkbcommon[wayland][X?]
+        x11-libs/pixman
+        caps? ( sys-libs/libcap )
+        logind? ( sys-apps/systemd )
+        providers:elogind? ( sys-auth/elogind )
+        providers:eudev? ( sys-apps/eudev )
+        providers:systemd? ( sys-apps/systemd )
+"
+
+MESON_SRC_CONFIGURE_OPTION_ENABLES=(
+    'caps libcap'
+    'X x11_backend'
+    xwayland
+    'logind systemd'
+    'providers:elogind elogind'
+)
+
