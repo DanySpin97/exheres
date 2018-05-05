@@ -11,11 +11,10 @@ SLOT="0"
 
 MYOPTIONS="
     caps [[ description = [ for capability support ] ]]
-    logind 
     xwayland [[ description = [ Enable support X11 applications ] ]]
     X [[ description = [ Enable X11 backend ] ]]
     ( providers: eudev systemd ) [[ number-selected = exactly-one ]]
-    ( logind providers: elogind ) [[
+    ( systemd-logind providers: elogind ) [[
         *description = [ Logind support ]
         number-selected = at-most-one
     ]]
@@ -31,7 +30,7 @@ DEPENDENCIES="
         x11-libs/libxkbcommon[wayland][X?]
         x11-libs/pixman
         caps? ( sys-libs/libcap )
-        logind? ( sys-apps/systemd )
+        systemd-logind? ( sys-apps/systemd )
         providers:elogind? ( sys-auth/elogind )
         providers:eudev? ( sys-apps/eudev )
         providers:systemd? ( sys-apps/systemd )
@@ -41,7 +40,7 @@ MESON_SRC_CONFIGURE_OPTION_ENABLES=(
     'caps libcap'
     'X x11_backend'
     xwayland
-    'logind systemd'
+    'systemd-logind systemd'
     'providers:elogind elogind'
 )
 
