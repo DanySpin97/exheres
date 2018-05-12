@@ -1,8 +1,8 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require python [ blacklist=none with_opt=true ]
 require github [ user='nsf' tag=v${PV} ] waf
+require setup-py [ import=setuptools blacklist=none with_opt=true ]
 
 SUMMARY="Library for writing text-based user interfaces"
 
@@ -16,13 +16,19 @@ DEPENDENCIES=""
 
 WAF_SRC_INSTALL_PARAMS=( --targets=${PN}_shared )
 
-src_install(){
+configure_one_multibuild() {
+    waf_src_configure
+}
+
+compile_one_multibuild() {
+    waf_src_compile
+}
+
+install_one_multibuild() {
     waf_src_install
-    for abi in ${PYTHON_ABIS}; do
-        edo python${abi} setup.py install \
-            --root="${IMAGE}" \
-            --prefix=/usr/$(exhost --target)
-    done
+    if optionq python; then
+        setup-py_install_one_multibuild
+    fi
 }
 
 RESTRICT="test"
