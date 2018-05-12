@@ -33,7 +33,7 @@ DEPENDENCIES="
         providers:elogind? ( sys-auth/elogind )
         providers:eudev? ( sys-apps/eudev )
         providers:systemd? ( sys-apps/systemd )
-        providerd:systemd-logind? ( sys-apps/systemd )
+        providers:systemd-logind? ( sys-apps/systemd )
 "
 
 MESON_SRC_CONFIGURE_OPTION_ENABLES=(
