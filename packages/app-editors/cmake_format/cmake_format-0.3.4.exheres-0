@@ -6,7 +6,7 @@ require setup-py [ import='setuptools' ]
 
 SUMMARY="Source code formatter for cmake listfiles."
 
-LICENCES="GLP-3"
+LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
 
