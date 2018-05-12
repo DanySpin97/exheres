@@ -5,7 +5,7 @@ require github [ user='zealdocs' tag=v${PV} ] cmake [ api=2 ]
 
 SUMMARY="Offline documentation browser inspired by Dash"
 
-LICENCES="GLP-3"
+LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
 
