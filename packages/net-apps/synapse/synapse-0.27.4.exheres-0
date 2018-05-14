@@ -12,5 +12,8 @@ PLATFORMS="~amd64"
 
 MYOPTIONS=""
 
-DEPENDENCIES=""
+DEPENDENCIES="
+    user/synapse
+    group/synapse
+"
 
