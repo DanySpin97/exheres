@@ -9,7 +9,7 @@ LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
 
-MYOPTIONS="X"
+MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
@@ -18,11 +18,8 @@ DEPENDENCIES="
         kde-frameworks/extra-cmake-modules
         x11-libs/qtbase:5[>=5.5.1]
         x11-libs/qtwebkit:5
-    suggestion:
-        X? (
-            x11-libs/qtx11extras:5
-            x11-utils/xcb-util-keysyms
-        )
+        x11-libs/qtx11extras:5
+        x11-utils/xcb-util-keysyms
 "
 
 BUGS_TO="danyspin97@protonmail.com"
