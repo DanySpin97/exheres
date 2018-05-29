@@ -23,17 +23,26 @@ DEPENDENCIES="
             media-gfx/ImageMagick
             media-gfx/scrot
             media-libs/imlib2
-        ) [[ description = [ Automatically take a screenshot ] ]]
+        ) [[
+            *group-name = [ screenshot ]
+            *description = [ Automatically take a screenshot ]
+        ]]
         (
             media-gfx/ImageMagick
             media-libs/libcaca
             net-www/w3m[imlib2]
             x11-apps/xprop
-        ) [[ description = [ Make image mode work ] ]]
+        ) [[
+            *group-name = [ inline-image ]
+            *description = [ Make inline image mode works ]
+        ]]
         (
             media-gfx/feh
             x11-apps/nitrogen
-        ) [[ description = [ Use current wallpaper inside neofetch box ] ]]
+        ) [[
+            *group-name = [ wallpaper ]
+            *description = [ Use current wallpaper inside neofetch box ]
+        ]]
 "
 
 DEFAULT_SRC_INSTALL_PARAMS=(
