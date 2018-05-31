@@ -36,7 +36,5 @@ src_install() {
     for i in example-*; do edo mv $i ${i/example-/}; done
     doins *.txt
     doins dnscrypt-proxy.toml
-    # TODO install systemd service
-    # optionq(systemd) && edo cp systemd/* /etc/systemd
 }
 
