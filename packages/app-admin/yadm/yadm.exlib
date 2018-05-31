@@ -31,8 +31,8 @@ BASH_COMPLETIONS=( "completion/${PN}.bash_completion" )
 ZSH_COMPLETIONS=( "completion/${PN}.zsh_completion" )
 
 yadm_src_install() {
-    dobin "${PN}"
-    doman "${PN}.1"
+    dobin ${PN}
+    doman ${PN}.1
 
     bash-completion_src_install
     zsh-completion_src_install
