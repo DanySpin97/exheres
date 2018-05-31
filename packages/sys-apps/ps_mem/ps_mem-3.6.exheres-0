@@ -2,7 +2,6 @@
 # Distributed under the terms of the GNU General Public License v3
 
 require github [ user='pixelb' tag=v${PV} ]
-
 require setup-py [ import='setuptools' ]
 
 SUMMARY="A utility to accurately report the in core memory usage for a program"
