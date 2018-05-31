@@ -1,7 +1,7 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='jarun' tag=v${PV} ]
+require github [ user='jarun' tag=v${PV} ] python [ blacklist="2" ]
 
 SUMMARY="Powerful command-line bookmark manager. Your mini web!"
 
@@ -13,7 +13,6 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        dev-lang/python:*[>=3.4][python_abis:*(-)?]
         dev-python/beautifulsoup4[python_abis:*(-)?]
         dev-python/cryptography[python_abis:*(-)?]
         dev-python/urllib3[python_abis:*(-)?]
