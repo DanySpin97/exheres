@@ -31,5 +31,6 @@ install_one_multibuild() {
     fi
 }
 
+# There is no test suite 
 RESTRICT="test"
 
