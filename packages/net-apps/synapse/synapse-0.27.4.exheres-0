@@ -13,7 +13,8 @@ PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    user/synapse
-    group/synapse
+    run:
+        user/synapse
+        group/synapse
 "
 
