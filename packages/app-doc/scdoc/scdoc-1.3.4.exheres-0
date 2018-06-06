@@ -1,0 +1,22 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="https://git.sr.ht/~sircmpwn/${PN}/"
+require scm-git
+
+SUMMARY="A simple man page generator written for POSIX systems written in C99."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=/usr/$(exhost --target)
+)
+
+BUGS_TO="danyspin97@protonmail.com"
+
