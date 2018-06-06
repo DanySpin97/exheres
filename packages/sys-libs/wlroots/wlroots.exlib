@@ -23,7 +23,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build+run:
         sys-libs/libinput[>=1.7.0]
-        sys-libs/wayland
+        sys-libs/wayland[>=1.15]
         sys-libs/wayland-protocols[>=1.12]
         x11-dri/mesa[wayland][X?]
         x11-dri/libdrm
