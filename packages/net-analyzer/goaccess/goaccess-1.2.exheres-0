@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='allinurl' tag=v${PV} ]
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
 
 SUMMARY="A real-time web log analyzer and interactive viewer that runs in a
          terminal"
@@ -18,7 +18,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build+run:
         sys-libs/ncurses
-        providers:libressl? ( dev-libs/libressl )
+        providers:libressl? ( dev-libs/libressl:= )
         providers:openssl? ( dev-libs/openssl )
 "
 
