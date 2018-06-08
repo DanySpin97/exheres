@@ -1,0 +1,27 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='martanne' tag=v${PV} ]
+
+SUMMARY="Provides session management"
+DESCRIPTION="it allows programs to be run independently from its controlling terminal. That is programs can be detached - run in the background - and then later reattached. Together with dvtm it provides a simpler and cleaner alternative to tmux or screen."
+
+LICENCES="ISC"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=/usr/$(exhost --target)
+    MANPREFIX=/usr/share/man
+)
+
+src_prepare() {
+    default
+
+    edo sed -i '/STRIP/d' Makefile
+}
+
