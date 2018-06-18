@@ -1,0 +1,20 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='ihabunek' ]
+require setup-py [ import=setuptools blacklist="2" ]
+
+SUMMARY="A Mastodon CLI client"
+
+LINCENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/requests[>=2.13][<3.0][python_abis:*(-)?]
+        dev-python/beautifulsoup4[>=4.5.0][<5.0][python_abis:*(-)?]
+"
+
