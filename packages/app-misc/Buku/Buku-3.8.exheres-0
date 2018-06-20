@@ -1,7 +1,7 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='jarun' tag=v${PV} ] python [ blacklist="2" ]
+require github [ user='jarun' tag=v${PV} ] python [ blacklist="2" multibuild=false ]
 
 SUMMARY="Powerful command-line bookmark manager. Your mini web!"
 
@@ -13,9 +13,9 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        dev-python/beautifulsoup4[python_abis:*(-)?]
-        dev-python/cryptography[python_abis:*(-)?]
-        dev-python/urllib3[python_abis:*(-)?]
+        dev-python/beautifulsoup4[python_abis:*(-)?][>=4.4.1]
+        dev-python/cryptography[python_abis:*(-)?][>=1.2.3]
+        dev-python/urllib3[python_abis:*(-)?][>=1.13.1]
 "
 
 DEFAULT_SRC_INSTALL_PARAMS=(
