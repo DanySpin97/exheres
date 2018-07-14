@@ -16,6 +16,8 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-python/python-dateutil[>=2.7.2][python_abis:*(-)?]
+        group/radicale
+        user/radicale
     test:
         dev-python/pytest[python_abis:*(-)?]
         dev-python/pytest-cov[python_abis:*(-)?]
