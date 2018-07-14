@@ -1,0 +1,33 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require setup-py [ import="setuptools" blacklist="2" ]
+require github [ user='Kozea' ]
+
+SUMMARY="https://languagetool.org/"
+HOMEPAGE="https://radicale.org"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/python-dateutil[>=2.7.2][python_abis:*(-)?]
+    test:
+        dev-python/pytest[python_abis:*(-)?]
+        dev-python/pytest-cov[python_abis:*(-)?]
+        dev-python/pytest-flake8[python_abis:*(-)?]
+        dev-python/pytest-isort[python_abis:*(-)?]
+        dev-python/pytest-runner[python_abis:*(-)?]
+"
+
+install_one_multibuild() {
+    setup-py_install_one_multibuild
+
+    insinto /etc/radicale/
+    doins {config,logging}
+}
+
