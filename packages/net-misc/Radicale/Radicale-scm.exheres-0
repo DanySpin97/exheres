@@ -4,7 +4,7 @@
 require setup-py [ import="setuptools" blacklist="2" ]
 require github [ user='Kozea' ]
 
-SUMMARY="https://languagetool.org/"
+SUMMARY="Radicale is a small but powerful CalDAV and CardDAV."
 HOMEPAGE="https://radicale.org"
 
 LICENCES="GPL-3"
