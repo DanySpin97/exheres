@@ -1,0 +1,28 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='solusipse' ]
+
+SUMMARY="Command line pastebin for sharing terminal output."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    run:
+        user/fiche
+        group/fiche
+"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    prefix=${IMAGE}/usr/$(exhost --target)/bin
+)
+
+src_install() {
+    edo mkdir -p ${IMAGE}/usr/$(exhost --target)/bin
+    default
+}
+
