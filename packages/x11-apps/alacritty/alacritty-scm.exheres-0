@@ -32,8 +32,11 @@ DEPENDENCIES="
 BUGS_TO="danyspin97@protonmail.com"
 
 src_install(){
-    default
+    cargo_src_install
+
     insinto /usr/share/applications
-    doins Alacritty.desktop
+    doins alacritty.desktop
+
+    emagicdocs
 }
 
