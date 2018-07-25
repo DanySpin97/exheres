@@ -1,0 +1,26 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='gwik' tag=v${PV} ]
+require setup-py [ import='setuptools' test='pytest' ]
+
+SUMMARY="A high performance, concurrent http client library for python with gevent"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/certifi[python_abis:*(-)?]
+        dev-python/gevent[>=0.13][python_abis:*(-)?]
+        dev-python/six[python_abis:*(-)?]
+"
+
+test_one_multibuild() {
+    esandbox disable_net
+    setup-py_test_one_multibuild
+    esandbox enable_net
+}
+
