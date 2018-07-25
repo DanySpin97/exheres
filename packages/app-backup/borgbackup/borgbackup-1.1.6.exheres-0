@@ -1,0 +1,28 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi
+require setup-py [ import='setuptools' blacklist="2 3.4 3.5" ]
+
+SUMMARY="A deduplicating backup program."
+HOMEPAGE="https://www.borgbackup.org/"
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS="
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-python/msgpack[=0.5.6][python_abis:*(-)?]
+"
+
+install_one_multibuild() {
+    setup-py_install_one_multibuild
+
+    edo sed -i 's/msgpack-python/msgpack/' \
+        ${IMAGE}/usr/$(exhost --target)/lib/python$(python_get_abi)/site-packages/${PNV}-py$(python_get_abi).egg-info/requires.txt
+}
+
