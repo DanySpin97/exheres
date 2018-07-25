@@ -1,0 +1,21 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='mgedmin' ]
+require setup-py [ import='setuptools' ]
+
+SUMMARY="Visually explore Python object graphs."
+HOMEPAGE="https://mg.pov.lt/objgraph/"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/graphviz[python_abis:*(-)?]
+    test:
+        dev-python/mock[python_abis:*(-)?]
+"
+
