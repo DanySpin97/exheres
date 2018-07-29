@@ -1,0 +1,28 @@
+# Copyright 2010 Dan Callaghan <djc@djc.id.au>
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=dulwich tag=${PNV} ]
+require setup-py [ import=setuptools work="${PN}-${PNV}" has_bin=true ]
+
+
+SUMMARY="Pure-Python Git implementation."
+DESCRIPTION="It aims to provide an interface to git repos (both local and
+remote) that doesn't call out to git directly but instead uses pure Python."
+HOMEPAGE="https://www.dulwich.io"
+
+LICENCES="|| ( Apache-2.0 GPL-2 )"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/certifi[python_abis:*(-)?]
+        dev-python/urllib3[=1.22][python_abis:*(-)?]
+        dev-scm/python-fastimport[python_abis:*(-)?]
+    test:
+        dev-python/gevent[python_abis:*(-)?]
+        dev-python/geventhttpclient[python_abis:*(-)?]
+"
+
