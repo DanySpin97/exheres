@@ -1,0 +1,23 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='jelmer' tag=v${PV} ]
+require setup-py [ import='setuptools' blacklist="2" ]
+
+SUMMARY="Xandikos is a lightweight yet complete CardDAV/CalDAV server."
+HOMEPAGE="https://www.xandikos.org/"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/defusedxml[python_abis:*(-)?]
+        dev-python/dulwich[>=0.19.1][python_abis:*(-)?]
+        dev-python/icalendar[python_abis:*(-)?]
+        dev-python/Jinja2[python_abis:*(-)?]
+"
+
