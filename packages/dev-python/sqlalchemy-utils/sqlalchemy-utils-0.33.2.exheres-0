@@ -1,0 +1,35 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='kvesteri' ]
+require setup-py [ import='setuptools' blacklist="2" test=pytest ]
+
+SUMMARY="python humanize functions"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/six[python_abis:*(-)?]
+        dev-python/SQLAlchemy[>=1.0][python_abis:*(-)?]
+    test:
+        dev-python/Pygments[>=1.2][python_abis:*(-)?]
+        dev-python/docutils[>=0.10][python_abis:*(-)?]
+        dev-python/flake8[>=2.4.0][python_abis:*(-)?]
+        dev-python/flexmock[>=0.9.7][python_abis:*(-)?]
+        dev-python/isort[>=4.2.2][python_abis:*(-)?]
+        dev-python/Jinja2[>=2.3][python_abis:*(-)?]
+        dev-python/mock[python_abis:*(-)?]
+        dev-python/psycopg2[>=2.5.1][python_abis:*(-)?]
+        dev-python/python-dateutil[>=2.2][python_abis:*(-)?]
+        dev-python/PyMySQL[python_abis:*(-)?]
+        dev-python/pytz[>=2014.2][python_abis:*(-)?]
+"
+
+# Tests require internet access
+RESTRICT="test"
+
