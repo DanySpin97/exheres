@@ -1,0 +1,20 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='bkabrda' ]
+require setup-py [ import='setuptools' test=pytest ]
+
+SUMMARY="Mock/stub/spy library for Python"
+
+LICENCES="BSD-2"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    test:
+        dev-python/nose[python_abis:*(-)?]
+        net-twisted/Twisted[python_abis:*(-)?]
+"
+
