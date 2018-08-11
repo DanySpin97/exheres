@@ -3,7 +3,11 @@
 
 require github [ user='jarun' tag=v${PV} ]
 
-SUMMARY="The fastest terminal file manager ever written. "
+SUMMARY="The fastest terminal file manager ever written."
+DESCRIPTION="It's extremely flexible - integrates with your DE and favourite
+    GUI utilities, works with the desktop opener, supports bookmarks, has smart
+    navigation shortcuts, navigate-as-you-type mode, disk usage analyzer mode,
+    comprehensive file details and much more."
 
 LICENCES="BSD-2"
 SLOT="0"
