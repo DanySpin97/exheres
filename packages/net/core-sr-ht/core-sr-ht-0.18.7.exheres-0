@@ -1,50 +1,8 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-# SCM_REPOSITORY="https://git.sr.ht/~sircmpwn/core.sr.ht"
-# SCM_bootstrap_REPOSITORY="https://github.com/twbs/bootstrap.git"
-# SCM_SECONDARY_REPOSITORIES="bootstrap"
-# SCM_EXTERNAL_REFS="srht/scss/boostrap:bootstrap scss/bootstrap:bootstrap"
-DOWNLOADS="https://git.sr.ht/~sircmpwn/core.sr.ht/snapshot/core.sr.ht-0.18.7.tar.xz"
-require setup-py [ import='setuptools' multibuild=false ]
+require core-sr-ht
 
-SUMMARY="Framework for building sr.ht sites."
-
-LICENCES="BSD-3"
-SLOT="0"
+DOWNLOADS="https://git.sr.ht/~sircmpwn/core.sr.ht/snapshot/core.sr.ht-${PV}.tar.xz"
 PLATFORMS="~amd64"
-
-MYOPTIONS=""
-
-DEPENDENCIES="
-    build:
-        dev-node/yarn
-    run:
-        dev-lang/sassc
-    run:
-        dev-python/Flask[python_abis:*(-)?]
-        dev-python/Markdown[python_abis:*(-)?]
-        dev-python/SQLAlchemy[python_abis:*(-)?]
-        dev-python/beautifulsoup4[python_abis:*(-)?]
-        dev-python/bleach[python_abis:*(-)?]
-        dev-python/humanize[python_abis:*(-)?]
-        dev-python/psycopg2[python_abis:*(-)?]
-        dev-python/requests[python_abis:*(-)?]
-        dev-python/sqlalchemy-utils[python_abis:*(-)?]
-"
-
-WORK="${WORKBASE}/core.sr.ht-${PV}"
-
-# Tests requires psycopg2-binary
-RESTRICT="test"
-
-src_prepare() {
-    edo sed -i 's/npm i/yarn/' setup.py
-
-    export PKGVER="${PV}"
-
-    esandbox disable_net
-    setup-py_src_prepare
-    esandbox enable_net
-}
 
