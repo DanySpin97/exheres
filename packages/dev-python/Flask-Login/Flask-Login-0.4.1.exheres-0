@@ -1,7 +1,7 @@
 # Copyright 2013 Markus Rothe
 # Distributed under the terms of the GNU General Public License v2
 
-require setuptools pypi
+require pypi setup-py [ import=setuptools blacklist=" " ]
 
 SUMMARY="User session management for Flask"
 
@@ -12,11 +12,10 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        dev-python/Flask
-    test:
-        dev-python/Attest
+        dev-python/Flask[python_abis:*(-)?]
+        dev-python/Werkzeug[python_abis:*(-)?]
 "
 
-# released tarball is missing tests/static/style.css
+# pypi does not ship Makefile to execute tests
 RESTRICT="test"
 
