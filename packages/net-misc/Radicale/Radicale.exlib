@@ -1,0 +1,52 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2018 Niels Ole Salscheider <olesalscheider@exherbo.org>
+# Distributed under the terms of the GNU General Public License v2
+
+require setup-py [ import="setuptools" blacklist="2" multibuild=false ]
+require github [ user='Kozea' ] systemd-service
+
+export_exlib_phases src_install
+
+SUMMARY="Radicale is a small but powerful CalDAV and CardDAV."
+HOMEPAGE="https://radicale.org"
+
+LICENCES="GPL-3"
+SLOT="0"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/passlib[python_abis:*(-)?]
+        dev-python/python-dateutil[>=2.7.2][python_abis:*(-)?]
+        dev-python/vobject[>=0.9.6][python_abis:*(-)?]
+        group/radicale
+        user/radicale
+    test:
+        dev-python/execnet[>=1.1][python_abis:*(-)?]
+        dev-python/pytest[python_abis:*(-)?]
+        dev-python/pytest-cov[python_abis:*(-)?]
+        dev-python/pytest-flake8[python_abis:*(-)?]
+        dev-python/pytest-isort[python_abis:*(-)?]
+        dev-python/pytest-runner[python_abis:*(-)?]
+    recommendation:
+        dev-python/passlib[python_abis:*(-)?] [[ description = [ allows to encrypt user passwords ] ]]
+"
+
+# The tests are currently broken
+RESTRICT="test"
+
+Radicale_src_install() {
+    setup-py_src_install
+
+    insinto /etc/radicale/
+    doins {config,logging}
+
+    install_systemd_files
+
+    mkdir -p "${IMAGE}"/var/lib/radicale/collections
+    edo chown radicale:radicale "${IMAGE}"/var/lib/radicale{,/collections}
+    edo chmod 770 "${IMAGE}"/var/lib/radicale{,/collections}
+    keepdir /var/lib/radicale/collections
+}
+
