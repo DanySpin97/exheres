@@ -4,4 +4,4 @@ fdmove -c 2 1
 
 s6-setuigid radicale
 
-/usr/bin/radicale
+/usr/bin/radicale --foreground
