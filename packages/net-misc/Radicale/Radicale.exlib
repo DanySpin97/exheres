@@ -3,7 +3,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require setup-py [ import="setuptools" blacklist="2" multibuild=false ]
-require github [ user='Kozea' ] systemd-service
+require github [ user='Kozea' ] systemd-service s6-rc-service
 
 export_exlib_phases src_install
 
@@ -43,6 +43,7 @@ Radicale_src_install() {
     doins {config,logging}
 
     install_systemd_files
+    install_s6-rc_files
 
     mkdir -p "${IMAGE}"/var/lib/radicale/collections
     edo chown radicale:radicale "${IMAGE}"/var/lib/radicale{,/collections}
