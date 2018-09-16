@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='kvesteri' ]
-require setup-py [ import='setuptools' blacklist="2" test=pytest ]
+require setup-py [ import='setuptools' blacklist=" " test=pytest ]
 
 SUMMARY="python humanize functions"
 
