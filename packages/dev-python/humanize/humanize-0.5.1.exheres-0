@@ -1,0 +1,19 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='jmoiron' ]
+require setup-py [ import='setuptools' blacklist=" " ]
+
+SUMMARY="python humanize functions"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    test:
+        dev-python/mock[python_abis:*(-)?]
+"
+
