@@ -1,0 +1,41 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='jwilm' ] cargo
+
+SUMMARY="A cross-platform, GPU-accelerated terminal emulator"
+DESCRIPTION="Alacritty is focused on simplicity and performance. The
+performance goal means it should be faster than any other terminal emulator
+available. The simplicity goal means that it doesn't have features such as
+tabs or splits (which can be better provided by a window manager or terminal
+multiplexer) nor niceties like a GUI config editor."
+
+LICENCES="Apache-2.0"
+SLOT="0"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        media-libs/fontconfig
+        media-libs/freetype:=
+        sys-libs/zlib
+        x11-dri/mesa
+        x11-libs/libX11
+        x11-libs/libXi
+        x11-libs/libXxf86vm
+    run:
+        x11-utils/xclip
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_install(){
+    cargo_src_install
+
+    insinto /usr/share/applications
+    doins alacritty.desktop
+
+    emagicdocs
+}
+
