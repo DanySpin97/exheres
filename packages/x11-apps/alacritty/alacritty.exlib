@@ -1,7 +1,9 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='jwilm' ] cargo
+require cargo github [ user='jwilm' tag=v${PV} ]
+
+export_exlib_phases src_install
 
 SUMMARY="A cross-platform, GPU-accelerated terminal emulator"
 DESCRIPTION="Alacritty is focused on simplicity and performance. The
@@ -30,7 +32,7 @@ DEPENDENCIES="
 
 BUGS_TO="danyspin97@protonmail.com"
 
-src_install(){
+alacritty_src_install(){
     cargo_src_install
 
     insinto /usr/share/applications
