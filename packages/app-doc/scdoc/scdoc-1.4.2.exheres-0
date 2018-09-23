@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="https://git.sr.ht/~sircmpwn/${PN}/"
+SCM_TAG="${PV}"
 require scm-git
 
 SUMMARY="A simple man page generator written for POSIX systems written in C99."
@@ -16,6 +17,7 @@ DEPENDENCIES=""
 
 DEFAULT_SRC_INSTALL_PARAMS=(
     PREFIX=/usr/$(exhost --target)
+    MANDIR=${IMAGE}/usr/share/man
 )
 
 BUGS_TO="danyspin97@protonmail.com"
