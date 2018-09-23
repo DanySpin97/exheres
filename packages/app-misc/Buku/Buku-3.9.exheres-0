@@ -14,8 +14,19 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-python/beautifulsoup4[python_abis:*(-)?][>=4.4.1]
+        dev-python/certifi[python_abis:*(-)?]
         dev-python/cryptography[python_abis:*(-)?][>=1.2.3]
+        dev-python/html5lib[python_abis:*(-)?][>=1.0.1]
         dev-python/urllib3[python_abis:*(-)?][>=1.13.1]
+    test:
+        dev-python/attrs[python_abis:*(-)?][>=17.4.0]
+        dev-python/flake8[python_abis:*(-)?][>=3.4.1]
+        dev-python/hypothesis[python_abis:*(-)?][>=3.7.0]
+        dev-python/PyYAML[python_abis:*(-)?]
+        dev-python/py[python_abis:*(-)?][>=1.5.0]
+        dev-python/pylint[python_abis:*(-)?][>=1.7.2]
+        dev-python/pytest[python_abis:*(-)?][>=3.4.2]
+        dev-python/pytest-cov[python_abis:*(-)?]
 "
 
 DEFAULT_SRC_INSTALL_PARAMS=(
