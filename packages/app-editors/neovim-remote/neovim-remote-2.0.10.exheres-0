@@ -1,7 +1,7 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='mhinz' tag=v${PV} ] setup-py [ import='setuptools' blacklist='2.7' ]
+require github [ user='mhinz' tag=v${PV} ] setup-py [ import='setuptools' blacklist="2" ]
 
 SUMMARY="Support for --remote and friends."
 
@@ -14,5 +14,6 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-python/psutil[python_abis:*(-)?]
+        dev-python/neovim-python[>=0.2.6][python_abis:*(-)?]
 "
 
