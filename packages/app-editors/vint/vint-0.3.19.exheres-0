@@ -1,7 +1,8 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='Kuniwak' tag=v${PV} ] setup-py [ import='setuptools' ]
+require github [ user='Kuniwak' tag=v${PV} ]
+require setup-py [ import='setuptools' multibuild=false ]
 
 SUMMARY="Fast and Highly Extensible VimL Lint implemented by Python."
 
@@ -19,9 +20,10 @@ DEPENDENCIES="
     test:
         dev-python/coverage[python_abis:*(-)?]
         dev-python/mock[python_abis:*(-)?]
-        dev-python/pathlib[python_abis:*(-)?]
         dev-python/pytest[python_abis:*(-)?]
         dev-python/pytest-cov[python_abis:*(-)?]
-        dev-python/typing[pythos_abis:*(-)?]
 "
+
+# Requires old version of dev-python/coverage
+RESTRICT="test"
 
