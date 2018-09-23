@@ -1,11 +1,16 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-# SCM_REPOSITORY="https://git.sr.ht/~sircmpwn/core.sr.ht"
-# SCM_bootstrap_REPOSITORY="https://github.com/twbs/bootstrap.git"
-# SCM_SECONDARY_REPOSITORIES="bootstrap"
-# SCM_EXTERNAL_REFS="srht/scss/boostrap:bootstrap scss/bootstrap:bootstrap"
-require setup-py [ import='setuptools' multibuild=false ]
+SCM_REPOSITORY="https://git.sr.ht/~sircmpwn/core.sr.ht"
+SCM_bootstrap_REPOSITORY="https://github.com/twbs/bootstrap.git"
+SCM_SECONDARY_REPOSITORIES="bootstrap "
+SCM_EXTERNAL_REFS="srht/scss/bootstrap:bootstrap "
+
+if ! ever is_scm scm ; then
+    SCM_TAG="${PV}"
+fi
+
+require scm-git setup-py [ import='setuptools' multibuild=false ]
 
 export_exlib_phases src_prepare
 
@@ -17,9 +22,8 @@ SLOT="0"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    build:
-        dev-node/yarn
-    run:
+    build+run:
+        dev-lang/node
         dev-lang/sassc
     run:
         dev-python/Flask[python_abis:*(-)?]
@@ -33,14 +37,10 @@ DEPENDENCIES="
         dev-python/sqlalchemy-utils[python_abis:*(-)?]
 "
 
-WORK="${WORKBASE}/core.sr.ht-${PV}"
-
 # Tests requires psycopg2-binary
 RESTRICT="test"
 
 core-sr-ht_src_prepare() {
-    edo sed -i 's/npm i/yarn/' setup.py
-
     export PKGVER="${PV}"
 
     esandbox disable_net
