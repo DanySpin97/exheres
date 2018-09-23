@@ -3,6 +3,5 @@
 
 require core-sr-ht
 
-DOWNLOADS="https://git.sr.ht/~sircmpwn/core.sr.ht/snapshot/core.sr.ht-${PV}.tar.xz"
 PLATFORMS="~amd64"
 
