@@ -18,6 +18,8 @@ DEPENDENCIES="
         net/core-sr-ht
     run:
         dev-python/Flask-Login[python_abis:*(-)?]
+        group/git
+        user/git
 "
 
 WORK="${WORKBASE}/git.sr.ht-${PV}"
