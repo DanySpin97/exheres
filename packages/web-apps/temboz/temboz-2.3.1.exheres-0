@@ -1,0 +1,23 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' blacklist="3" ]
+
+SUMMARY=" The Temboz RSS/Atom feed reader"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/Flask[python_abis:*(-)?]
+        dev-python/argon2_cffi[python_abis:*(-)?]
+        dev-python/html5lib[python_abis:*(-)?]
+        dev-python/passlib[python_abis:*(-)?]
+        dev-python/requests[python_abis:*(-)?]
+        dev-python/translitcodec[python_abis:*(-)?]
+        dev-python/yappi[python_abis:*(-)?]
+"
+
