@@ -1,0 +1,22 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' test='pytest' ]
+
+SUMMARY="The secure Argon2 password hashing algorithm."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        app-crypt/argon2
+        dev-python/cffi[>=1.0.0][python_abis:*(-)?]
+        dev-python/six[python_abis:*(-)?]
+    test:
+        dev-python/coverage[python_abis:*(-)?]
+        dev-python/hypothesis[python_abis:*(-)?]
+"
+
