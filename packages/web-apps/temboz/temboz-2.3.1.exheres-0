@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require pypi setup-py [ import='setuptools' blacklist="3" multibuild=false ]
+require s6-rc-service
 
 SUMMARY=" The Temboz RSS/Atom feed reader"
 
@@ -23,6 +24,8 @@ DEPENDENCIES="
 
 src_install() {
     setup-py_src_install
+
+    install_s6-rc_files
 
     keepdir /var/lib/temboz
 }
