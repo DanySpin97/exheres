@@ -1,7 +1,7 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require pypi setup-py [ import='setuptools' blacklist="3" ]
+require pypi setup-py [ import='setuptools' blacklist="3" multibuild=false ]
 
 SUMMARY=" The Temboz RSS/Atom feed reader"
 
@@ -20,4 +20,17 @@ DEPENDENCIES="
         dev-python/translitcodec[python_abis:*(-)?]
         dev-python/yappi[python_abis:*(-)?]
 "
+
+src_install() {
+    setup-py_src_install
+
+    keepdir /var/lib/temboz
+}
+
+pkg_postinst() {
+    elog "Generate a database"
+    elog "and configure temboz:"
+    elog "cd /var/lib/temboz"
+    elog "temboz"
+}
 
