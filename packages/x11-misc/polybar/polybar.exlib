@@ -1,0 +1,72 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="https://github.com/jaagr/${PN}"
+SCM_i3ipcpp_REPOSITORY="https://github.com/jaagr/i3ipcpp"
+SCM_xpp_REPOSITORY="https://github.com/jaagr/xpp"
+SCM_SECONDARY_REPOSITORIES="i3ipcpp xpp"
+SCM_EXTERNAL_REFS="lib/i3ipcpp:i3ipcpp lib/xpp:xpp"
+require scm-git cmake [ api=2 ]
+
+SUMMARY="A fast and easy-to-use status bar."
+
+LICENCES="MIT"
+SLOT="0"
+MYOPTIONS="
+    alsa
+    curl [[ description = [ Support for github module ] ]]
+    mpd
+    i3
+    pulseaudio
+    wireless
+    X
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-lang/python:2.7
+        x11-libs/cairo
+        x11-libs/libxcb
+        x11-proto/xcb-proto
+        x11-utils/xcb-util-image
+        x11-utils/xcb-util-wm
+        alsa? (
+            sys-sound/alsa-lib
+        )
+        curl? (
+            net-misc/curl
+        )
+        mpd? (
+            media-sound/mpd
+        )
+        pulseaudio? (
+            media-sound/pulseaudio
+        )
+        wireless? (
+            net-wireless/wireless_tools
+        )
+        X? (
+            x11-libs/libXrandr
+            x11-utils/xcb-util-cursor
+            x11-utils/xcb-util-xrm
+        )
+    recommendation:
+        fonts/unifont
+"
+
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
+    'alsa ALSA'
+    'curl CURL'
+    'i3 I3'
+    'mpd MPD'
+    'pulseaudio PULSEAUDIO'
+    'wireless NETWORK'
+)
+
+CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
+    'X XCURSOR'
+    'X XRANDR'
+    'X XKB'
+    'X XRM'
+)
+
