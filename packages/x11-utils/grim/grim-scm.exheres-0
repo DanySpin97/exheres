@@ -13,6 +13,8 @@ MYOPTIONS="
 "
 
 DEPENDENCIES="
+    build:
+        app-doc/scdoc
     build+run:
         sys-libs/wayland-protocols
         x11-libs/cairo
