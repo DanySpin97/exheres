@@ -1,0 +1,26 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='t6' ]
+
+SUMMARY="A module for PulseAudio to support playing to sndio servers."
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        media-sound/pulseaudio[>=12.0]
+"
+
+DEFAULT_SRC_COMPILE_PARAMS=(
+    PKGCONF=$(exhost --tool-prefix)pkg-config
+)
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PKGCONF=$(exhost --tool-prefix)pkg-config
+    INSTALL_LIB='install -m 444'
+)
+
