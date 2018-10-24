@@ -1,0 +1,65 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='godotengine' tag=${PV}-stable ] scons
+
+SUMMARY="Multi-platform 2D and 3D game engine"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    mono
+    ( providers: eudev systemd ) [[ number-selected = exactly-one ]]
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        media-libs/freetype:2
+        media-sound/pulseaudio
+        sys-sound/alsa-lib
+        x11-dri/mesa[X]
+        x11-libs/libXcursor
+        x11-libs/libXi
+        x11-libs/libXinerama
+        x11-libs/libXrandr
+        x11-server/xorg-server
+        providers:eudev? ( sys-apps/eudev )
+        providers:systemd? ( sys-apps/systemd )
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
+"
+
+SCONS_SRC_CONFIGURE_PARAMS=(
+    platform=x11
+    udev=yes
+)
+
+SCONS_SRC_COMPILE_PARAMS=(
+    platform=x11
+    udev=yes
+    CC=$(exhost --tool-prefix)cc
+    CXX=$(exhost --tool-prefix)c++
+    CXXFLAGS="${CXXFLAGS/-pipe/-pipe }"
+    CCFLAGS="${CCFLAGS/-pipe/-pipe }"
+)
+
+SCONS_SRC_INSTALL_PARAMS=(
+    platform=x11
+)
+
+src_prepare() {
+    default
+
+    edo sed -i "321i\    env[\"AR\"]='$(exhost --tool-prefix)ar'" "${WORK}"/SConstruct
+    edo sed -i "321i\    env[\"RANLIB\"]='$(exhost --tool-prefix)ranlib'" "${WORK}"/SConstruct
+    edo sed -i "s/pkg-config/$(exhost --tool-prefix)pkg-config/" "${WORK}"/platform/x11/detect.py
+}
+
+src_install() {
+    emagicdocs
+
+    newbin "${WORK}/bin/godot.x11.tools.64" godot
+}
+
