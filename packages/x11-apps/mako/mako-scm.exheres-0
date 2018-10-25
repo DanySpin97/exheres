@@ -17,7 +17,7 @@ DEPENDENCIES="
         sys-libs/wayland
         x11-libs/cairo
         x11-libs/pango
-        providers:elogind? ( sys-auth/elogind )
+        providers:elogind? ( sys-auth/elogind[~scm] )
         providers:systemd? ( sys-apps/systemd )
 "
 
