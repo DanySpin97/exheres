@@ -15,6 +15,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build+run:
         sys-libs/wayland
+        sys-libs/wayland-protocols
         x11-libs/cairo
         x11-libs/pango
         providers:elogind? ( sys-auth/elogind[~scm] )
