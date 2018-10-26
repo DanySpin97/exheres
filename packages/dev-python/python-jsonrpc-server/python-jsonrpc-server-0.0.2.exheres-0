@@ -1,0 +1,22 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' blacklist="2" test='pytest' ]
+
+SUMMARY="An asynchronous JSON RPC server"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/future[>=0.14.0][python_abis:*(-)?]
+    test:
+        dev-python/coverage[python_abis:*(-)?]
+        dev-python/mock[python_abis:*(-)?]
+        dev-python/pytest-cov[python_abis:*(-)?]
+        dev-python/tox[python_abis:*(-)?]
+"
+
