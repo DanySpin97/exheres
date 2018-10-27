@@ -1,0 +1,24 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ pn="${PN/-/.}" user='halcy' ]
+require setup-py [ import='setuptools' work=${PN/-/.}-${PV} ]
+
+SUMMARY="Python wrapper for Mastodon"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/requests[python_abis:*(-)?]
+        dev-python/python-dateutil[python_abis:*(-)?]
+        dev-python/six[python_abis:*(-)?]
+        dev-python/pytz[python_abis:*(-)?]
+        dev-python/decorator[>=4.0.0][python_abis:*(-)?]
+        dev-python/http-ece[python_abis:*(-)?]
+        dev-python/cryptography[>=1.6.0][python_abis:*(-)?]
+"
+
