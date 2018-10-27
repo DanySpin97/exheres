@@ -1,0 +1,21 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptool' blacklist="2" ]
+
+SUMMARY="A command line instance for interacting with Mastodon instances."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/click[>=6.7][python_abis:*(-)?]
+        dev-python/Mastodon-py[python_abis:*(-)?]
+        dev-python/colored[python_abis:*(-)?]
+        dev-python/humanize[python_abis:*(-)?]
+        dev-python/emoji[python_abis:*(-)?]
+"
+
