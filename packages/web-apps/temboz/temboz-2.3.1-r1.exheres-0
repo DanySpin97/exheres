@@ -28,9 +28,10 @@ DEPENDENCIES="
 src_install() {
     setup-py_src_install
 
-    install_s6-rc_files
-
     keepdir /var/lib/temboz
+    edo chown temboz:temboz "${IMAGE}"/var/lib/temboz
+
+    install_s6-rc_files
 }
 
 pkg_postinst() {
