@@ -2,6 +2,8 @@
 
 fdmove -c 2 1
 
+s6-setuidgid temboz
+
 foreground { s6-echo -- "\033[35;1m===\033[0m Starting longrun: temboz" }
 
 cd /var/lib/temboz

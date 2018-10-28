@@ -20,6 +20,9 @@ DEPENDENCIES="
         dev-python/requests[python_abis:*(-)?]
         dev-python/translitcodec[python_abis:*(-)?]
         dev-python/yappi[python_abis:*(-)?]
+    run:
+        group/temboz
+        user/temboz
 "
 
 src_install() {
@@ -34,6 +37,6 @@ pkg_postinst() {
     elog "Generate a database"
     elog "and configure temboz:"
     elog "cd /var/lib/temboz"
-    elog "temboz"
+    elog "sudo -u temboz temboz"
 }
 
