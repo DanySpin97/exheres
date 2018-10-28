@@ -20,9 +20,8 @@ DEPENDENCIES="
         dev-python/requests[python_abis:*(-)?]
         dev-python/translitcodec[python_abis:*(-)?]
         dev-python/yappi[python_abis:*(-)?]
-    run:
-        group/temboz
-        user/temboz
+        group/${PN}
+        user/${PN}
 "
 
 src_install() {
