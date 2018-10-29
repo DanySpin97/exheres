@@ -22,6 +22,6 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
 src_install(){
     default
 
-    edo rm -rf "${IMAGE}"/tmp
+    edo rm -rf "${IMAGE}"/var/tmp/
 }
 
