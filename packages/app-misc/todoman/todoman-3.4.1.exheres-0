@@ -1,0 +1,47 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import=setuptools blacklist="2" multibuild=false ]
+require bash-completion zsh-completion
+
+SUMMARY="A simple CalDAV-based todo manager."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-python/setuptools_scm[python_abis:*(-)?]
+    build+run:
+        dev-python/atomicwrites[python_abis:*(-)?]
+        dev-python/click[>=6.0][python_abis:*(-)?]
+        dev-python/click-log[>=0.2.1][python_abis:*(-)?]
+        dev-python/configobj[python_abis:*(-)?]
+        dev-python/humanize[python_abis:*(-)?]
+        dev-python/icalendar[python_abis:*(-)?]
+        dev-python/parsedatetime[python_abis:*(-)?]
+        dev-python/python-dateutil[python_abis:*(-)?]
+        dev-python/pyxdg[python_abis:*(-)?]
+        dev-python/tabulate[python_abis:*(-)?]
+        dev-python/urwid[python_abis:*(-)?]
+    test:
+        dev-python/flake8[python_abis:*(-)?]
+        dev-python/flake8-import-order[python_abis:*(-)?]
+        dev-python/freezegun[python_abis:*(-)?]
+        dev-python/hypothesis[python_abis:*(-)?]
+        dev-python/pytest[python_abis:*(-)?]
+        dev-python/pytest-cov[python_abis:*(-)?]
+        dev-python/pytest-runner[python_abis:*(-)?]
+"
+
+src_install() {
+    setup-py_src_install
+
+    dobashcompletion contrib/completion/bash/_todo _todo
+    dozshcompletion contrib/completion/zsh/_todo
+
+    dodoc ${PN}.conf.sample
+}
+
