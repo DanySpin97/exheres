@@ -15,7 +15,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        dev-python/click[python_abis:*(-)?]
+        dev-python/click[>=5.0][python_abis:*(-)?]
         python_abis:2.7? ( dev-python/futures[python_abis:2.7] )
 "
 
