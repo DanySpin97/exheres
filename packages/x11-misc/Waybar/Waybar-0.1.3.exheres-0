@@ -1,0 +1,40 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='Alexays' ] meson
+
+SUMMARY="Highly customizable Wayland bar for Wlroots based compositors."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    network
+    pulseaudio
+    tray
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/fmt[~scm]
+        dev-libs/jsoncpp:=
+        dev-cpp/libsigc++:=
+        gnome-bindings/gtkmm:3[wayland]
+        sys-libs/libinput
+        sys-libs/wayland
+        sys-libs/wayland-protocols
+        sys-libs/wlroots
+        network? ( net-libs/libnl:3.0 )
+        pulseaudio? ( media-sound/pulseaudio )
+        tray? (
+            dev-libs/glib:2
+            dev-libs/libdbusmenu
+        )
+"
+
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
+    'network libnl enabled disabled'
+    'pulseaudio pulseaudio enabled disabled'
+    'tray dbusmenu-gtk enabled disabled'
+)
+
