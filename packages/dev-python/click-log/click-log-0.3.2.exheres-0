@@ -18,5 +18,3 @@ DEPENDENCIES="
         dev-python/click[python_abis:*(-)?]
 "
 
-BUGS_TO="flocke@shadowice.org"
-
