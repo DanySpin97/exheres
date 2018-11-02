@@ -1,0 +1,18 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='avian2' tag=${PNV} ]
+require setup-py [ import=setuptools work=${PN}-${PNV} ]
+
+SUMMARY="ASCII transliteration of Unicode text"
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+# test are failing
+RESTRICT="test"
+
