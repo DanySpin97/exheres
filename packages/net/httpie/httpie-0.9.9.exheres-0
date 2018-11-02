@@ -1,0 +1,7 @@
+# Copyright 2015 Clément Delafargue <clement@delafargue.name>
+# Distributed under the terms of the GNU General Public License v2
+
+require httpie
+
+PLATFORMS="~amd64"
+
