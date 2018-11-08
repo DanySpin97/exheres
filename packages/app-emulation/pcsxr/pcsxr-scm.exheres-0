@@ -1,0 +1,38 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='iCatButler' ] cmake [ api=2 ]
+
+SUMMARY="Fork of the PCSX emulator."
+HOMEPAGE="https://pcsxr.svn.codeplex.com/svn/pcsxr"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        media-libs/SDL:2
+        x11-dri/mesa
+        x11-libs/cairo
+        x11-libs/gdk-pixbuf:2.0
+        x11-libs/gtk+:3
+        x11-libs/libICE
+        x11-libs/libSM
+        x11-libs/libX11
+        x11-libs/libXext
+        x11-libs/libXtst
+        x11-libs/libXv
+        x11-libs/libXxf86vm
+        x11-libs/pango
+"
+
+src_prepare() {
+    default
+
+    local regex='s;${CMAKE_INSTALL_PREFIX}/share/;/usr/share/;'
+    edo sed -i ${regex} ${CMAKE_SOURCE}/doc/CMakeLists.txt
+    edo sed -i 's;share/;/usr/share/;' ${CMAKE_SOURCE}/gui/CMakeLists.txt
+}
+
