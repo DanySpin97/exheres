@@ -1,7 +1,7 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='bugaevc' ] meson
+require github [ user='bugaevc' tag=v${PV} ] meson
 
 SUMMARY="Command-line copy/paste utilities for Wayland"
 
