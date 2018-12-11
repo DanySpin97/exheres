@@ -1,0 +1,23 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="https://repo.or.cz/tinycc.git"
+require scm-git
+
+SUMMARY="A small but hyper fast C compiler."
+HOMEPAGE="http://savannah.nongnu.org/projects/tinycc"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --cc=$(exhost --tool-prefix)cc
+    --ar=$(exhost --tool-prefix)ar
+    --disable-static
+    --enable-shared
+)
+
