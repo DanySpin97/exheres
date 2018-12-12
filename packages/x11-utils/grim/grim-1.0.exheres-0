@@ -5,3 +5,16 @@ require grim
 
 PLATFORMS="~amd64"
 
+MYOPTIONS="
+    ( providers: ijg-jpeg jpeg-turbo ) [[
+        number-selected = exactly-one
+    ]]
+"
+
+DEPENDENCIES+="
+    build+run:
+        providers:ijg-jpeg? ( media-libs/jpeg:= )
+        providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
+
+"
+
