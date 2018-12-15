@@ -1,0 +1,18 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' blacklist=" " ]
+
+SUMMARY="A Python binding for Hoedown"
+HOMEPAGE="http://misaka.61924.nl/"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/cffi[>=1.0.0][python_abis:*(-)?]
+"
+
