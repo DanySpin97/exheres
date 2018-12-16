@@ -1,0 +1,25 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='freedoom' tag=v${PV} ]
+
+SUMMARY="An entirely free software game based on the Doom engine."
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-python/Pillow
+        games-util/deutex
+    recommendation:
+        games-engines/gzdoom
+"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    prefix=/usr
+    bindir=/$(exhost --target)/bin
+)
+
