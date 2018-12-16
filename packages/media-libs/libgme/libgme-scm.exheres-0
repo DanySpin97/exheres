@@ -1,0 +1,27 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='mcfiredrill' ] cmake [ api=2 ]
+
+SUMMARY="Blargg's video game music file emulation/playback library"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    USE_GME_AY
+    USE_GME_GBS
+    USE_GME_GYM
+    USE_GME_HES
+    USE_GME_KSS
+    USE_GME_NSF
+    USE_GME_NSFE
+    USE_GME_SAP
+    USE_GME_SPC
+    USE_GME_VGM
+)
+
