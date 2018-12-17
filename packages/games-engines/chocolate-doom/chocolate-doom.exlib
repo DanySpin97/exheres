@@ -1,0 +1,33 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=${PN} tag=${PNV} ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
+
+export_exlib_phases src_prepare
+
+SUMMARY="A Doom source port that is minimalist and historically accurate."
+HOMEPAGE="https://www.chocolate-doom.org"
+
+LICENCES="GPL-2"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        media-libs/libpng:=
+        media-libs/libsamplerate
+        media-libs/SDL:2
+        media-libs/SDL_net:2
+        media-libs/SDL_mixer:2[midi]
+
+"
+
+chocolate-doom_src_prepare() {
+    edo sed -i 's;appdir = \$(prefix);appdir = /usr;' ${WORK}/src/Makefile.am
+    edo sed -i 's;appdatadir = \$(prefix);appdatadir = /usr;' ${WORK}/src/Makefile.am
+    edo sed -i 's;iconsdir = \$(prefix);iconsdir = /usr;' ${WORK}/data/Makefile.am
+
+    autotools_src_prepare
+}
+
