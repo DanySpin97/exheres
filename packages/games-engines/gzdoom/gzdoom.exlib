@@ -1,0 +1,29 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='coelckers' tag=g${PV} ] cmake [ api=2 ]
+
+SUMMARY="Enhanced port of the Doom engine."
+HOMEPAGE="zdoom.org"
+
+LICENCES="GPL-3"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        media-libs/libgme
+        media-libs/libjpeg-turbo
+        media-libs/openal
+        media-libs/SDL:2
+        media-sound/fluidsynth
+        sys-libs/libgomp
+    suggestion:
+        media-sound/timidity++
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DINSTALL_PK3_PATH=/usr/share/games/doom
+    -DINSTALL_DOCS_PATH=/usr/share/doc/${PN}
+)
+
