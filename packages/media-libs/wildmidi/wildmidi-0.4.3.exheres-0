@@ -1,0 +1,36 @@
+# Copyright 2018 <name>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='Mindwerks' tag=${PNV} ] cmake [ api=2 ]
+
+SUMMARY="a simple software midi player which has a core softsynth library."
+
+LICENCES="GPL-3 LGPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    alsa [[ description = [ Support alsa audio output ] ]]
+    openal [[ description = [ Support openal audio output ] ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        alsa? ( sys-sound/alsa-lib )
+        openal? ( media-libs/openal )
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DWANT_PLAYER=ON
+)
+
+CMAKE_SRC_CONFIGURE_OPTIONS=(
+    "alsa WANT_ALSA"
+    "openal WANT_OPENAL"
+)
+
+src_prepare() {
+    edo sed -i 's;share/man;/usr/share/man;' ${CMAKE_SOURCE}/src/CMakeLists.txt
+
+    cmake_src_prepare
+}
+
