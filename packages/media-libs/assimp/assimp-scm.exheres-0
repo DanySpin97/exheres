@@ -1,0 +1,27 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='assimp' tag=v${PV} ] cmake [ api=2 ]
+
+SUMMARY="Official Open Asset Import Library."
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    docs
+"
+
+DEPENDENCIES=""
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DASSIMP_DOUBLE_PRECISION=ON
+    -DASSIMP_INSTALL_PDB=OFF
+    -DIGNORE_GIT_HASH=ON
+    -DSYSTEM_IRRXML=OFF
+)
+
+CMAKE_SRC_CONFIGURE_OPTIONS=(
+    'docs BUILD_DOCS'
+)
+
