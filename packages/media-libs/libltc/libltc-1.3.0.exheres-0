@@ -1,0 +1,15 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='x42' tag=v${PV} ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
+
+SUMMARY="Linear/Logitudinal Time Code (LTC) Library."
+
+LICENCES="LGPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
