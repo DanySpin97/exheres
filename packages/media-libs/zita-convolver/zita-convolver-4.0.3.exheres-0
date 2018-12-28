@@ -1,0 +1,31 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="A fast, partitioned convolution engine library."
+HOMEPAGE="https://kokkinizita.linuxaudio.org/linuxaudio/"
+DOWNLOADS="https://kokkinizita.linuxaudio.org/linuxaudio/downloads/${PNV}.tar.bz2"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        sci-libs/fftw
+"
+
+WORK=${WORK}/source
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    INCDIR=/usr/$(exhost --target)/include
+    LIBDIR=/usr/$(exhost --target)/lib
+)
+
+src_prepare() {
+    edo sed -i '/native/d' ${WORK}/Makefile
+    edo sed -i '/ldconfig/d' ${WORK}/Makefile
+
+    default
+}
+
