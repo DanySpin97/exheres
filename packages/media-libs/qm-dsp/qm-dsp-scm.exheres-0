@@ -1,0 +1,43 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='c4dm' ]
+
+SUMMARY="A C++ library of functions for DSP and Music Informatics purposes."
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_compile() {
+    emake -f build/linux/Makefile.linux64
+}
+
+src_install() {
+    edo cd dsp
+    for i in * ;
+    do
+        insinto /usr/$(exhost --target)/include/qm-dsp/dsp/$i
+        doins $i/*.h
+    done
+    edo cd ..
+    edo rm -rf ext build dsp tests
+    for i in */ ;
+    do
+        cd $i
+        insinto /usr/$(exhost --target)/include/qm-dsp/$i
+        for k in *.h ;
+        do
+            doins $k
+        done
+        cd ..
+    done
+    dolib.a libqm-dsp.a
+    emagicdocs
+}
+
