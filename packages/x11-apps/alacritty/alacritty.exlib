@@ -3,7 +3,7 @@
 
 require github [ user='jwilm' tag=v${PV} force_git_clone=true ] cargo
 
-export_exlib_phases src_install
+export_exlib_phases src_compile src_install
 
 SUMMARY="A cross-platform, GPU-accelerated terminal emulator"
 DESCRIPTION="Alacritty is focused on simplicity and performance. The
@@ -32,11 +32,21 @@ DEPENDENCIES="
 
 BUGS_TO="danyspin97@protonmail.com"
 
+alacritty_src_compile() {
+    cargo_src_compile
+
+    edo mkdir terminfo
+    edo tic -x -o terminfo alacritty.info
+}
+
 alacritty_src_install(){
     cargo_src_install
 
     insinto /usr/share/applications
     doins alacritty.desktop
+
+    insinto /usr/share/terminfo/a
+    doins terminfo/a/*
 
     emagicdocs
 }
