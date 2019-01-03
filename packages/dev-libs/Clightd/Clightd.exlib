@@ -1,0 +1,56 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='FedeDP' ] cmake [ api=2 ]
+
+SUMMARY="A linux bus interface that lets you change screen brightness."
+
+LICENCES="GPL-3"
+SLOT="0"
+MYOPTIONS="
+    ddcutil
+    dpms
+    gamma
+    idle
+    ( providers: elogind systemd ) [[ number-selected = exactly-one ]]
+    ( providers: eudev systemd ) [[ number-selected = exactly-one ]]
+"
+
+DEPENDENCIES="
+    build:
+        sys-auth/polkit:=
+    build+run:
+        dev-libs/libmodule
+        providers:elogind? (
+            sys-auth/elogind
+        )
+        providers:eudev? (
+            sys-apps/eudev
+        )
+        providers:systemd? (
+            sys-apps/systemd
+        )
+        ddcutil? (
+            sys-apps/ddcutil
+        )
+        dpms? (
+            x11-libs/libX11
+            x11-libs/libXext
+        )
+        gamma? (
+            x11-libs/libX11
+            x11-libs/libXrandr
+        )
+        idle? (
+            x11-libs/libX11
+            x11-libs/libXScrnSaver
+        )
+"
+
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
+    'ddcutil DDC'
+    'dpms DPMS'
+    'gamma GAMMA'
+    'idle IDLE'
+)
+
