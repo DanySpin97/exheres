@@ -1,0 +1,31 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='FedeDP' ] cmake [ api=2 ]
+
+SUMMARY="A c user service to turn your webcam into a light sensor."
+
+LICENCES="GPL-3"
+SLOT="0"
+MYOPTIONS="
+    ( providers: elogind systemd ) [[ number-selected = exactly-one ]]
+    bash-completion
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/Clightd[ddcutil][dpms][gamma][idle]
+        dev-libs/libconfig
+        dev-libs/popt
+        sci-libs/gsl
+        providers:elogind? (
+            sys-auth/elogind
+        )
+        providers:systemd? (
+            sys-apps/systemd
+        )
+    recommendation:
+        sys-apps/upower
+        gps/geoclue:2.0
+"
+
