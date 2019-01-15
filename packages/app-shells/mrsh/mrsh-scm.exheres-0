@@ -1,0 +1,29 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='emersion' ] meson
+
+SUMMARY="A minimal POSIX shell"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    readline
+"
+
+DEPENDENCIES="
+    build+run:
+        readline? (
+            sys-libs/readline:=
+        )
+"
+
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
+    'readline readline enabled disabled'
+)
+
+MESON_SRC_CONFIGURE_OPTIONS=(
+    'readline -Dreadline-provider=readline'
+)
+
