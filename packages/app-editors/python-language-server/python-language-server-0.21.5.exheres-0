@@ -1,0 +1,33 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' blacklist="2" test=pytest ]
+
+SUMMARY="An implementation of the Language Server Protocol for Python."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/future[>=0.14.0][python_abis:*(-)?]
+        dev-python/pluggy[python_abis:*(-)?]
+        dev-python/python-jsonrpc-server[>=0.1.0][python_abis:*(-)?]
+        dev-util/jedi[>=0.12.0][python_abis:*(-)?]
+    recommendation:
+        dev-python/mccabe[python_abis:*(-)?]
+        dev-python/pydocstyle[python_abis:*(-)?]
+        dev-python/pycodestyle[python_abis:*(-)?]
+        dev-python/pyflakes[python_abis:*(-)?]
+        dev-python/yapf[python_abis:*(-)?]
+    suggestion:
+        dev-python/autopep8[python_abis:*(-)?]
+    test:
+        dev-python/autopep8[python_abis:*(-)?]
+        dev-python/mock[python_abis:*(-)?]
+        dev-python/pydocstyle[python_abis:*(-)?]
+        dev-python/tox[python_abis:*(-)?]
+"
+
