@@ -1,7 +1,8 @@
-# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require pypi setup-py [ import='setuptools' blacklist="2" test='pytest' ]
+require github [ user='palantir' ]
+require setup-py [ import='setuptools' blacklist="2" test='pytest' ]
 
 SUMMARY="An asynchronous JSON RPC server"
 
