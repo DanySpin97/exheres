@@ -31,3 +31,9 @@ DEPENDENCIES="
         dev-python/tox[python_abis:*(-)?]
 "
 
+src_prepare() {
+    edo sed -i '/python-jsonrpc-server/d' ${WORK}/PYTHON_ABIS/$(python_get_abi)/${PNV}/setup.py
+
+    setup-py_src_prepare
+}
+
