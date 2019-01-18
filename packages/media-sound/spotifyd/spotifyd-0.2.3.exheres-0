@@ -1,0 +1,23 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cargo github [ user='Spotifyd' tag=v${PV} ]
+
+SUMMARY="A spotify daemon"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="pulseaudio"
+
+DEPENDENCIES="
+    build+run:
+        pulseaudio? ( media-sound/pulseaudio )
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+ECARGO_FEATURE_ENABLES=(
+    'pulseaudio pulseaudio_backend'
+)
+
