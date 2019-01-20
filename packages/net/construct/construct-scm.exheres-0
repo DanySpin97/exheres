@@ -1,0 +1,59 @@
+# Coyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="https://github.com/matrix-construct/construct"
+SCM_matrixjs_REPOSITORY="https://github.com/matrix-org/matrix-js-sdk"
+SCM_matrixreact_REPOSITORY="https://github.com/matrix-org/matrix-react-sdk"
+SCM_riot_REPOSITORY="https://github.com/vector-im/riot-web"
+SCM_SECONDARY_REPOSITORIES="matrixjs matrixreact riot"
+SCM_EXTERNAL_REFS="deps/matrix-js-sdk:matrixjs deps/matrix-react-sdk:matrixreact"
+SCM_EXTERNAL_REFS+=" deps/riot-web:riot deps/rocksdb: deps/boost: deps/gecko-dev:"
+
+require scm-git
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
+
+SUMMARY="The first matrix server written in C++."
+
+LICENCES="custom"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    ( providers: libressl openssl ) [[ number-selected = [ exactly-one ] ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        app-arch/snappy
+        app-arch/lz4
+        dev-db/rocksdb
+        dev-libs/boost[>=1.66]
+        dev-libs/libsodium
+        dev-libs/spidermonkey:=
+        sys-apps/file
+        sys-libs/zlib
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --with-logdir=/var/log/construct
+    --datadir=/usr/share
+)
+
+export AT_M4DIR=( tools/m4 )
+
+src_prepare() {
+    edo sed -i '/datadir=/d' configure.ac
+    edo sed -i 's/install: install-mkdirs/install:/' share/Makefile.am
+
+    autotools_src_prepare
+}
+
+src_install() {
+    edo mkdir -p "${IMAGE}"/usr/share/${PN}
+
+    default
+
+    keepdir /var/log/${PN}
+}
+
