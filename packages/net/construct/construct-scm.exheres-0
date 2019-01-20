@@ -42,16 +42,7 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 
 export AT_M4DIR=( tools/m4 )
 
-src_prepare() {
-    edo sed -i '/datadir=/d' configure.ac
-    edo sed -i 's/install: install-mkdirs/install:/' share/Makefile.am
-
-    autotools_src_prepare
-}
-
 src_install() {
-    edo mkdir -p "${IMAGE}"/usr/share/${PN}
-
     default
 
     keepdir /var/log/${PN}
