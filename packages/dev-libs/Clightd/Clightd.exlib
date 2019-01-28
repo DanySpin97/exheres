@@ -20,7 +20,7 @@ DEPENDENCIES="
     build:
         sys-auth/polkit:=
     build+run:
-        dev-libs/libmodule
+        dev-libs/libmodule[>=4.0.0]
         providers:elogind? (
             sys-auth/elogind
         )
