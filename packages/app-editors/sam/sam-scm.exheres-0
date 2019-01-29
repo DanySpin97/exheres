@@ -1,0 +1,46 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='deadpixi' ]
+
+SUMMARY="An updated version of the sam text editor."
+
+LICENCES="custom"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+    build+run:
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+DEFAULT_SRC_COMPILE_PARAMS=(
+    CC=$(exhost --tool-prefix)cc
+    AR=$(exhost --tool-prefix)ar
+    RANLIB=$(exhost --tool-prefix)ranlib
+    # >1 does not work
+    -j1
+)
+
+src_prepare() {
+    edo sed -i '/ln -sf/d' ${WORK}/doc/Makefile
+}
+
+src_install() {
+    DESTDIR=${IMAGE} \
+    BINDIR=${DESTDIR}/usr/$(exhost --target)/bin \
+    MANDIR=${DESTDIR}/usr/share/man emake install
+
+    emagicdocs
+
+    local mandir=/usr/share/man/man1
+    dosym ${mandir}/sam.1 ${mandir}/B.1
+    dosym ${mandir}/sam.1 ${mandir}/samterm.1
+    dosym ${mandir}/sam.1 ${mandir}/rsam.1
+    dosym ${mandir}/sam.1 ${mandir}/sam.save.1
+}
+
+
