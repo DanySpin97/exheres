@@ -1,0 +1,47 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='olive-editor' ] qmake [ slot=5 ]
+
+SUMMARY="Professional open-source NLE video editor"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    frei0r [[ description = [ Enable support for FreI0r plugins ] ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        media/ffmpeg[frei0r?]
+        x11-dri/mesa
+        x11-libs/qtbase:5
+        x11-libs/qtmultimedia:5
+        frei0r? (
+            media-plugins/frei0r-plugins
+        )
+"
+
+EQMAKE_PARAMS=(
+    PREFIX=/usr/$(exhost --target)
+)
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_prepare() {
+    edo sed -i 's;\$$PREFIX/share/;/usr/share/;' "${WORK}"/${PN}.pro
+
+    default
+}
+
+src_configure() {
+    local options=
+
+    if ! optionq frei0r ; then
+       options+="DEFINES+=NOFREI0R"
+    fi
+
+    eqmake ${options}
+}
+
