@@ -1,0 +1,23 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require gitlab [ user='wavexx' ]
+require setup-py [ import=setuptools blacklist="3" multibuild=false ]
+
+SUMMARY="A screencast tool to display your keys inspired by Screenflick."
+
+LICENCES="GPL-3"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-python/distutils-extra[python_abis:*(-)?]
+    build+run:
+        gnome-bindings/pygtk[python_abis:*(-)?]
+        dev-python/pycairo[python_abis:*(-)?]
+        x11-misc/slop
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
