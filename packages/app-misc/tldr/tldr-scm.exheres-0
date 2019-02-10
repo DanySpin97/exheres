@@ -1,0 +1,38 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='tldr-pages' pn=${PN}-cpp-client ]
+
+SUMMARY="Command line client in C for tldr pages."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        app-arch/libzip
+        net-misc/curl
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+DEFAULT_SRC_COMPILE_PARAMS=(
+    CC=$(exhost --tool-prefix)cc
+    LD=$(exhost --tool-prefix)cc
+)
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=/usr
+)
+
+src_prepare() {
+    default
+
+    edo sed -i "s;shell pkg-config;shell $(exhost --tool-prefix)pkg-config;" ${WORK}/Makefile
+    edo sed -i 's;$(PREFIX)/bin;/usr/'"$(exhost --target)"'/bin;' ${WORK}/Makefile
+}
+
