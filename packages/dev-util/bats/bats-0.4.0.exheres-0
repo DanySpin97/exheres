@@ -16,9 +16,9 @@ DEPENDENCIES=""
 src_install(){
     dobin bin/*
 
-    insinto /usr/$(exhost --target)/libexec
-    doins libexec/*
+    exeinto /usr/$(exhost --target)/libexec
+    dosym /usr/$(exhost --target)/libexec/${PN} /usr/$(exhost --target)/bin/${PN}
+    doexe libexec/*
 
     doman man/bats.{1,7}
 }
-
