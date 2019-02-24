@@ -26,13 +26,13 @@ DEFAULT_SRC_COMPILE_PARAMS=(
 )
 
 DEFAULT_SRC_INSTALL_PARAMS=(
-    PREFIX=/usr
+    PREFIX=${IMAGE}/usr
 )
 
 src_prepare() {
     default
 
     edo sed -i "s;shell pkg-config;shell $(exhost --tool-prefix)pkg-config;" ${WORK}/Makefile
-    edo sed -i 's;$(PREFIX)/bin;/usr/'"$(exhost --target)"'/bin;' ${WORK}/Makefile
+    edo sed -i 's;$(PREFIX)/bin;'"${IMAGE}"'/usr/'"$(exhost --target)"'/bin;' ${WORK}/Makefile
 }
 
