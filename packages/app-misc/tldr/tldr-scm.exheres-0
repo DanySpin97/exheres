@@ -8,7 +8,7 @@ SUMMARY="Command line client in C for tldr pages."
 LICENCES="MIT"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
+MYOPTIONS=" ( libc: musl )"
 
 DEPENDENCIES="
     build:
@@ -16,6 +16,9 @@ DEPENDENCIES="
     build+run:
         app-arch/libzip
         net-misc/curl
+        libc:musl? (
+            dev-libs/musl-fts
+        )
 "
 
 BUGS_TO="danyspin97@protonmail.com"
@@ -34,5 +37,8 @@ src_prepare() {
 
     edo sed -i "s;shell pkg-config;shell $(exhost --tool-prefix)pkg-config;" ${WORK}/Makefile
     edo sed -i 's;$(PREFIX)/bin;'"${IMAGE}"'/usr/'"$(exhost --target)"'/bin;' ${WORK}/Makefile
+    if [[ $(exhost --target) == *-musl* ]]; then
+        edo sed -i 's/\(ALL_LDLIBS.*\)$/\1 -lfts/' ${WORK}/Makefile
+    fi
 }
 
