@@ -1,0 +1,26 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='technion' tag=v${PV} ]
+
+SUMMARY="A shared library that implements scrypt() functionality."
+
+LICENCES="BSD-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_prepare() {
+    edo sed -i "s/ar /$(exhost --tool-prefix)ar /" "${WORK}"/Makefile
+
+    default
+}
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=/usr/$(exhost --target)
+)
+
