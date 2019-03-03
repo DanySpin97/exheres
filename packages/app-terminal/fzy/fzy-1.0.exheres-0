@@ -10,7 +10,7 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
 
-BUGS_TO=""
+BUGS_TO="danyspin97@protonmail.com"
 
 DEFAULT_SRC_INSTALL_PARAMS=(
     PREFIX=/usr/$(exhost --target)
