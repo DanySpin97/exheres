@@ -1,0 +1,17 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='octobanana' ] cmake [ api=2 ]
+
+SUMMARY="A TUI text reader for the terminal."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+BUGS_TO="danyspin97@protonmail.com"
+
