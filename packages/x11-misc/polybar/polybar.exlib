@@ -6,6 +6,11 @@ SCM_i3ipcpp_REPOSITORY="https://github.com/jaagr/i3ipcpp"
 SCM_xpp_REPOSITORY="https://github.com/jaagr/xpp"
 SCM_SECONDARY_REPOSITORIES="i3ipcpp xpp"
 SCM_EXTERNAL_REFS="lib/i3ipcpp:i3ipcpp lib/xpp:xpp"
+
+if ! ever is_scm; then
+    SCM_TAG="${PV}"
+fi
+
 require scm-git cmake [ api=2 ]
 
 SUMMARY="A fast and easy-to-use status bar."
@@ -64,8 +69,13 @@ CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
 )
 
 CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
+    'X XCOMPOSITE'
     'X XCURSOR'
+    'X XDAMAGE'
     'X XRANDR'
+    'X XRANDR_MONITORS'
+    'X XRENDER'
+    'X XSYNC'
     'X XKB'
     'X XRM'
 )
