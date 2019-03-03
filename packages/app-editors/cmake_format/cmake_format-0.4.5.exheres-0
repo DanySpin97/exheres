@@ -15,7 +15,5 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-python/PyYAML[python_abis:*(-)?]
-    run:
-        dev-python/numpy[python_abis:*(-)?]
 "
 
