@@ -17,11 +17,14 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
     -DBUILD_SHARED_LIBS=ON
     -DBUILD_PACKAGING=OFF
     -DINSTALL_HEADERS=ON
+    -DPKGCONFIG_INSTALL_DIR=/usr/$(exhost --target)/lib/pkgconfig
 )
 
 src_install(){
     default
 
-    edo rm -rf "${IMAGE}"/var/tmp/
+    edo cd "${IMAGE}"
+    # Remove all folders and files except for usr/
+    edo rm -rf -- !(usr)
 }
 
