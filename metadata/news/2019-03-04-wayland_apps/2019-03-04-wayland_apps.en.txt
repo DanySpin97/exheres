@@ -1,0 +1,19 @@
+Title: Wayland apps have been moved to their own category
+Author: Danilo Spinella <danyspin97@protonmail.com>
+Content-Type: text/plain
+Posted: 2019-03-04
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: x11-apps/mako
+Display-If-Installed: x11-misc/Waybar
+Display-If-Installed: x11-utils/grim
+Display-If-Installed: x11-utils/slurp
+Display-If-Installed: x11-utils/wl-clipboard
+
+The following packages have been moved to wayland-apps/ category:
+x11-apps/mako, x11-misc/Waybar, x11-utils/grim, x11-utils/slurp,
+x11-utils/wl-clipboard.
+
+Replace the currently installed package by running:
+cave uninstall <package-name>
+cave resolve wayland-apps/<package-name> -x
