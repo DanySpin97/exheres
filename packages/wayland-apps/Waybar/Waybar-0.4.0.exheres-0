@@ -16,7 +16,7 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build+run:
-        dev-libs/fmt[~scm]
+        dev-libs/fmt[>=5.3.0]
         dev-libs/jsoncpp:=
         dev-cpp/libsigc++:=
         gnome-bindings/gtkmm:3[wayland]
