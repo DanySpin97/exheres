@@ -1,0 +1,77 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='eXeC64' tag=v${PV} ]
+
+SUMMARY="Image viewer for X11/Wayland"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS="
+    (
+        jpeg [[ requires = [ providers: jpeg-turbo ] ]]
+        png
+        tiff
+        svg
+    ) [[ number-selected = at-least-one ]]
+    ( providers: jpeg-turbo )
+"
+
+DEPENDENCIES="
+    build:
+        app-doc/asciidoc
+    build+run:
+        media-libs/SDL:2
+        media-libs/SDL_ttf:2
+        media-libs/fontconfig
+        jpeg? ( media-libs/libjpeg-turbo )
+        png? (
+            media-libs/libpng:=    
+            sys-libs/zlib
+        )
+        tiff? (
+            media-libs/tiff
+            sys-libs/zlib
+        )
+        tiff? ( media-libs/libjpeg-turbo )
+        svg? (
+            dev-libs/libcroco
+            gnome-desktop/librsvg:2
+            x11-libs/gdk-pixbuf:2.0
+            x11-libs/pango
+        )
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=/usr
+    BINPREFIX=/usr/$(exhost --target)/bin
+)
+
+src_prepare() {
+    local ENABLE_JPEG=
+    if option jpeg; then
+        ENABLE_JPEG='-e s/LIBJPEG=*/LIBJPEG=yes/'
+    fi
+    local ENABLE_PNG=
+    if option png; then
+        ENABLE_PNG='-e s/LIBPNG=*/LIBPNG=yes/'
+    fi
+    local ENABLE_TIFF=
+    if option tiff; then
+        ENABLE_TIFF='-e s/LIBTIFF=*/LIBTIFF=yes/'
+    fi
+    local ENABLE_SVG=
+    if option svg; then
+        ENABLE_SVG='-e s/LIBRSVG=*/LIBRSVG=yes/'
+    fi
+    edo sed -i -e 's/FREEIMAGE=*/FREEIMAGE=no/' \
+            ${ENABLE_PNG} ${ENABLE_TIFF} \
+            ${ENABLE_JPEG} ${ENABLE_SVG} "${WORK}"/config.mk
+
+    default
+}
+
