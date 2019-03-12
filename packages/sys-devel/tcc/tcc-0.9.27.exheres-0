@@ -10,7 +10,7 @@ HOMEPAGE="http://savannah.nongnu.org/projects/tinycc"
 LICENCES="LGPL-2.1"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
+MYOPTIONS="( libc: musl )"
 
 DEPENDENCIES=""
 
@@ -19,5 +19,9 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
     --ar=$(exhost --tool-prefix)ar
     --disable-static
     --enable-shared
+)
+
+DEFAULT_SRC_CONFIGURE_OPTIONS=(
+   'libc:musl --config-musl'
 )
 
