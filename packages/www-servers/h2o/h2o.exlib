@@ -1,0 +1,65 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_picotemplate_REPOSITORY="https://github.com/kazuho/picotemplate.git"
+SCM_p5server_REPOSITORY="https://github.com/kazuho/p5-Server-Starter.git"
+SCM_oktavia_REPOSITORY="https://github.com/shibukawa/oktavia.git"
+SCM_cachedigest_REPOSITORY="https://github.com/h2o/cache-digest.js.git"
+SCM_h2get_REPOSITORY="https://github.com/deweerdt/h2get.git"
+SCM_theft_REPOSITORY="https://github.com/silentbicycle/theft.git"
+SCM_SECONDARY_REPOSITORIES="picotemplate p5server oktavia
+        cachedigest h2get theft"
+SCM_EXTERNAL_REFS="misc/picotemplate:picotemplate
+        misc/p5-Server-Starter:p5server
+        misc/oktavia:oktavia
+        misc/cache-digest.js:cachedigest
+        misc/h2get:h2get
+        deps/theft:theft"
+
+require github [ user='h2o' tag=v${PV} ] cmake [ api=2 ]
+
+export_exlib_phases src_install
+
+SUMMARY="Optimized HTTP/1,HTTP/2 server."
+
+LICENCES="MIT"
+SLOT="0"
+
+MYOPTIONS="
+    ( providers: libressl openssl ) [[ number-selected = [ exactly-one ] ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/libuv
+        sys-libs/zlib
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DBUILD_SHARED_LIBS=ON
+    -DWITH_MRUBY=OFF
+    -DWITHOUT_LIBS=ON
+)
+
+if ! ever is_scm ; then
+    CMAKE_SRC_CONFIGURE_PARAMS+=(
+        -DWITH_BUNDLED_SSL=OFF
+    )
+else
+    CMAKE_SRC_CONFIGURE_PARAMS+=(
+        -DWITH_CCACHE=OFF
+    )
+fi
+
+BUGS_TO="danyspin97@protonmail.com"
+
+h2o_src_install() {
+    default
+
+    insinto /usr/$(exhost --target)/lib/pkgconfig
+    doins "${WORK}"/libh2o.pc
+    doins "${WORK}"/libh2o-evloop.pc
+}
+
