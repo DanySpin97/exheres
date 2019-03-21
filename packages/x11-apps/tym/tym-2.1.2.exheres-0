@@ -1,0 +1,28 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='endaaman' ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
+
+SUMMARY="A lua-configurable terminal emulator."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-lang/lua:5.3
+        dev-libs/vte:2.91
+        x11-libs/gtk+:3
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_prepare() {
+    edo sed -i 's/lua53/lua-5.3/' "${WORK}"/configure.ac
+
+    autotools_src_prepare
+}
+
