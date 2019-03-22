@@ -8,7 +8,7 @@ SUMMARY="Pure Python MySQL Client"
 
 LICENCES="MIT"
 SLOT="0"
-PLATFORMS="~amd64"
+PLATFORMS="~x86 ~amd64 ~arm ~arm7"
 
 MYOPTIONS=""
 
