@@ -9,7 +9,7 @@ HOMEPAGE="https://www.borgbackup.org/"
 
 LICENCES="BSD-3"
 SLOT="0"
-PLATFORMS="~x86 ~amd64 ~arm ~arm7"
+PLATFORMS="~amd64 ~arm ~armv7 ~armv8 ~x86"
 
 MYOPTIONS="
 "
