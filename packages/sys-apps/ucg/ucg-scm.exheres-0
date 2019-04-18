@@ -1,0 +1,25 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='gvansickle' ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
+
+SUMMARY="A fast grep-like tool for searching large bodies of source code."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    libc: musl
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/pcre2[>=10.20]
+        libc:musl? (
+            dev-libs/argp-standalone
+        )
+" 
+    
+BUGS_TO="danyspin97@protonmail.com"
+
