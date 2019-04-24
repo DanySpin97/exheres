@@ -1,4 +1,5 @@
 # Copyright 2014-2016 Alexander Scheuermann <alex+exherbo@tnix.de>
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require lua [ multibuild=false whitelist="5.1 5.2 5.3" ]
@@ -21,7 +22,6 @@ DEPENDENCIES="
         doc? ( app-doc/doxygen )
     build+run:
         dev-libs/boost
-        sys-libs/glibc
         qt5? ( x11-libs/qtbase:5 )
 "
 
