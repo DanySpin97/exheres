@@ -5,3 +5,7 @@ require h2o
 
 PLATFORMS="~amd64"
 
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/fix-libressl-2.7.patch
+)
+
