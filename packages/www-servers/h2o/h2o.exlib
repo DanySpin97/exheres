@@ -17,6 +17,7 @@ SCM_EXTERNAL_REFS="misc/picotemplate:picotemplate
         deps/theft:theft"
 
 require github [ user='h2o' tag=v${PV} ] cmake [ api=2 ]
+require 66-service
 
 export_exlib_phases src_install
 
@@ -61,5 +62,7 @@ h2o_src_install() {
     insinto /usr/$(exhost --target)/lib/pkgconfig
     doins "${WORK}"/libh2o.pc
     doins "${WORK}"/libh2o-evloop.pc
+
+    install_66_files
 }
 

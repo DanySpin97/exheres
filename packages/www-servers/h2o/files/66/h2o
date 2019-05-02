@@ -1,0 +1,16 @@
+[main]
+@type = longrun
+@name = h2o
+@description = "Run the h2o web server"
+@user = ( root )
+@options = ( log env )
+
+[start]
+@build = auto
+@execute = (
+    backtick H2O_ROOT { s6-echo -- /usr/ }
+    h2o --mode=master --conf=${CONF}
+)
+
+[environment]
+!CONF=/etc/h2o.conf
