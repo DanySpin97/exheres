@@ -1,0 +1,50 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='facebook' tag=v${PV} ] cmake [ api=2 ]
+
+SUMMARY="A library that provides an embeddable, persistent key-value store."
+
+LICENCES="|| (
+    GPL-2
+    Apache-2.0
+)"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    jemalloc
+    lz4
+    snappy
+"
+
+DEPENDENCIES="
+    build+run:
+        app-arch/bzip2
+        app-arch/zstd
+        dev-libs/gflags
+        jemalloc? (
+            dev-libs/jemalloc
+        )
+        lz4? (
+            app-arch/lz4
+        )
+        snappy? (
+            app-arch/snappy
+        )
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DWITH_B2=ON
+    -DWITH_GFLAGS=ON
+    -DWITH_ZSTD=ON
+
+    # CMake cannot find zlib
+    -DWITH_ZLIB=OFF
+)
+
+CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
+    'jemalloc JEMALLOC'
+    'lz4 LZ4'
+    'snappy SNAPPY'
+)
+
