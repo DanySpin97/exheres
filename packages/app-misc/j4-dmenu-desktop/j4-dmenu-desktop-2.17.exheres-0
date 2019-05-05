@@ -1,0 +1,44 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='enkore' tag=r${PV} ] cmake [ api=2 ]
+
+SUMMARY="A fast desktop menu"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    test:
+        dev-cpp/catch
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DWITH_GIT_CATCH=OFF
+)
+
+src_prepare() {
+    edo sed -i 's/PATH_SUFFIXES catch/PATH_SUFFIXES catch2/' "${CMAKE_SOURCE}"/CMakeLists.txt
+
+    default
+}
+
+src_configure() {
+    if expecting_tests; then
+        CMAKE_SRC_CONFIGURE_PARAMS+=(
+            -DWITH_TESTS=ON
+        )
+    else
+        CMAKE_SRC_CONFIGURE_PARAMS+=(
+            -DWITH_TESTS=OFF
+        )
+    fi
+
+    cmake_src_configure
+}
+
