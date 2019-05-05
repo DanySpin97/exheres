@@ -1,0 +1,35 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require gitlab [ user='racy' ]
+
+SUMMARY="Print screen helper for sway."
+
+LICENCES="Apache-2.0"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        app-text/jq
+        compositor/sway[>=1.0]
+        x11-apps/xdg-user-dirs
+        wayland-apps/grim
+        wayland-apps/slurp
+    recommendation:
+        wayland-apps/wl-clipboard
+    suggestion:
+        x11-utils/xclip
+        x11-utils/xsel
+"
+
+src_install() {
+    insinto /etc/sway/config.d
+    newins "${WORK}"/swayshot.config swayshot
+
+    newbin "${WORK}"/swayshot.sh swayshot
+
+    emagicdocs
+}
+
