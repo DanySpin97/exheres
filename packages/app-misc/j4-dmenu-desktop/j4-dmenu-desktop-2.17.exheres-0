@@ -22,23 +22,13 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
     -DWITH_GIT_CATCH=OFF
 )
 
+CMAKE_SRC_CONFIGURE_TESTS=(
+    '-DWITH_TESTS=ON -DWITH_TESTS=OFF'
+)
+
 src_prepare() {
     edo sed -i 's/PATH_SUFFIXES catch/PATH_SUFFIXES catch2/' "${CMAKE_SOURCE}"/CMakeLists.txt
 
     default
-}
-
-src_configure() {
-    if expecting_tests; then
-        CMAKE_SRC_CONFIGURE_PARAMS+=(
-            -DWITH_TESTS=ON
-        )
-    else
-        CMAKE_SRC_CONFIGURE_PARAMS+=(
-            -DWITH_TESTS=OFF
-        )
-    fi
-
-    cmake_src_configure
 }
 
