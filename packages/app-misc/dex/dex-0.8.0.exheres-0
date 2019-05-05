@@ -1,0 +1,31 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='jceb' tag=v${PV} ]
+
+SUMMARY="DesktopEntry Execution."
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    dev-lang/python:*[>=3.0]
+    dev-python/Sphinx
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=/usr/$(exhost --target)
+    DOCPREFIX=/usr/share/doc/${PN}
+    MANPREFIX=/usr/share/man
+)
+
+src_prepare() {
+    default
+
+    edo sed -i "s/TAG = .*/TAG=${PNV}/" "${WORK}"/Makefile
+}
+
