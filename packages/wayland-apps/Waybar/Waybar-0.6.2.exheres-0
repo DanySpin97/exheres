@@ -12,6 +12,8 @@ MYOPTIONS="
     network
     pulseaudio
     tray
+    udev
+    udev? ( ( providers: eudev systemd ) [[ number-selected = exactly-one ]] )
 "
 
 DEPENDENCIES="
@@ -30,11 +32,14 @@ DEPENDENCIES="
             dev-libs/glib:2
             dev-libs/libdbusmenu
         )
+        providers:eudev? ( sys-apps/eudev )
+        providers:systemd? ( sys-apps/systemd )
 "
 
-MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
-    'network libnl enabled disabled'
-    'pulseaudio pulseaudio enabled disabled'
-    'tray dbusmenu-gtk enabled disabled'
+MESON_SRC_CONFIGURE_OPTION_FEATURES=(
+    'network libnl'
+    'pulseaudio pulseaudio'
+    'tray dbusmenu-gtk'
+    'udev libudev'
 )
 
