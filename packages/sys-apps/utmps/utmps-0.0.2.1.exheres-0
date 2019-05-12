@@ -1,0 +1,60 @@
+# Copyright 2015-2018 Johannes Nixdorf <mixi@exherbo.org>
+# Distributed under the terms of the GNU General Public License v2
+
+HOMEPAGE="http://skarnet.org/software/${PN}/"
+
+if ever is_scm; then
+    SCM_REPOSITORY="git://git.skarnet.org/s6-rc"
+    require scm-git
+else
+    DOWNLOADS="http://skarnet.org/software/${PN}/${PNV}.tar.gz"
+fi
+
+SUMMARY="A secure utmp/wtmp implementation."
+
+LICENCES="ISC"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="static"
+
+DEPENDENCIES="
+    build:
+        dev-libs/skalibs[>=2.8.0.0]
+    run:
+        sys-apps/s6[>=2.8.0.0]
+"
+
+# CROSS_COMPILE: because configure only expects executables to be prefixed if build != host
+# REALCC: because the makefile prefixes configure's CC with $(CROSS_COMPILE)
+DEFAULT_SRC_COMPILE_PARAMS=(
+    REALCC=${CC}
+    CROSS_COMPILE=$(exhost --target)-
+)
+
+src_configure()
+{
+    local args=(
+        --enable-shared
+        --with-lib=/usr/$(exhost --target)/lib
+        --with-dynlib=/usr/$(exhost --target)/lib
+        --disable-nsss
+        $(option_enable static allstatic)
+    )
+
+    [[ $(exhost --target) == *-gnu* ]] || \
+        args+=( $(option_enable static static-libc) )
+
+    econf "${args[@]}"
+}
+
+src_install()
+{
+    default
+
+    insinto /usr/share/doc/${PNVR}/html
+    doins doc/*
+
+    # dodoc doesn't preserve symlinks, the empty directories are there for a reason
+    edo cp -Pr examples "${IMAGE}"/usr/share/doc/${PNVR}
+}
+
