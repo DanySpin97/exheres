@@ -25,6 +25,8 @@ DEPENDENCIES="
 prepare_one_multibuild() {
     setup-py_prepare_one_multibuild
 
-    edo sed -i 's/msgpack-python/msgpack/' "${WORKBASE}/${MULTIBUILD_CLASS}/${MULTIBUILD_TARGET}/${PNV}"/setup.py
+    # As long as we keep the dependency version the same as the official
+    # supported version then continue to use the system package
+    edo sed -i 's/prefer_system_msgpack = False/prefer_system_msgpack = True/' "${WORKBASE}/${MULTIBUILD_CLASS}/${MULTIBUILD_TARGET}/${PNV}"/src/borg/helpers.py
 }
 
