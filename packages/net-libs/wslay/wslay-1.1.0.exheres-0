@@ -1,0 +1,31 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='tatsuhiro-t' tag=release-${PV} ] cmake [ api=2 ]
+
+SUMMARY="The WebSocket library in C"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    test:
+        dev-util/cunit[>=2.1]
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DWSLAY_CONFIGURE_INSTALL=ON
+    -DWSLAY_STATIC=OFF
+    -DWSLAY_SHARED=ON
+    -DWSLAY_EXAMPLES=OFF
+)
+
+CMAKE_SRC_CONFIGURE_TESTS=(
+    '-DWSLAY_TESTS=ON -DWSLAY_TESTS=OFF'
+)
+
