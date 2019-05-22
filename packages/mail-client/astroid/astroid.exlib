@@ -1,0 +1,66 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='astroidmail' tag=v${PV} ] cmake [ api=2 ]
+
+SUMMARY="A lightweight and fast Mail User Agent."
+
+LICENCES="
+    GPL-3
+    LGPL-2.1
+    BSD-3
+"
+
+SLOT="0"
+
+MYOPTIONS="
+    editor [[ description = [ Enable support for embedded editors ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        app-doc/scdoc
+    build+run:
+        dev-libs/boost
+        dev-libs/glib:2
+        dev-libs/libpeas[>=1.0.0]
+        dev-libs/libsass
+        dev-libs/protobuf:*
+        dev-libs/vte:2.91
+        gnome-bindings/glibmm:2.4
+        gnome-bindings/gtkmm:3[>=3.10]
+        gnome-desktop/gobject-introspection
+        mail-client/notmuch
+        net-libs/webkit[>=2.20]
+        net-utils/gmime
+        x11-libs/gtk+:3
+        editor? (
+            gnome-bindings/gtkmm:3[X]
+        )
+    run:
+        gnome-desktop/gsettings-desktop-schemas
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_prepare() {
+    cmake_src_prepare
+
+    edo sed -i 's;DESTINATION share;DESTINATION /usr/share;' CMakeLists.txt
+    edo sed 's;path prefix = .*$;path prefix = path("/usr/share/astroid")\;;' \
+        -i src/utils/resource.cc
+}
+
+src_configure() {
+    if option editor; then
+        CMAKE_SRC_CONFIGURE_PARAMS=(
+            -DDISABLE_EMBEDDED_EDITOR=OFF
+        )
+    else
+        CMAKE_SRC_CONFIGURE_PARAMS=(
+            -DDISABLE_EMBEDDED_EDITOR=ON
+        )
+    fi
+
+    cmake_src_configure
+}
