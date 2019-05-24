@@ -3,7 +3,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require setup-py [ import="setuptools" blacklist="2" multibuild=false ]
-require github [ user='Kozea' ] systemd-service s6-rc-service
+require github [ user='Kozea' ] 66-service s6-rc-service systemd-service
 
 export_exlib_phases src_install
 
@@ -18,7 +18,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-python/passlib[python_abis:*(-)?]
-        dev-python/python-dateutil[>=2.7.2][python_abis:*(-)?]
+        dev-python/python-dateutil[>=2.7.3][python_abis:*(-)?]
         dev-python/vobject[>=0.9.6][python_abis:*(-)?]
         group/radicale
         user/radicale
@@ -42,8 +42,9 @@ Radicale_src_install() {
     insinto /etc/radicale/
     doins {config,logging}
 
-    install_systemd_files
+    install_66_files
     install_s6-rc_files
+    install_systemd_files
 
     mkdir -p "${IMAGE}"/var/lib/radicale/collections
     edo chown radicale:radicale "${IMAGE}"/var/lib/radicale{,/collections}

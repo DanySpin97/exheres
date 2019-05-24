@@ -1,0 +1,16 @@
+[main]
+@type = longrun
+@name = radicale
+@description = "Run the radicale DAV server"
+@user = ( root )
+@options = ( log env )
+
+[start]
+@build = auto
+@runas = radicale
+@execute = (
+    execl-cmdline -s { radicale --foreground ${CMD_ARGS} }
+)
+
+[environment]
+!CMD_ARGS=--
