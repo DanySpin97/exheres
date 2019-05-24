@@ -8,7 +8,7 @@
 [start]
 @build = auto
 @execute = (
-    backtick H2O_ROOT { s6-echo -- /usr/ }
+    export H2O_ROOT "/usr"
     h2o --mode=master --conf=${CONF}
 )
 

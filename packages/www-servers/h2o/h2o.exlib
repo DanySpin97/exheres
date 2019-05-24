@@ -32,10 +32,13 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build+run:
-        dev-libs/libuv
+        dev-libs/libuv[>=1.0.0]
+        net-libs/wslay
         sys-libs/zlib
         providers:libressl? ( dev-libs/libressl:= )
         providers:openssl? ( dev-libs/openssl )
+    run:
+        dev-lang/perl:*
 "
 
 CMAKE_SRC_CONFIGURE_PARAMS=(
