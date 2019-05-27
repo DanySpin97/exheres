@@ -1,0 +1,44 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='danyspin97' ]
+
+SUMMARY="A vim-like webkit2gtk web browser"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        app-text/discount
+        dev-libs/glib:2
+        dev-perl/File-MimeInfo
+        net-libs/webkit:4.0
+        x11-libs/gtk+:3
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+DEFAULT_SRC_COMPILE_PARAMS=(
+     PREFIX=/usr/$(exhost --target)
+     DISTROURI=https://exherbo.org/
+     DISTRONAME=Exherbo
+)
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+     PREFIX=/usr/$(exhost --target)
+     MANDIR=/usr/share/man
+)
+
+src_install() {
+    default
+
+   insinto /usr/share/pixmaps
+   doins wyeb.png
+
+   insinto /usr/share/applications
+   doins wyeb.desktop
+}
+
