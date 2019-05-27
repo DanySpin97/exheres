@@ -1,0 +1,37 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='danyspin97' ]
+
+SUMMARY="An adblock extension for webkit2gtk browsers."
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    (
+        wyeb [[ description = [ Install extension for wyeb browser ] ]]
+    ) [[ number-selected = at-least-one ]]
+"
+
+DEPENDENCIES="
+    post:
+        wyeb? ( net-www/wyeb )
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=/usr/$(exhost --target)
+    EXTENSION_DIR=/usr/$(exhost --target)/lib
+)
+
+src_install() {
+    default
+
+    if option wyeb; then
+        edo mkdir -p "${IMAGE}"/usr/$(exhost --target)/lib/wyebrowser
+        dosym /usr/$(exhost --target)/lib/adblock.so /usr/$(exhost --target)/lib/wyebrowser/
+    fi
+}
+
