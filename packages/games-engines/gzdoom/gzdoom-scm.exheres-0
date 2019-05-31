@@ -1,7 +1,14 @@
-# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require gzdoom
 
 PLATFORMS="~amd64"
+
+if [[ $(exhost --target) == *-musl* ]]; then
+    DEPENDENCIES+="
+        build+run:
+            dev-libs/libexecinfo
+    "
+fi
 

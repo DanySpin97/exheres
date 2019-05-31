@@ -1,4 +1,4 @@
-# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='coelckers' tag=g${PV} ] cmake [ api=2 ]
@@ -12,12 +12,16 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
+        app-arch/bzip2
         media-libs/libgme
         media-libs/libjpeg-turbo
-        media-libs/openal
         media-libs/SDL:2
         media-sound/fluidsynth
         sys-libs/libgomp
+        sys-libs/vulkan-headers
+        sys-libs/vulkan-loader
+        sys-libs/zlib
+        media-libs/openal
     suggestion:
         media-sound/timidity++
 "
@@ -25,5 +29,13 @@ DEPENDENCIES="
 CMAKE_SRC_CONFIGURE_PARAMS=(
     -DINSTALL_PK3_PATH=/usr/share/games/doom
     -DINSTALL_DOCS_PATH=/usr/share/doc/${PN}
+
+    # Use system libs
+    -DFORCE_INTERNAL_ZLIB=OFF
+    -DFORCE_INTERNAL_BZIP2=OFF
+    -DFORCE_INTERNAL_JPEG=OFF
+    -DFORCE_INTERNAL_GME=OFF
+
+    -DNO_OPENAL=FALSE
 )
 
