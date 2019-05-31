@@ -3,7 +3,7 @@
 
 require github [ user='babluboy' ] gsettings meson vala [ vala_dep=true ]
 
-SUMMARY="A lightweight Wayland notification daemon"
+SUMMARY="A simple, focused eBook reader and library management."
 
 LICENCES="GPL-3"
 SLOT="0"
@@ -22,6 +22,4 @@ DEPENDENCIES="
         net-libs/webkit:4.0
         x11-libs/gtk+:3
 "
-
-export DESTDIR="${IMAGE}"
 
