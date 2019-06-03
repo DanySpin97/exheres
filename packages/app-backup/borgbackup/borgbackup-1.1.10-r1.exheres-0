@@ -18,15 +18,6 @@ DEPENDENCIES="
     build:
         dev-python/setuptools_scm[python_abis:*(-)?]
     build+run:
-        dev-python/msgpack[=0.5.6][python_abis:*(-)?]
         sys-apps/acl
 "
-
-prepare_one_multibuild() {
-    setup-py_prepare_one_multibuild
-
-    # As long as we keep the dependency version the same as the official
-    # supported version then continue to use the system package
-    edo sed -i 's/prefer_system_msgpack = False/prefer_system_msgpack = True/' "${WORKBASE}/${MULTIBUILD_CLASS}/${MULTIBUILD_TARGET}/${PNV}"/src/borg/helpers.py
-}
 
