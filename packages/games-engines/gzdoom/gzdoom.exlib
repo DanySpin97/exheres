@@ -15,13 +15,15 @@ DEPENDENCIES="
         app-arch/bzip2
         media-libs/libgme
         media-libs/libjpeg-turbo
+        media-libs/libsndfile
+        media-libs/openal
         media-libs/SDL:2
         media-sound/fluidsynth
+        media-sound/mpg123
         sys-libs/libgomp
         sys-libs/vulkan-headers
         sys-libs/vulkan-loader
         sys-libs/zlib
-        media-libs/openal
     suggestion:
         media-sound/timidity++
 "
@@ -37,5 +39,6 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
     -DFORCE_INTERNAL_GME=OFF
 
     -DNO_OPENAL=FALSE
+    -DNO_OPENMP=FALSE
 )
 
