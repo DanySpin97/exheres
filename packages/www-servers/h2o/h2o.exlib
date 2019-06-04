@@ -19,7 +19,7 @@ SCM_EXTERNAL_REFS="misc/picotemplate:picotemplate
 require github [ user='h2o' tag=v${PV} ] cmake [ api=2 ]
 require 66-service
 
-export_exlib_phases src_install
+export_exlib_phases src_prepare src_install
 
 SUMMARY="Optimized HTTP/1,HTTP/2 server."
 
@@ -31,6 +31,8 @@ MYOPTIONS="
 "
 
 DEPENDENCIES="
+    build:
+        dev-lang/ruby:*
     build+run:
         dev-libs/libuv[>=1.0.0]
         net-libs/wslay
@@ -43,21 +45,21 @@ DEPENDENCIES="
 
 CMAKE_SRC_CONFIGURE_PARAMS=(
     -DBUILD_SHARED_LIBS=ON
-    -DWITH_MRUBY=OFF
     -DWITHOUT_LIBS=ON
 )
 
-if ! ever is_scm ; then
-    CMAKE_SRC_CONFIGURE_PARAMS+=(
-        -DWITH_BUNDLED_SSL=OFF
-    )
-else
-    CMAKE_SRC_CONFIGURE_PARAMS+=(
-        -DWITH_CCACHE=OFF
-    )
-fi
+CMAKE_SRC_CONFIGURE_OPTION_WITHS=(
+    'mruby MRUBY'
+)
 
 BUGS_TO="danyspin97@protonmail.com"
+
+h2o_src_prepare() {
+    cmake_src_prepare
+
+    edo sed -i "s/pkg-config/$(exhost --tool-prefix)/" \
+        "${CMAKE_SOURCE}"/deps/mruby/lib/mruby/gem.rb
+}
 
 h2o_src_install() {
     default

@@ -5,3 +5,26 @@ require h2o
 
 PLATFORMS="~amd64"
 
+MYOPTIONS+="
+    mruby [[ description = [ Support for ruby scripting ] ]]
+"
+
+DEPENDENCIES+="
+    build+run:
+        mruby? (
+            dev-lang/ruby:*
+            dev-libs/oniguruma
+        )
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/h2o-2.3-mruby.patch
+)
+
+CMAKE_SRC_CONFIGURE_PARAMS+=(
+    -DWITH_BUNDLED_SSL=OFF
+)
+
+export PKG_CONFIG=$(exhost --tool-prefix)pkg-config
+export LD=$(exhost --tool-prefix)cc
+

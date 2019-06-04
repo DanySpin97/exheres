@@ -9,3 +9,7 @@ DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/fix-libressl-2.7.patch
 )
 
+CMAKE_SRC_CONFIGURE_PARAMS+=(
+    -DWITH_CCACHE=OFF
+)
+
