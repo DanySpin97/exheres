@@ -13,4 +13,4 @@
 )
 
 [environment]
-!CMD_ARGS=--
+!CMD_ARGS=--server-pid radicale
