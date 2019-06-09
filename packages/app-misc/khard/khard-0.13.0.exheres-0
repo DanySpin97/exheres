@@ -23,9 +23,6 @@ DEPENDENCIES="
         dev-python/vobject[python_abis:*(-)?]
 "
 
-# test require contacts saved
-RESTRICT="test"
-
 src_test() {
     edo mkdir -p ${TEMP}/.config/khard
     edo cp "${WORK}"/misc/khard/khard.conf.example ${TEMP}/.config/khard/khard.conf
