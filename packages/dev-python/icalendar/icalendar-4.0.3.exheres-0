@@ -1,4 +1,4 @@
-# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='collective' ]
@@ -17,7 +17,4 @@ DEPENDENCIES="
         dev-python/python-dateutil[python_abis:*(-)?]
         dev-python/pytz[python_abis:*(-)?]
 "
-
-# Test phase is failing
-RESTRICT="test"
 
