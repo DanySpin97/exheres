@@ -1,4 +1,4 @@
-# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require pypi setup-py [ import=setuptools blacklist="2" ]
@@ -18,13 +18,15 @@ DEPENDENCIES="
     build+run:
         dev-python/atomicwrites[>=0.1.7][python_abis:*(-)?]
         dev-python/click[>=3.2][python_abis:*(-)?]
+        dev-python/click-log[>=0.2.0][python_abis:*(-)?]
         dev-python/configobj[python_abis:*(-)?]
-        dev-python/icalendar[>=3.11.7][python_abis:*(-)?]
+        dev-python/icalendar[>=4.0.3][python_abis:*(-)?]
         dev-python/pyxdg[python_abis:*(-)?]
         dev-python/pytz[python_abis:*(-)?]
         dev-python/python-dateutil[python_abis:*(-)?]
         dev-python/tzlocal[>=1.0][python_abis:*(-)?]
         dev-python/urwid[python_abis:*(-)?]
+        python_abis:3.4? ( dev-python/typing[python_abis:*(-)?] )
     test:
         dev-python/freezegun[python_abis:*(-)?]
         dev-python/vdirsyncer[python_abis:*(-)?]
