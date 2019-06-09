@@ -1,9 +1,10 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2019 Maxime SORIN <maxime.sorin@clever-cloud.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='jwilm' tag=v${PV} force_git_clone=true ] cargo
+require github [ user='jwilm' tag=v${PV} force_git_clone=true ] cargo zsh-completion bash-completion
 
-export_exlib_phases src_compile src_install
+export_exlib_phases src_prepare src_compile src_install
 
 SUMMARY="A cross-platform, GPU-accelerated terminal emulator"
 DESCRIPTION="Alacritty is focused on simplicity and performance. The
@@ -15,7 +16,10 @@ multiplexer) nor niceties like a GUI config editor."
 LICENCES="Apache-2.0"
 SLOT="0"
 
-MYOPTIONS=""
+MYOPTIONS="
+    zsh-completion
+    bash-completion
+"
 
 DEPENDENCIES="
     build+run:
@@ -36,18 +40,27 @@ alacritty_src_compile() {
     cargo_src_compile
 
     edo mkdir terminfo
-    edo tic -x -o terminfo alacritty.info
+    edo tic -x -o terminfo extra/alacritty.info
+}
+
+ZSH_COMPLETIONS=( extra/completions/_alacritty )
+BASH_COMPLETIONS=( extra/completion/alacritty.bash )
+
+alacritty_src_prepare(){
+    edo sed -e /Icon/s/Alacritty/Terminal/ -i extra/linux/alacritty.desktop
 }
 
 alacritty_src_install(){
     cargo_src_install
 
     insinto /usr/share/applications
-    doins alacritty.desktop
+    doins extra/linux/alacritty.desktop
 
     insinto /usr/share/terminfo/a
     doins terminfo/a/*
 
     emagicdocs
-}
 
+    optionq zsh-completion && zsh-completion_src_install
+    optionq bash-completion && bash-completion_src_install
+}
