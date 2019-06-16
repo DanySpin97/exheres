@@ -1,7 +1,9 @@
 # Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='FedeDP' ] cmake [ api=2 ]
+require github [ user='FedeDP' ] cmake [ api=2 ] 66-service
+
+export_exlib_phases src_install
 
 SUMMARY="A linux bus interface that lets you change screen brightness."
 
@@ -53,4 +55,10 @@ CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
     'gamma GAMMA'
     'idle IDLE'
 )
+
+Clightd_src_install() {
+    default
+
+    install_66_files
+}
 

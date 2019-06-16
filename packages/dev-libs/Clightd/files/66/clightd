@@ -1,0 +1,14 @@
+[main]
+@type = longrun
+@name = clightd
+@description = "Run the clightd daemon"
+@user = ( root )
+@depends = ( dbus polkitd upowerd )
+@options = ( log )
+
+[start]
+@build = auto
+@execute = (
+    /usr/host/lib/clightd/clightd
+)
+
