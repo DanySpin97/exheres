@@ -47,6 +47,8 @@ DEPENDENCIES="
             x11-libs/libX11
             x11-libs/libXScrnSaver
         )
+    run:
+        sys-apps/upower
 "
 
 CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
