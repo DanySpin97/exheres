@@ -10,19 +10,17 @@ SUMMARY="A linux bus interface that lets you change screen brightness."
 LICENCES="GPL-3"
 SLOT="0"
 MYOPTIONS="
-    ddcutil
-    dpms
-    gamma
-    idle
+    ddcutil [[ description = [ Enable support for external monitor backlight ] ]]
+    dpms [[ description = [ Enable power saving when the device is not used ] ]]
+    gamma [[ description = [ Adjust screeen gamma according to time ] ]]
     ( providers: elogind systemd ) [[ number-selected = exactly-one ]]
     ( providers: eudev systemd ) [[ number-selected = exactly-one ]]
 "
 
 DEPENDENCIES="
-    build:
-        sys-auth/polkit:=
     build+run:
         dev-libs/libmodule[>=4.0.0]
+        sys-auth/polkit:=[gobject-introspection]
         providers:elogind? (
             sys-auth/elogind
         )
@@ -33,7 +31,7 @@ DEPENDENCIES="
             sys-apps/systemd
         )
         ddcutil? (
-            sys-apps/ddcutil
+            sys-apps/ddcutil[>=0.9.5]
         )
         dpms? (
             x11-libs/libX11
@@ -43,10 +41,6 @@ DEPENDENCIES="
             x11-libs/libX11
             x11-libs/libXrandr
         )
-        idle? (
-            x11-libs/libX11
-            x11-libs/libXScrnSaver
-        )
     run:
         sys-apps/upower
 "
@@ -55,7 +49,6 @@ CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
     'ddcutil DDC'
     'dpms DPMS'
     'gamma GAMMA'
-    'idle IDLE'
 )
 
 Clightd_src_install() {
