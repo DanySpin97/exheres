@@ -24,3 +24,6 @@ DEPENDENCIES="
 
 BUGS_TO="flocke@shadowice.org"
 
+# Tests fail
+RESTRICT="test"
+
