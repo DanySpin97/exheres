@@ -3,8 +3,8 @@
 
 require pypi setup-py [ import=setuptools blacklist="2" ]
 
-SUMMARY="Browse Reddit from your terminal"
-HOMEPAGE="https://github.com/pimutils/${PN}"
+SUMMARY="A standards based CLI (console) calendar program."
+HOMEPAGE="https://lostpackets.de/${PN}/"
 
 LICENCES="MIT"
 SLOT="0"
