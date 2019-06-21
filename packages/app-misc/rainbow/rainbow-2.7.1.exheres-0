@@ -1,0 +1,21 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='nicoulaj' ] setup-py [ import=setuptools blacklist=" " ]
+
+SUMMARY="Colorize commands output or STDIN using patterns."
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/Jinja2[>=2.7.2][python_abis:*(-)?]
+"
+
+# Test dependencies are unpackged
+RESTRICT="test"
+
