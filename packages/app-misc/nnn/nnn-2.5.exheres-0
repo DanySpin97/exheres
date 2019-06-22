@@ -1,4 +1,4 @@
-# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='jarun' tag=v${PV} ]
@@ -18,6 +18,8 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         sys-libs/ncurses
+    run:
+        x11-apps/xdg-utils
 "
 
 DEFAULT_SRC_INSTALL_PARAMS=(
