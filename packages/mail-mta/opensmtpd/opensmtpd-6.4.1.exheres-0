@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require alternatives systemd-service
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
 
-MY_PNV=${PNV/_/}
+MY_PNV=${PNV}p2
 
 SUMMARY="Portable version of smtp server implementation for OpenBSD"
 HOMEPAGE="http://www.opensmtpd.org/"
@@ -18,16 +18,13 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-libs/libevent
-        dev-libs/openssl
+        dev-libs/libressl:=
         net-libs/libasr
-        sys-libs/db:=
     run:
         user/_smtpd
         user/_smtpf
         user/_smtpq
 "
-
-DEFAULT_SRC_CONFIGURE_PARAMS=( --with-ca-file=/etc/ssl/certs/ca-certificates.crt )
 
 WORK="${WORKBASE}"/${MY_PNV}
 
@@ -43,14 +40,8 @@ src_prepare() {
 src_install() {
     default
 
-    local f d n
-    for f in /usr/$(exhost --target)/bin/{sendmail,mailq}        \
-             /usr/share/man/man5/{aliases,forward,table}.5       \
-             /usr/share/man/man8/sendmail.8; do
-        d="${f%/*}"
-        n="${f##*/}"
-        edo mv "${IMAGE}${f}" "${IMAGE}${d}"/${PN}."${n}"
-        alternatives_for mta ${PN} 5 "${f}" ${PN}."${n}"
+    for i in aliases forward makemap; do
+        edo rm -rf "${IMAGE}"/usr/share/man/man8/${i}.8
     done
 
     install_systemd_files
