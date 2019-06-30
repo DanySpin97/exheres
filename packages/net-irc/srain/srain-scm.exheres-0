@@ -1,0 +1,39 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='SrainApp' ]
+
+SUMMARY="Modern IRC client written in GTK."
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2
+        dev-libs/glib-networking
+        dev-libs/libconfig
+        dev-libs/libsecret
+        gnome-desktop/libsoup
+        sys-devel/gettext
+        x11-libs/gtk+:3[>=3.18]
+    suggestion:
+        gnome-desktop/gnome-keyring
+        kde-frameworks/kwallet
+"
+
+DEFAULT_SRC_COMPILE_PARAMS=(
+    CC=$(exhost --tool-prefix)cc
+)
+
+src_prepare() {
+    edo sed -i "s,pkg-config,$(exhost --tool-prefix)pkg-config," \
+            ${WORK}/src/Makefile
+
+    default
+}
+
