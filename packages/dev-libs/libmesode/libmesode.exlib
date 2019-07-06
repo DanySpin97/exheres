@@ -1,7 +1,7 @@
 # Copyright 2015 Jakob Nixdorf <flocke@shadowice.org>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user="boothj5" ] autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 1.12 1.11 1.10 1.9 ] ]
+require github [ user="boothj5" ] autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
 
 SUMMARY="A minimal XMPP library written in C (fork of libstrophe for use with profanity)"
 
@@ -14,9 +14,10 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build:
+        virtual/pkg-config
         doc? ( app-doc/doxygen )
     build+run:
-        dev-libs/expat
+        dev-libs/expat[>=2.0.0]
         providers:libressl? ( dev-libs/libressl:= )
         providers:openssl? ( dev-libs/openssl )
 "
