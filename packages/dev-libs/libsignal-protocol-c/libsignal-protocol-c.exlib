@@ -1,0 +1,19 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='signalapp' tag=v${PV} ] cmake [ api=2 ]
+
+SUMMARY="Signal Protocol C Library."
+
+LICENCES="GPL-3"
+SLOT="0"
+MYOPTIONS="
+    ( providers: libressl openssl )
+"
+
+DEPENDENCIES="
+    build+run:
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
+"
+
