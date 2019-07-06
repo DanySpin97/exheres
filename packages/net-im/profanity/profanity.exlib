@@ -13,20 +13,25 @@ MYOPTIONS="
     libnotify
     otr [[ description = [ Support message encryption using OTR (XEP-0364) ] ]]
     pgp [[ description = [ Support message encryption using PGP (XEP-0027) ] ]]
+    tray [[ description = [ Enable GTK tray icons ] ]]
     xscreensaver [[ description = [ Use libXScrnSaver to determine the idle time ] ]]
 "
 
 DEPENDENCIES="
     build+run:
         dev-libs/expat
-        dev-libs/glib:2
-        dev-libs/libmesode
+        dev-libs/glib:2[>=2.40]
+        dev-libs/libmesode[>=0.9.2]
         net-misc/curl
         sys-libs/ncurses
         libnotify? ( x11-libs/libnotify )
-        otr? ( net-libs/libotr )
+        otr? ( net-libs/libotr[>=4.0] )
         pgp? ( app-crypt/gpgme )
-        xscreensaver? ( x11-libs/libXScrnSaver )
+        tray? ( x11-libs/gtk+:2[>=2.24.10] )
+        xscreensaver? (
+            x11-libs/libX11
+            x11-libs/libXScrnSaver
+        )
     test:
         dev-util/cmocka
 "
@@ -35,6 +40,12 @@ BUGS_TO="flocke@shadowice.org"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( '--enable-plugins' '--enable-c-plugins' )
 DEFAULT_SRC_CONFIGURE_OPTIONS=( "python PYTHON_VERSION=${PYTHON_ABIS}" )
-DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( 'libnotify notifications' 'otr' 'pgp' 'python python-plugins' )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    'libnotify notifications'
+    'otr'
+    'pgp'
+    'python python-plugins'
+    'tray icons'
+)
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'xscreensaver' )
 
