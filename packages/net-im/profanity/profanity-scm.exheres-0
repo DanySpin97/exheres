@@ -4,4 +4,13 @@
 require profanity
 
 PLATFORMS="~amd64"
+MYOPTIONS+="omemo"
+
+DEPENDENCIES+="
+    build+run:
+        dev-libs/libgcrypt[>=1.7.0]
+        dev-libs/libsignal-protocol-c[>=2.3.2]
+"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES+=( 'omemo' )
 
