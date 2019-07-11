@@ -14,7 +14,7 @@ DEPENDENCIES="
         app-doc/scdoc
     build+run:
         sys-libs/wayland
-        sys-libs/wayland-protocols
+        sys-libs/wayland-protocols[>=1.14]
         x11-libs/cairo
 "
 
