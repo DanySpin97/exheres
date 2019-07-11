@@ -9,6 +9,7 @@ LICENCES="MIT"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="
+    mpd
     network
     pulseaudio
     tray
@@ -26,6 +27,7 @@ DEPENDENCIES="
         sys-libs/libinput
         sys-libs/wayland
         sys-libs/wayland-protocols
+        mpd? ( media-libs/libmpdclient )
         network? ( net-libs/libnl:3.0 )
         pulseaudio? ( media-sound/pulseaudio )
         tray? (
@@ -37,6 +39,7 @@ DEPENDENCIES="
 "
 
 MESON_SRC_CONFIGURE_OPTION_FEATURES=(
+    'mpd'
     'network libnl'
     'pulseaudio pulseaudio'
     'tray dbusmenu-gtk'
