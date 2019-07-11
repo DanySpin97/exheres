@@ -1,7 +1,7 @@
 # Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='emersion' tag=v${PV} ] meson
+require github [ user='emersion' release=v${PV} suffix=tar.gz ] meson
 
 SUMMARY="Grab images from a Wayland compositor."
 
@@ -19,7 +19,7 @@ DEPENDENCIES="
     build:
         app-doc/scdoc
     build+run:
-        sys-libs/wayland-protocols
+        sys-libs/wayland-protocols[>=1.14]
         x11-libs/cairo
         providers:ijg-jpeg? ( media-libs/jpeg:= )
         providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
