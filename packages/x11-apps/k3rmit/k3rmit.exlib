@@ -25,10 +25,9 @@ BUGS_TO="danyspin97@protonmail.com"
 k3rmit_src_install() {
     default
 
+    dodoc ${CMAKE_SOURCE}/.config/${PN}.conf
 
-    if ever is_scm; then
-        insinto /usr/share/applications/
-        doins ${CMAKE_SOURCE}/.config/${PN}.desktop
-    fi
+    insinto /usr/share/applications/
+    doins ${CMAKE_SOURCE}/.config/${PN}.desktop
 }
 
