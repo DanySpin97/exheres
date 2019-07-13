@@ -15,6 +15,10 @@ MYOPTIONS=""
 
 DEPENDENCIES=""
 
+DEFAULT_SRC_COMPILE_PARAMS=(
+    PREFIX=/usr/$(exhost --target)
+)
+
 DEFAULT_SRC_INSTALL_PARAMS=(
     PREFIX=/usr/$(exhost --target)
     MANDIR=${IMAGE}/usr/share/man
