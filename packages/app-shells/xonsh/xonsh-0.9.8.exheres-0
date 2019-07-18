@@ -1,0 +1,26 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='xonsh' ]
+require setup-py [ import=setuptools blacklist="2" has_bin=true ]
+
+SUMMARY="Python-powered, cross-platform, Unix-gazing shell."
+
+LICENCES="BSD-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    suggestion:
+        dev-python/distro[python_abis:*(-)?] [[
+            description = [ Add more information related to linux ]
+        ]]
+        dev-python/prompt_toolkit[python_abis:*(-)?] [[
+            description = [ Support for advanced line-editing ]
+        ]]
+        dev-python/pygments[>=2.2][python_abis:*(-)?] [[
+            description = [ Enable syntax highlighting ]
+        ]]
+"
+
