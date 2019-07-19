@@ -8,7 +8,6 @@ SUMMARY="A lightweight Wayland notification daemon"
 LICENCES="MIT"
 SLOT="0"
 MYOPTIONS="
-    icons [[ description = [ Enable icon support ] ]]
     ( providers: elogind systemd )
 "
 
@@ -20,11 +19,9 @@ DEPENDENCIES="
         sys-libs/wayland
         sys-libs/wayland-protocols[>=1.14]
         x11-libs/cairo
+        x11-libs/gtk+:3
+        x11-libs/gdk-pixbuf:2.0
         x11-libs/pango
-        icons? (
-            x11-libs/gtk+:3
-            x11-libs/gdk-pixbuf:2.0
-        )
         providers:elogind? (
             sys-auth/elogind[=238.3|>=239.2]
         )
@@ -33,9 +30,6 @@ DEPENDENCIES="
 
 MESON_SRC_CONFIGURE_PARAMS=(
     -Dman-pages=enabled
-)
-
-MESON_SRC_CONFIGURE_OPTION_FEATURES=(
-    icons
+    -Dicons=enabled
 )
 
