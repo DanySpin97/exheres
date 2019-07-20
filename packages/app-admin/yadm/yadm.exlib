@@ -9,7 +9,7 @@ require bash-completion zsh-completion
 export_exlib_phases src_install
 
 SUMMARY="Yet Another Dotfiles Manager"
-HOMEPAGE="https://thelocehiliosan.github.io/yadm/"
+HOMEPAGE="https://yadm.io/"
 
 LICENCES="GPL-3"
 SLOT="0"
@@ -28,7 +28,7 @@ DEPENDENCIES="
 "
 
 BASH_COMPLETIONS=( "completion/${PN}.bash_completion" )
-ZSH_COMPLETIONS=( "completion/${PN}.zsh_completion" )
+ZSH_COMPLETIONS=( "completion/${PN}.zsh_completion _yadm" )
 
 yadm_src_install() {
     dobin ${PN}
