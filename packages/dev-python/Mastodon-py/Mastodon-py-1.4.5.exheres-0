@@ -13,12 +13,25 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        dev-python/requests[python_abis:*(-)?]
+        dev-python/requests[>=2.4.2][python_abis:*(-)?]
         dev-python/python-dateutil[python_abis:*(-)?]
+        dev-python/python-magic[python_abis:*(-)?]
         dev-python/six[python_abis:*(-)?]
         dev-python/pytz[python_abis:*(-)?]
         dev-python/decorator[>=4.0.0][python_abis:*(-)?]
-        dev-python/http-ece[python_abis:*(-)?]
+    test:
+        dev-python/pytest[python_abis:*(-)?]
+        dev-python/pytest-cov[python_abis:*(-)?]
+        dev-python/pytest-mock[python_abis:*(-)?]
+        dev-python/pytest-runner[python_abis:*(-)?]
+        dev-python/pytest-vcr[python_abis:*(-)?]
+        dev-python/requests-moc[python_abis:*(-)?]
+        dev-python/vcrpy[python_abis:*(-)?]
+    recommendation:
+        dev-python/http-ece[>=1.0.5][python_abis:*(-)?]
         dev-python/cryptography[>=1.6.0][python_abis:*(-)?]
 "
+
+# Test deps are not packaged
+RESTRICT="test"
 
