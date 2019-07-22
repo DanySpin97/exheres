@@ -1,9 +1,10 @@
 # Copyright 2014 Jorge Aparicio
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=${PN} ]
+require github [ user=${PN} tag=v${PV} ]
 
-SUMMARY="C/C++/Objective-C static code analyzer"
+SUMMARY="A static source code analysis tool to improve quality."
 HOMEPAGE="http://oclint.org"
 
 LICENCES="BSD-3"
@@ -13,8 +14,9 @@ DEPENDENCIES="
     build:
         dev-lang/python:*
         sys-devel/cmake
+        sys-devel/ninja
     build+run:
-        dev-lang/clang[>=3.5]
+        dev-lang/clang:8
 "
 
 src_prepare() {
@@ -27,21 +29,26 @@ src_prepare() {
 
 src_compile() {
     pushd oclint-scripts
-    edo ./build -llvm-root=/usr -release
+    edo ./build -llvm-root=/usr/$(exhost --target)/lib/llvm/8 -release
     popd
 }
 
 src_install() {
     pushd oclint-scripts
-    edo ./bundle -llvm-root=/usr -release
+    edo ./bundle -llvm-root=/usr/$(exhost --target)/lib/llvm/8 -release
     popd
 
     # manual install
-    exeinto /usr/bin
-    doexe build/oclint-release/bin/*
+    dobin build/oclint-release/bin/*
 
-    insinto /usr/${LIBDIR}/oclint
+    for i in reporters rules ; do
+        insinto /usr/$(exhost --target)/lib/${PN}/${i}/
+        doins build/oclint-release/lib/${PN}/${i}/*.so
+    done
+
+    insinto /usr/share/doc/${PNV}
     doins oclint-core/LICENSE
-    doins -r build/oclint-release/lib/oclint/*
+
+    emagicdocs
 }
 
