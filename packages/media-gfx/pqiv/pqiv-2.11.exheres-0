@@ -1,0 +1,73 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='phillipberndt' ]
+
+SUMMARY="Powerful image viewer with minimal UI."
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS="
+    ffmpeg [[ description = [ Enable support for video ] ]]
+    imagemagick [[ description = [ Enable support for psd and other forms ] ]]
+    libarchive [[
+        description = [ Enable support for images in archives and comic books ]
+    ]]
+    pdf [[ description = [ Enable support for pdf using poppler ] ]]
+    ps [[ description = [ Enable support for ps/eps using libspectre ] ]]
+    webp [[ description = [ Enable support for WebP ] ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/glib:2[>=2.32]
+        x11-libs/cairo[>=1.6]
+        x11-libs/gdk-pixbuf:2.0
+        x11-libs/gtk+:3
+        ffmpeg? ( media-libs/ffmpeg )
+        imagemagick? ( media-libs/ImageMagick )
+        libarchive? ( app-arch/libarchive )
+        pdf? ( app-text/poppler )
+        ps? ( app-text/libspectre )
+        webp? ( media-libs/libwebp:= )
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_configure() {
+    local backends=gdkpixbuf,
+    if option ffmpeg; then
+        backends+=libav,
+    fi
+    if option imagemagick; then
+        backends+=wand,
+    fi
+    if option libarchive; then
+        backends+=archive,archive_cbx,
+    fi
+    if option pdf; then
+        backends+=poppler,
+    fi
+    if option ps; then
+        backends+=spectre,
+    fi
+    if option webp; then
+        backends+=webp,
+    fi
+
+    local params=(
+	    # Use system libs
+        --backends-build=shared
+        --backends=${backends}
+        --hates=datadir
+        --hates=datarootdir
+        --hates=enable-fast-install
+    )
+
+    # For some reasons the compiler is set to <arch><arch>cc
+    # setting CC fix this
+    CC=cc econf ${params[@]}
+}
+
