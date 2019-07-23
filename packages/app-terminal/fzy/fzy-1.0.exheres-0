@@ -10,6 +10,8 @@ SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS=""
 
+DEPENDENCIES=""
+
 BUGS_TO="danyspin97@protonmail.com"
 
 DEFAULT_SRC_INSTALL_PARAMS=(
