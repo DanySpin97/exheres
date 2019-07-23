@@ -1,0 +1,20 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='soveran' ]
+
+SUMMARY="Command-line, stack-based calculator with postfix notation."
+
+LICENCES="BSD-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+BUGS_TO="danyspin97@protonmail.com"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=${IMAGE}usr/$(exhost --target)
+    MANPREFIX=${IMAGE}usr/share/man
+    STRIP="echo"
+)
+
