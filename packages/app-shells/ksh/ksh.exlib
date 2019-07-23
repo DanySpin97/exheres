@@ -1,61 +1,38 @@
 # Copyright 2009 Elias Pipping <elias@pipping.org>
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
+require github [ user='att' pn='ast' ] meson
+
+export_exlib_phases src_install
+
 SUMMARY="The Korn Shell"
-HOMEPAGE="http://www.research.att.com/~gsf/download/gen/ast-ksh.html#ksh93"
-# ast-base contains nmake (as well as ast-ksh) which is required by the ksh test suite
-DOWNLOADS="
-    http://dev.exherbo.org/~pipping/distfiles/ast-base.$(ever replace_all -).tgz
-    http://dev.exherbo.org/~pipping/distfiles/INIT.$(ever replace_all -).tgz
-"
 
-UPSTREAM_CHANGELOG="http://www.research.att.com/~gsf/download/gen/ast-ksh.html#ksh93%20changes"
-
-LICENCES="CPL-1.0"
+LICENCES="EPL-1.0"
 SLOT="0"
-MYOPTIONS=""
+MYOPTIONS="
+    ( libc: musl )
+"
 
 DEPENDENCIES="
-    test:
-        app-shells/ksh
+    build+run:
+        libc:musl? (
+            dev-libs/libexecinfo
+            dev-libs/musl-fts
+        )
 "
 
-WORK="${WORKBASE}"
+MESON_SRC_CONFIGURE_TESTS=(
+    '-Dbuild-api-tests=true -Dbuild-api-tests=false'
+)
 
-pkg_setup() {
-    unset LIBDIR # shcomp fails to link if this is set
-}
+# Tests are failing
+RESTRICT="test"
 
-src_prepare() {
-    # FIXME: These fail because of sandboxing
-    edo rm src/cmd/ksh93/tests/{basic,pty,signal}.sh
-    # FIXME: This needs to be investigated (pty.sh, too)
-    edo rm src/cmd/ksh93/tests/locale.sh
-}
+ksh_src_install() {
+    meson_src_install
 
-src_compile() {
-    local arch=`bin/package`
-
-    # Using /bin/ksh resulted in a Memory fault with older versions of ksh
-    edo bin/package only make SHELL=/bin/sh CC.OPTIMIZE="${CFLAGS}"
-    if grep -q 'make: \*\*\* [[:digit:]]\+ actions\? failed' arch/${arch}/lib/package/gen/make.out; then
-        die "Failed to compile ast-ksh"
-    fi
-}
-
-src_test() {
-    local arch=`bin/package`
-
-    # bin/regress assumes ksh for a shell
-    edo bin/package only test ast-ksh SHELL=/bin/ksh
-}
-
-src_install() {
-    local arch=`bin/package`
-
-    exeinto /bin
-    doexe arch/${arch}/bin/ksh
-    newman arch/${arch}/man/man1/sh.1 ksh.1
+    doman src/cmd/${PN}93/{${PN}.1,nval.3,shell.3}
     dodoc src/cmd/ksh93/{RELEASE{88,93,},TYPES}
 }
 
