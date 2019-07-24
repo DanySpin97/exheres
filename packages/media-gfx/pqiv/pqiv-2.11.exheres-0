@@ -37,33 +37,51 @@ DEPENDENCIES="
 BUGS_TO="danyspin97@protonmail.com"
 
 src_configure() {
-    local backends=gdkpixbuf,
-    if option ffmpeg; then
-        backends+=libav,
-    fi
-    if option imagemagick; then
-        backends+=wand,
-    fi
-    if option libarchive; then
-        backends+=archive,archive_cbx,
-    fi
-    if option pdf; then
-        backends+=poppler,
-    fi
-    if option ps; then
-        backends+=spectre,
-    fi
-    if option webp; then
-        backends+=webp,
-    fi
-
     local params=(
 	    # Use system libs
         --backends-build=shared
-        --backends=${backends}
         --hates=datadir
         --hates=datarootdir
         --hates=enable-fast-install
+    )
+
+    local backends=gdkpixbuf,
+    if option ffmpeg; then
+        backends+=libav,
+    else
+        params+=( --without-libav )
+    fi
+    if option imagemagick; then
+        backends+=wand,
+    else
+        params+=( --without-wand )
+    fi
+    if option libarchive; then
+        backends+=archive,archive_cbx,
+    else
+        params+=(
+            --without-archive
+            --without-archive_cbx
+        )
+    fi
+    if option pdf; then
+        backends+=poppler,
+    else
+        params+=( --without-poppler )
+    fi
+    if option ps; then
+        backends+=spectre,
+    else
+        params+=( --without-spectre )
+    fi
+    if option webp; then
+        backends+=webp,
+    else
+        params+=( --without-webp )
+    fi
+
+    params+=(
+        --backends=${backends}
     )
 
     # For some reasons the compiler is set to <arch><arch>cc
