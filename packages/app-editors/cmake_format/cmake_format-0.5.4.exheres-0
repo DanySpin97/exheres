@@ -15,5 +15,14 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-python/PyYAML[python_abis:*(-)?]
+    suggestion:
+        dev-python/Jinja2[python_abis:*(-)?]
 "
+
+src_test() {
+    # tests clone a remote repository using git
+    esandbox enable_net
+    default
+    esandbox disable_net
+}
 
