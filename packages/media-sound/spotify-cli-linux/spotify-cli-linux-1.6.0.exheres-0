@@ -1,0 +1,22 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='pwittchen' tag=v${PV} ]
+require setup-py [ import=setuptools blacklist="2 3.4 3.5" ]
+
+SUMMARY="A command line interface to Spotify on Linux."
+
+LINCENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/lyricwikia[python_abis:*(-)?]
+"
+
+# tests fail
+RESTRICT="test"
+
