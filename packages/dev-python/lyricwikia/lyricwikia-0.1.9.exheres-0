@@ -1,0 +1,28 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' ]
+
+SUMMARY="Python API to get song lyric from LyricWikia."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-python/pytest-runner[python_abis:*(-)?]
+    build+run:
+        dev-python/beautifulsoup4[python_abis:*(-)?]
+        dev-python/requests[python_abis:*(-)?]
+        dev-python/six[python_abis:*(-)?]
+    test:
+        dev-python/pytest[python_abis:*(-)?]
+        dev-python/responses[python_abis:*(-)?]
+"
+
+# tests fail
+RESTRICT="test"
+
