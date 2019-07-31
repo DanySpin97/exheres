@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='hectorm' tag=v${PV} ]
-require systemd-service [ files 
+require systemd-service
 
 SUMMARY="Improve your privacy by blocking ads and malware domains."
 
