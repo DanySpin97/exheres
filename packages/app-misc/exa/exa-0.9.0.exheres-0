@@ -13,6 +13,6 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
-        dev-scm/git
+        dev-scm/libgit2
 "
 
