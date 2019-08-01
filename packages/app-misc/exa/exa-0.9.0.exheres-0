@@ -11,5 +11,8 @@ PLATFORMS="~amd64"
 
 MYOPTIONS=""
 
-DEPENDENCIES=""
+DEPENDENCIES="
+    build+run:
+        dev-scm/git
+"
 
