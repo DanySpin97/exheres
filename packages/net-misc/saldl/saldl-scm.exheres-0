@@ -33,3 +33,6 @@ WAF_SRC_CONFIGURE_PARAMS=(
     --hates=htmldir
 )
 
+# There is no test suite
+RESTRICT="test"
+
