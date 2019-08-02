@@ -1,0 +1,35 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='saldl' tag=v${PV} ] waf
+
+SUMMARY="A lightweight well-featured CLI downloader optimized for speed."
+
+LICENCES="AGPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    doc
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
+"
+
+DEPENDENCIES="
+    build:
+        doc? ( app-doc/asciidoc )
+    build+run:
+        dev-libs/libevent[>=2.0.20]
+        net-libs/libssh2
+        net-misc/curl[>=7.55]
+        sys-libs/zlib
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+WAF_SRC_CONFIGURE_PARAMS=(
+    --hates=sbindir
+    --hates=datadir
+    --hates=htmldir
+)
+
