@@ -1,0 +1,20 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='celery' pn="py-${PN}" ]
+require setup-py [ import='setuptools' blacklist=" " work="py-${PNV}" ]
+
+SUMMARY="Fork of amqplib used by Celery."
+
+LICENCES="BSD-3"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/vine[>=1.1.3&<5.0.0][python_abis:*(-)?]
+"
+
+# test dependencies are unpackaged
+RESTRICT="test"
+
