@@ -1,0 +1,26 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' ]
+
+SUMMARY="Python unittest Utilities."
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/nose[>=1.3.7][python_abis:*(-)?]
+        dev-python/six[python_abis:*(-)?]
+    test:
+        dev-python/coverage[>=3.0][python_abis:*(-)?]
+"
+
+# There is no suitable version for pytest-runner, the current version is >=4
+# pytest-wolenodeid has not been written
+# tox is compatible with python >=3 while bleach supports python-2.7
+RESTRICT="test"
+
