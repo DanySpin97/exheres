@@ -26,13 +26,16 @@ DEPENDENCIES="
         dev-lang/node
         dev-lang/sassc
     run:
+        dev-python/Flask-Login[python_abis:*(-)?]
         dev-python/Flask[python_abis:*(-)?]
         dev-python/Markdown[python_abis:*(-)?]
+        dev-python/Pygments[python_abis:*(-)?]
         dev-python/SQLAlchemy[python_abis:*(-)?]
+        dev-python/alembic[python_abis:*(-)?]
         dev-python/beautifulsoup4[python_abis:*(-)?]
         dev-python/bleach[python_abis:*(-)?]
+        dev-python/celery[python_abis:*(-)?]
         dev-python/humanize[python_abis:*(-)?]
-        dev-python/psycopg2[python_abis:*(-)?]
         dev-python/requests[python_abis:*(-)?]
         dev-python/sqlalchemy-utils[python_abis:*(-)?]
 "
@@ -43,6 +46,7 @@ RESTRICT="test"
 core-sr-ht_src_prepare() {
     export PKGVER="${PV}"
 
+    # Node needs to download dependencies
     esandbox disable_net
     setup-py_src_prepare
     esandbox enable_net
