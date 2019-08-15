@@ -21,12 +21,11 @@ DEPENDENCIES="
         dev-python/click-log[>=0.2.0][python_abis:*(-)?]
         dev-python/configobj[python_abis:*(-)?]
         dev-python/icalendar[>=4.0.3][python_abis:*(-)?]
-        dev-python/pyxdg[python_abis:*(-)?]
-        dev-python/pytz[python_abis:*(-)?]
         dev-python/python-dateutil[python_abis:*(-)?]
+        dev-python/pytz[python_abis:*(-)?]
+        dev-python/pyxdg[python_abis:*(-)?]
         dev-python/tzlocal[>=1.0][python_abis:*(-)?]
         dev-python/urwid[python_abis:*(-)?]
-        python_abis:3.4? ( dev-python/typing[python_abis:*(-)?] )
     test:
         dev-python/freezegun[python_abis:*(-)?]
         dev-python/vdirsyncer[python_abis:*(-)?]
