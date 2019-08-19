@@ -1,0 +1,18 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' blacklist=" " ]
+
+SUMMARY="A python module to bypass Cloudflare's anti-bot page."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/requests[>=2.6.1][python_abis:*(-)?]
+"
+
