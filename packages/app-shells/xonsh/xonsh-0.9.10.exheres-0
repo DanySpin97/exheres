@@ -12,6 +12,10 @@ PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
+    test:
+        dev-python/pygments[>=2.2][python_abis:*(-)?] [[
+            description = [ Enable syntax highlighting ]
+        ]]
     suggestion:
         dev-python/distro[python_abis:*(-)?] [[
             description = [ Add more information related to linux ]
