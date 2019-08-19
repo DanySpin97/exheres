@@ -1,0 +1,27 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='vn-ki' ]
+require setup-py [ import=setuptools blacklist=" " test=pytest ]
+
+SUMMARY="A simple but powerful anime downloader and streamer."
+
+LINCENCES="Unlicense"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/click[>=6.7][python_abis:*(-)?]
+        dev-python/beautifulsoup4[>=4.6.0][<5.0][python_abis:*(-)?]
+        dev-python/fuzzywuzzy[>=0.16.0][<2.0][python_abis:*(-)?]
+        dev-python/requests[>=2.18.4][python_abis:*(-)?]
+    recommendation:
+        dev-python/cfscrape[>=1.9.5][python_abis:*(-)?]
+"
+
+# Tests require internet connection
+RESTRICT="test"
+
