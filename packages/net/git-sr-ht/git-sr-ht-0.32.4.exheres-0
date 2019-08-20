@@ -1,0 +1,44 @@
+# Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PN="git.sr.ht"
+require setup-py [ import='distutils' multibuild=false ]
+
+SUMMARY="Git component for sourcehut (sr.ht) sites."
+HOMEPAGE="https://${MY_PN}/~sircmpwn/${MY_PN}"
+DOWNLOADS="${HOMEPAGE}/archive/${PV}.tar.gz"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-lang/go
+    build+run:
+        dev-lang/node
+        dev-lang/sassc
+        dev-scm/pygit2[python_abis:*(-)?]
+        net-libs/scm-sr-ht[python_abis:*(-)?]
+        net/core-sr-ht[python_abis:*(-)?]
+    run:
+        group/git
+        user/git
+    recommendation:
+        virtual/cron
+    suggestion:
+        dev-db/redis
+        dev-python/celery[python_abis:*(-)?]
+        dev-python/redis[python_abis:*(-)?]
+        net/build-sr-ht[python_abis:*(-)?]
+"
+
+WORK="${WORKBASE}/git.sr.ht-${PV}"
+
+src_prepare() {
+    export SRHT_PATH=/usr/$(exhost --target)/lib/python$(python_get_abi)/site-packages/srht
+    setup-py_src_prepare
+}
+
