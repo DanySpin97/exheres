@@ -1,0 +1,25 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PN="scm.sr.ht"
+require setup-py [ import='setuptools' blacklist="2" work=${MY_PN}-${PV} ]
+
+SUMMARY="Shared support code for sr.ht source control services."
+HOMEPAGE="https://git.sr.ht/~sircmpwn/${MY_PN}"
+DOWNLOADS="${HOMEPAGE}/archive/${PV}.tar.gz"
+https://git.sr.ht/~sircmpwn/scm.sr.ht/archive/0.13.4.tar.gz
+
+LICENCES="AGPL"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        net/core-sr-ht[python_abis:*(-)?]
+"
+
+# There is no test suite
+RESTRICT="test"
+
