@@ -1,0 +1,20 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='ojarva' pn=python-${PN} tag=v${PV} ]
+require setup-py [ import='setuptools' work=python-${PNV} ]
+
+SUMMARY="OpenSSH public key parser for Python."
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/cryptography[>=2.1.4][python_abis:*(-)?]
+        dev-python/ecdsa[>=0.13][python_abis:*(-)?]
+"
+
