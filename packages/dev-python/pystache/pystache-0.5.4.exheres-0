@@ -1,0 +1,18 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' ]
+
+SUMMARY="Mustache in Python."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+# There is not test suite
+RESTRICT="test"
+
