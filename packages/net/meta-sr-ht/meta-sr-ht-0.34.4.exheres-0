@@ -1,0 +1,39 @@
+# Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PN="meta.sr.ht"
+require setup-py [ import='setuptools' multibuild=false ]
+
+SUMMARY="Account management component for sourcehut (sr.ht) sites."
+HOMEPAGE="https://git.sr.ht/~sircmpwn/${MY_PN}"
+DOWNLOADS="${HOMEPAGE}/archive/${PV}.tar.gz"
+
+LICENCES="AGPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-lang/node
+        dev-lang/sassc
+    build+run:
+        dev-db/redis
+        dev-python/bcrypt[python_abis:*(-)?]
+        dev-python/PGPy[python_abis:*(-)?]
+        dev-python/prometheus_client[python_abis:*(-)?]
+        dev-python/pystache[python_abis:*(-)?]
+        dev-python/qrcode[python_abis:*(-)?]
+        dev-python/redis[python_abis:*(-)?]
+        dev-python/sshpubkeys[python_abis:*(-)?]
+        dev-python/zxcvbn[python_abis:*(-)?]
+        net/core-sr-ht[python_abis:*(-)?]
+        www-servers/gunicorn[python_abis:*(-)?]
+    suggestion:
+        dev-python/psycopg2[python_abis:*(-)?] [[
+                description = [ For supporting the PostgreSQL databases ] ]]
+"
+
+WORK="${WORKBASE}/${MY_PN}-${PV}"
+
