@@ -1,0 +1,58 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='vapoursynth' tag=R${PV} ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
+require python [ blacklist="2" ]
+
+SUMMARY="A video processing framework with simplicity in mind."
+
+LICENCES="OFL-1.1"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS="
+    images [[
+        description = [ Support image reading/writing using ImageMagick ] ]]
+    ocr [[
+        description = [ Add support for ocr using tesseract ] ]]
+    python [[
+        description = [ Add the python module, build VSScript and vspipe ] ]]
+    subtext [[
+        description = [ Enable the subtitle rendering plugin ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        media-libs/zimg
+        images? ( media-gfx/ImageMagick )
+        ocr? ( app-text/tesseract )
+        python? ( dev-python/Cython[python_abis:*(-)?] )
+        subtext? (
+            media/ffmpeg
+            media-libs/libass
+        )
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --enable-x86-asm
+    --enable-core
+
+    --enable-eedi3
+    --enable-miscfilters
+    --enable-morpho
+    --enable-removegrain
+    --enable-vinverse
+    --enable-vivtc
+)
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    'images imwri'
+    'ocr'
+    'python python-module'
+    'python vspipe'
+    'python vsscript'
+    'subtext'
+)
+
