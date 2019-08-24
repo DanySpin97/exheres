@@ -1,0 +1,34 @@
+# Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PN="man.sr.ht"
+require setup-py [ import='setuptools' multibuild=false ]
+
+SUMMARY="Wiki service component for sourcehut (sr.ht) sites."
+HOMEPAGE="https://git.sr.ht/~sircmpwn/${MY_PN}"
+DOWNLOADS="${HOMEPAGE}/archive/${PV}.tar.gz"
+
+LICENCES="AGPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-lang/node
+        dev-lang/sassc
+    build+run:
+        dev-python/Flask-Login[python_abis:*(-)?]
+        dev-scm/pygit2[python_abis:*(-)?]
+        net/core-sr-ht[python_abis:*(-)?]
+        www-servers/gunicorn[python_abis:*(-)?]
+    test:
+        dev-python/misaka[python_abis:*(-)?]
+"
+
+WORK="${WORKBASE}/${MY_PN}-${PV}"
+
+# Tests fail
+RESTRICT="test"
+
