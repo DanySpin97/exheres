@@ -18,6 +18,8 @@ MYOPTIONS="
 "
 
 DEPENDENCIES="
+    build:
+        app-doc/scdoc[>=1.9.2]
     build+run:
         dev-libs/fmt[>=5.3.0]
         dev-libs/jsoncpp:=
