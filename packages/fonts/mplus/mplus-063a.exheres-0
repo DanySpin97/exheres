@@ -1,0 +1,24 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require xfont
+
+SUMMARY="Overpass open source web font family — Sponsored by Red Hat"
+HOMEPAGE="http://${PN}-fonts.osdn.jp/about-en.html"
+DOWNLOADS="https://ja.osdn.net/projects/${PN}-fonts/downloads/62344/${PN}-TESTFLIGHT-${PV}.tar.xz"
+
+LICENCES="Custom"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+WORK="${WORKBASE}/${PN}-TESTFLIGHT-${PV}"
+
+src_install(){
+    insinto /usr/share/fonts/X11/mplus
+    doins *.ttf
+}
+
