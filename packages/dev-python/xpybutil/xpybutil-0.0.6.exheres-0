@@ -1,0 +1,19 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='BurntSushi' ]
+require setup-py [ import='setuptools' blacklist=" " ]
+
+SUMMARY="An incomplete xcb-util port plus some extras."
+
+LICENCES="WTFPL"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/xcffib[python_abis:*(-)?]
+"
+
