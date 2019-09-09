@@ -1,0 +1,22 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require setup-py [ import='setuptools' blacklist="2" ] pypi
+
+SUMMARY="An improved Python library to control i3wm and sway."
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/python-xlib[python_abis:*(-)?]
+"
+
+# Tests require enum-compat dependency
+# TODO (danyspin97): unrestrict tests when enum-compat dep is removed
+RESTRICT="test"
+
