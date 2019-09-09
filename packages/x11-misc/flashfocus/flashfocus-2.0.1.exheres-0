@@ -1,0 +1,35 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='fennerm' tag=v${PV} ]
+require setup-py [ import='setuptools' blacklist="2 3.5" has_bin=true \
+                   multibuild=false ]
+
+SUMMARY="Simple focus animation for tiling window managers."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/cffi[python_abis:*(-)?]
+        dev-python/click[python_abis:*(-)?]
+        dev-python/i3ipc[>=2.1.1][python_abis:*(-)?]
+        dev-python/marshmallow[>=2.0&<3.0][python_abis:*(-)?]
+        dev-python/PyYAML[>=5.1][python_abis:*(-)?]
+        dev-python/xcffib[python_abis:*(-)?]
+        dev-python/xpybutil[python_abis:*(-)?]
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+RESTRICT="test"
+
+src_prepare() {
+    edo touch ${WORK}/flashfocus/display_protocols/__init__.py
+
+    setup-py_src_prepare
+}
+
