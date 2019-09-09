@@ -1,0 +1,19 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require setup-py [ import='setuptools' blacklist="2" ] pypi
+
+SUMMARY="A library for converting complex objects to and from Python datatypes."
+
+LICENCES="MIT"
+SLOT="0"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    test:
+        dev-python/pytest[python_abis:*(-)?]
+        dev-python/pytz[python_abis:*(-)?]
+        dev-python/simplejson[python_abis:*(-)?]
+"
+
