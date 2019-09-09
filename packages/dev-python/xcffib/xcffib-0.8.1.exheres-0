@@ -1,0 +1,18 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require setup-py [ import='setuptools' blacklist=" " ] pypi
+
+SUMMARY="An incomplete xcb-util port plus some extras."
+
+LICENCES="Apache-2.0"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/six[python_abis:*(-)?]
+"
+
