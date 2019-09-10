@@ -13,6 +13,7 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     build+run:
+        dev-python/cffi[>=1.1.0][python_abis:*(-)?]
         dev-python/six[python_abis:*(-)?]
 "
 
