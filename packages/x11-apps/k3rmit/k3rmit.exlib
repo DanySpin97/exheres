@@ -1,7 +1,7 @@
 # Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='KeyLo99' ] cmake [ api=2 ]
+require github [ user='orhun' ] cmake [ api=2 ]
 
 export_exlib_phases src_install
 
