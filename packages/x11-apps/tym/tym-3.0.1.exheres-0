@@ -14,6 +14,7 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         dev-lang/lua:5.3
+        dev-libs/pcre2
         dev-libs/vte:2.91
         x11-libs/gtk+:3
 "
