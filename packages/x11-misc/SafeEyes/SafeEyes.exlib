@@ -1,0 +1,23 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='slgobinath' tag=v${PV} ]
+require setup-py [ import='setuptools' blacklist="2" ]
+
+SUMMARY="Protect your eyes from eye strain using this break reminder."
+
+LICENCES="GLP-3"
+SLOT="0"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/libappindicator[gobject-introspection]
+        dev-python/Babel[python_abis:*(-)?]
+        dev-python/psutil[python_abis:*(-)?]
+        dev-python/python-xlib[python_abis:*(-)?]
+        gnome-bindings/pygobject[python_abis:*(-)?]
+        x11-libs/libnotify[gobject-introspection]
+"
+
