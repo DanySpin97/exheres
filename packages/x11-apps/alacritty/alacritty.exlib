@@ -44,7 +44,7 @@ alacritty_src_compile() {
 }
 
 ZSH_COMPLETIONS=( extra/completions/_alacritty )
-BASH_COMPLETIONS=( extra/completion/alacritty.bash )
+BASH_COMPLETIONS=( extra/completions/alacritty.bash )
 
 alacritty_src_prepare(){
     edo sed -e /Icon/s/Alacritty/Terminal/ -i extra/linux/alacritty.desktop
