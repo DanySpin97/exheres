@@ -1,0 +1,24 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='emersion' tag=v${PV} ] meson
+
+SUMMARY="A lightweight Wayland notification daemon"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        app-doc/scdoc[>=1.9.2]
+    build+run:
+        sys-libs/wayland
+        sys-libs/wayland-protocols[>=1.14]
+"
+
+MESON_SRC_CONFIGURE_PARAMS=(
+    -Dman-pages=enabled
+)
+
