@@ -1,7 +1,10 @@
 # Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='palantir' ]
+# Use tarball from PyPi, the one from GH isn't generated properly
+# and causes this package to be installed as version 0+unknown
+#require github [ user='palantir' ]
+require pypi
 require setup-py [ import='setuptools' blacklist="2" test='pytest' ]
 
 SUMMARY="An asynchronous JSON RPC server"
@@ -18,6 +21,5 @@ DEPENDENCIES="
         dev-python/coverage[python_abis:*(-)?]
         dev-python/mock[python_abis:*(-)?]
         dev-python/pytest-cov[python_abis:*(-)?]
-        dev-python/tox[python_abis:*(-)?]
 "
 
