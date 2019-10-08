@@ -1,23 +1,31 @@
 # Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require cargo github [ user='Spotifyd' tag=v${PV} ]
+require cargo [ disable_default_features=true ]
+require github [ user='Spotifyd' tag=v${PV} ]
 
 SUMMARY="A spotify daemon"
 
 LICENCES="GPL-3"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS="pulseaudio"
+MYOPTIONS="
+    mpris [[ description = [ Support the D-Bus MPRIS inteface ] ]]
+    ( alsa pulseaudio ) [[ number-selected = at-least-one ]]
+"
 
 DEPENDENCIES="
     build+run:
+        alsa? ( sys-sound/alsa-lib )
+        mpris? ( sys-apps/dbus )
         pulseaudio? ( media-sound/pulseaudio )
 "
 
 BUGS_TO="danyspin97@protonmail.com"
 
 ECARGO_FEATURE_ENABLES=(
+    'alsa alsa_backend'
+    'mpris dbus_mpris'
     'pulseaudio pulseaudio_backend'
 )
 
