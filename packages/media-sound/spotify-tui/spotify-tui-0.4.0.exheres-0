@@ -1,0 +1,16 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cargo github [ user='Rigellute' tag=v${PV} ]
+
+SUMMARY="Spotify for the terminal written in Rust."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+BUGS_TO="danyspin97@protonmail.com"
+
