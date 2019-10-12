@@ -1,0 +1,38 @@
+# Coyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=whoozle tag=v${PV} ] cmake
+
+SUMMARY="Android File Transfer for Linux"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    fuse [[ description = [ Enable support for fuse mount helper ] ]]
+    qt5
+"
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        sys-apps/file
+        sys-libs/readline:=
+        fuse? ( sys-fs/fuse:0 )
+        qt5? ( x11-libs/qt )
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/musl.patch
+)
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DBUILD_SHARED_LIB=ON
+)
+
+CMAKE_SRC_CONFIGURE_OPTIONS=(
+    'fuse BUILD_FUSE'
+    'qt5 BUILD_QT_UI'
+)
+
