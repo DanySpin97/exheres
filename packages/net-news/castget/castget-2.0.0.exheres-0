@@ -1,0 +1,49 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='mlj' tag=rel_$(ever replace_all _ ${PV}) ]
+require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
+
+SUMMARY="A  command-line based RSS enclosure downloader, primarly for podcats."
+
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS="
+    id3lib
+"
+
+DEPENDENCIES="
+    build:
+        sys-apps/ronn
+        virtual/pkg-config
+    build+run:
+        dev-libs/glib:2[>=2.30]
+        dev-libs/libxml2:2.0
+        net-misc/curl[>=7.21.6]
+        id3lib? ( media-libs/id3lib[>=3.8.3] )
+"
+
+# Tests are failing
+RESTRICT="test"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    id3lib
+)
+
+src_compile() {
+    # Needed for ronn man building
+    export LANG=en_US.UTF-8
+    export LANGUAGE=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+
+    default
+}
+
+src_install() {
+    default
+
+    dodoc ${PN}rc.example
+}
+
