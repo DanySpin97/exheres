@@ -1,0 +1,16 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=${PN} ] cargo
+
+SUMMARY="The cross-shell prompt for astronauts."
+
+LICENCES="ISC"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+# Tests fails
+RESTRICT="test"
+
