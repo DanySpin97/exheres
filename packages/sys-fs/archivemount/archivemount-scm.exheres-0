@@ -1,12 +1,9 @@
 # Copyright 2015 Ivan Diordtisa <ivan.diorditsa@gmail.com>
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require archivemount
-
-SCM_REPOSITORY="${HOMEPAGE}/git/"
-require scm-git
-
-require autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.15 ] ]
+require archivemount github [ user='cybernoid' ] \
+        autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
 
 PLATFORMS="~amd64"
 
