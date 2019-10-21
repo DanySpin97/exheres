@@ -19,7 +19,6 @@ DEPENDENCIES="
         net-misc/youtube-dl[python_abis:*(-)?]
     suggestion:
         media/mpv [[ description = [ Used for playback of the downloaded content (alternative to mplayer). ] ]]
-        media/mplayer [[ description = [ Used for playback of the downloaded content (alternative to mpv). ] ]]
 "
 
 BUGS_TO="flocke@shadowice.org"
