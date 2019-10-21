@@ -1,0 +1,20 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+MY_PN="setuptools-scm-git-archive"
+require pypi setup-py [ import=setuptools blacklist=" " ]
+
+SUMMARY="setuptools_scm plugin for git archives."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/setuptools_scm[python_abis:*(-)?]
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
