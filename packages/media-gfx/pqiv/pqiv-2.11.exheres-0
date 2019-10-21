@@ -26,7 +26,7 @@ DEPENDENCIES="
         x11-libs/cairo[>=1.6]
         x11-libs/gdk-pixbuf:2.0
         x11-libs/gtk+:3
-        ffmpeg? ( media-libs/ffmpeg )
+        ffmpeg? ( media/ffmpeg )
         imagemagick? ( media-libs/ImageMagick )
         libarchive? ( app-arch/libarchive )
         pdf? ( app-text/poppler )
