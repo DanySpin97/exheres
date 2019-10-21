@@ -1,9 +1,10 @@
 # Copyright 2015 Ivan Diorditsa <ivan.diorditsa@gmail.com
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require archivemount
 
-DOWNLOADS="${HOMEPAGE}/${PNV}.tar.gz"
+DOWNLOADS="https://www.cybernoia.de/software/${PN}/${PNV}.tar.gz"
 
 PLATFORMS="~amd64"
 

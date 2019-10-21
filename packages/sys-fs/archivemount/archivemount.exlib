@@ -1,8 +1,9 @@
 # Copyright 2015 Ivan Diorditsa <ivan.diorditsa@gmail.com>
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 SUMMARY="FUSE-based file system. Its purpose is to mount archives (i.e. tar, tar.gz, etc.)"
-HOMEPAGE="http://www.cybernoia.de/software/archivemount/"
+HOMEPAGE="http://www.cybernoia.de/software/archivemount.html"
 
 LICENCES="GPL-2"
 SLOT="0"
@@ -11,6 +12,6 @@ MYOPTIONS=""
 DEPENDENCIES="
     build+run:
         app-arch/libarchive
-        sys-fs/fuse
+        sys-fs/fuse:0[>=2.6]
 "
 
