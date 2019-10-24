@@ -1,0 +1,35 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='babluboy' ] gsettings meson vala [ vala_dep=true ]
+
+export_exlib_phases src_test
+
+SUMMARY="A simple, focused eBook reader and library management."
+
+LICENCES="GPL-3"
+SLOT="0"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        app-text/poppler[glib]
+        base/libgee:0.8
+        dev-db/sqlite:3[>=3.5.9]
+        dev-libs/glib:2[>=2.38]
+        dev-libs/granite[vala_abis:*(-)?][>=0.5]
+        dev-libs/libxml2:2.0
+        net-libs/webkit:4.0
+        x11-libs/gtk+:3
+"
+
+# Tests fail
+RESTRICT="test"
+
+bookworm_src_test() {
+    esandbox disable_net
+    meson_src_test
+    esandbox enable_net
+}
+
