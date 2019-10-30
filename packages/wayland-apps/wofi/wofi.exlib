@@ -1,0 +1,41 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="https://hg.sr.ht/~scoopta/${PN}"
+require scm-hg
+
+export_exlib_phases src_prepare src_compile src_install
+
+SUMMARY="A launcher/menu program for wlroots based wayland compositors"
+
+LICENCES="GPL-3"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        sys-libs/wayland
+        x11-libs/gtk+:3
+"
+
+wofi_src_prepare() {
+    edo sed -i "s/gcc/$(exhost --tool-prefix)gcc/" "${WORK}"/Release/makefile
+    edo sed -e "s/gcc/$(exhost --tool-prefix)gcc/" \
+            -e "s/pkg-config/$(exhost --tool-prefix)pkg-config/" \
+            -i "${WORK}"/Release/{modes,proto,src}/subdir.mk
+
+    default
+}
+
+wofi_src_compile() {
+    emake -C Release
+}
+
+wofi_src_install() {
+    dobin Release/${PN}
+
+    emagicdocs
+}
+
