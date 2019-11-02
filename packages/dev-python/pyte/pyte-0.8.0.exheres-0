@@ -1,0 +1,21 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='selectel' ]
+require setup-py [ import='setuptools' blacklist=" " test=pytest ]
+
+SUMMARY="Simple VTXXX-compatible linux terminal emulator"
+
+LICENCES="LGPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-python/pytest-runner[python_abis:*(-)?]
+    build+run:
+        dev-python/wcwidth[python_abis:*(-)?]
+"
+
