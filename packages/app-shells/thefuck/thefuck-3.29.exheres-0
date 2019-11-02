@@ -1,0 +1,29 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='nvbn' ]
+require setup-py [ import=setuptools blacklist=" " has_bin=true ]
+
+SUMMARY="Magnificent app which corrects your previous console command"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/colorama[python_abis:*(-)?]
+        dev-python/decorator[python_abis:*(-)?]
+        dev-python/psutil[python_abis:*(-)?]
+        dev-python/pyte[python_abis:*(-)?]
+        dev-python/six[python_abis:*(-)?]
+        pythin_abis:2.7? (
+            dev-python/pathlib2[python_abis:2.7]
+            dev-python/backports[python_abis:2.7]
+        )
+"
+
+# Tests need the package to be installed
+RESTRICT="test"
+
