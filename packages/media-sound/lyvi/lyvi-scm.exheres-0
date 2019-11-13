@@ -1,0 +1,27 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require setup-py [ import=setuptools blacklist=" " has_bin=true ]
+require github [ user='ok100' tag=v${PV} ]
+
+SUMMARY="Command-line lyrics (and more!) viewer"
+
+LICENCES="WTPFL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/Pillow[python_abis:*(-)?]
+        dev-python/plyr[python_abis:*(-)?]
+        dev-python/psutil[python_abis:*(-)?]
+        dev-python/urwid[python_abis:*(-)?]
+        media-libs/glyr
+    suggestion:
+        dev-python/dbus-python[python_abis:*(-)?]
+        gnome-bindings/pygobject[python_abis:*(-)?]
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
