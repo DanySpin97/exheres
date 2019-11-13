@@ -1,0 +1,20 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='sahib' pn=python-glyr ]
+require setup-py [ import='setuptools' work=python-glyr-${PV} ]
+
+SUMMARY="Python bindings to libglyr"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/Cython[python_abis:*(-)?]
+        media-libs/glyr
+"
+
