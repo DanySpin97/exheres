@@ -1,0 +1,25 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='kqo' tag=v${PV} ] meson
+
+SUMMARY="bspwm-like Wayland compositor"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        sys-libs/wayland
+        sys-libs/wlroots[>=0.6.0]
+        x11-libs/libxkbcommon
+"
+
+src_prepare() {
+    edo sed -i "s/, version: '0.6.0'//" "${MESON_SOURCE}"/meson.build
+
+    default
+}
+
