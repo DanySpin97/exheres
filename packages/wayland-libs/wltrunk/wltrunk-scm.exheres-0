@@ -1,0 +1,27 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="https://git.sr.ht/~bl4ckb0ne/wltrunk"
+require scm-git meson
+
+SUMMARY="High-level Wayland compositor library based on wlroots"
+HOMEPAGE="${SCM_REPOSITORY}"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        sys-libs/wayland
+        sys-libs/wayland-protocols[>=1.12]
+        sys-libs/wlroots
+        x11-libs/libxkbcommon
+        x11-libs/pixman:1
+"
+
+MESON_SRC_CONFIGURE_PARAMS=(
+    -Dtrunkston=false
+)
+
