@@ -1,0 +1,22 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user=WayfireWM ] meson
+
+SUMMARY="A library for managing configuration files, written for wayfire"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        sys-libs/wlroots[>=0.8.0]
+        x11-libs/libevdev
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
