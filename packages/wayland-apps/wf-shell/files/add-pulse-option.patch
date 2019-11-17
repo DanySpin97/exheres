@@ -1,0 +1,126 @@
+Source: written by Scott Moreau <oreaus@gmail.com>
+Upstream: no
+Reason: Make pulse dependency optional
+
+---
+ config.h.in                 |  6 ++++++
+ meson.build                 | 17 ++++++++++++++---
+ meson_options.txt           |  1 +
+ src/panel/meson.build       | 10 ++++++++--
+ src/panel/panel.cpp         |  5 +++++
+ subprojects/gtk-layer-shell |  2 +-
+ 6 files changed, 35 insertions(+), 6 deletions(-)
+ create mode 100644 config.h.in
+ create mode 100644 meson_options.txt
+
+diff --git a/config.h.in b/config.h.in
+new file mode 100644
+index 0000000..b185dce
+--- /dev/null
++++ b/config.h.in
+@@ -0,0 +1,6 @@
++#ifndef CONFIG_H
++#define CONFIG_H
++
++#mesondefine HAVE_PULSE
++
++#endif /* end of include guard: CONFIG_H */
+diff --git a/meson.build b/meson.build
+index ef94eda..2feac8d 100644
+--- a/meson.build
++++ b/meson.build
+@@ -4,7 +4,7 @@ project(
+ 	'cpp',
+ 	version: '0.3',
+ 	license: 'MIT',
+-	meson_version: '>=0.43.0',
++	meson_version: '>=0.47.0',
+ 	default_options: [
+ 		'cpp_std=c++14',
+         'c_std=c11',
+@@ -18,8 +18,19 @@ wayland_protos = dependency('wayland-protocols')
+ gtkmm          = dependency('gtkmm-3.0')
+ wfconfig       = dependency('wf-config', version: '>=0.3') #TODO fallback submodule
+ gtklayershell  = dependency('gtk-layer-shell-0', version: '>= 0.1', fallback: ['gtk-layer-shell', 'gtk_layer_shell_dep'])
+-libpulse       = dependency('libpulse')
+-libgvc         = subproject('gvc', default_options: ['static=true']).get_variable('libgvc_dep')
++libpulse       = dependency('libpulse', required : get_option('pulse'))
++libgvc         = subproject('gvc', default_options: ['static=true'], required : get_option('pulse'))
++
++conf_data = configuration_data()
++
++if libpulse.found()
++  libgvc = libgvc.get_variable('libgvc_dep')
++  conf_data.set('HAVE_PULSE', true)
++endif
++
++configure_file(input: 'config.h.in',
++               output: 'config.h',
++               configuration: conf_data)
+ 
+ needs_libinotify = ['freebsd', 'dragonfly'].contains(host_machine.system())
+ libinotify       = dependency('libinotify', required: needs_libinotify)
+diff --git a/meson_options.txt b/meson_options.txt
+new file mode 100644
+index 0000000..2734f78
+--- /dev/null
++++ b/meson_options.txt
+@@ -0,0 +1 @@
++option('pulse', type: 'feature', value: 'auto', description: 'Build pulseaudio volume widget')
+\ No newline at end of file
+diff --git a/src/panel/meson.build b/src/panel/meson.build
+index 985742e..ae20bb5 100644
+--- a/src/panel/meson.build
++++ b/src/panel/meson.build
+@@ -4,10 +4,16 @@ widget_sources = ['widgets/battery.cpp',
+                   'widgets/launchers.cpp',
+                   'widgets/network.cpp',
+                   'widgets/spacing.cpp',
+-                  'widgets/volume.cpp',
+                   'widgets/window-list/window-list.cpp',
+                   'widgets/window-list/toplevel.cpp']
+ 
++deps = [gtkmm, wayland_client, libutil, wf_protos, wfconfig, gtklayershell]
++
++if libpulse.found()
++  widget_sources += 'widgets/volume.cpp'
++  deps += [libpulse, libgvc]
++endif
++
+ executable('wf-panel', ['panel.cpp'] + widget_sources,
+-        dependencies: [gtkmm, wayland_client, libutil, wf_protos, wfconfig, gtklayershell, libpulse, libgvc],
++        dependencies: deps,
+         install: true)
+diff --git a/src/panel/panel.cpp b/src/panel/panel.cpp
+index 6c8a1b6..6de5080 100644
+--- a/src/panel/panel.cpp
++++ b/src/panel/panel.cpp
+@@ -12,6 +12,7 @@
+ #include <sstream>
+ 
+ #include <map>
++#include "../../config.h"
+ 
+ #include "panel.hpp"
+ 
+@@ -21,7 +22,9 @@
+ #include "widgets/launchers.hpp"
+ #include "widgets/network.hpp"
+ #include "widgets/spacing.hpp"
++#ifdef HAVE_PULSE
+ #include "widgets/volume.hpp"
++#endif
+ #include "widgets/window-list/window-list.hpp"
+ 
+ #include "wf-shell-app.hpp"
+@@ -201,8 +204,10 @@ class WayfirePanel::impl
+             return Widget(new WayfireNetworkInfo());
+         if (name == "battery")
+             return Widget(new WayfireBatteryInfo());
++#ifdef HAVE_PULSE
+         if (name == "volume")
+             return Widget(new WayfireVolume());
++#endif
+         if (name == "window-list")
+             return Widget(new WayfireWindowList(output));
+ 
