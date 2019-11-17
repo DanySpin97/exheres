@@ -1,0 +1,47 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='Cloudef' ] cmake
+
+SUMMARY="Dynamic menu library and client inspired by dmenu"
+
+LICENCES="GPL-3 LGPL-3"
+SLOT="0"
+
+MYOPTIONS="
+    (
+        ncurses
+        X
+        wayland
+    ) [[ number-selected = at-least-one ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        ncurses? (
+            sys-libs/ncurses
+        )
+        X? (
+            x11-libs/cairo
+            x11-libs/libX11
+        )
+        wayland? (
+            sys-libs/wayland
+            x11-libs/cairo
+            x11-libs/pango
+            x11-libs/libxkbcommon[wayland]
+        )
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DCURSES_NEED_WIDE=TRUE
+)
+
+CMAKE_SRC_CONFIGURE_OPTIONS=(
+    'ncurses BEMENU_CURSES_RENDERER'
+    'X BEMENU_X11_RENDERER'
+    'wayland BEMENU_WAYLAND_RENDERER'
+)
+
+BUGS_TO="danyspin97@protonmail.com"
+
