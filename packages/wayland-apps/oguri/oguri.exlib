@@ -1,0 +1,26 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='vilhalmer' ] meson
+export_exlib_phases src_install
+
+SUMMARY="A very nice animated wallpaper daemon for Wayland compositors"
+
+LICENCES="MIT"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        sys-libs/wayland
+        sys-libs/wayland-protocols[>=1.14]
+        x11-libs/cairo
+        x11-libs/gdk-pixbuf:2.0
+"
+
+oguri_src_install() {
+    meson_src_install
+
+    dobin contrib/${PN}-swaybg
+}
+
