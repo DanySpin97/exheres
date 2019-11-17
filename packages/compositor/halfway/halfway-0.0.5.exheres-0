@@ -23,3 +23,9 @@ src_prepare() {
     default
 }
 
+src_install() {
+    dobin ${PN}
+
+    emagicdocs
+}
+
