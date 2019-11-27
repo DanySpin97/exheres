@@ -1,0 +1,154 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='ldc-developers' pnv=${PNV}-src release=v${PV} \
+        suffix=tar.gz ] cmake [ api=2 ]
+
+DMD_VER="2.0.88"
+
+MUSL_BOOTSTRAP="
+https://alpine.global.ssl.fastly.net/alpine/edge/testing/x86_64/${PN}-runtime-${PV}-r0.apk -> ${PNV}-alpine-runtime.tar.gz
+https://alpine.global.ssl.fastly.net/alpine/edge/testing/x86_64/${PN}-${PV}-r0.apk -> ${PNV}-alpine.tar.gz
+"
+
+DOWNLOADS+="
+    platform:amd64? (
+        libc:musl? (
+            ${MUSL_BOOTSTRAP}
+        )
+        !libc:musl? (
+            ${HOMEPAGE}/releases/download/v${PV}/${PN}2-${PV}-linux-x86_64.tar.xz
+        )
+    )
+"
+
+SUMMARY="The LLVM-based D Compiler"
+
+LICENCES="
+Boost-1.0 [[ note = [ dmd frontend, ldc-jit-rt ] ]]
+BSD-3 [[ note = [ LDC source and ldc-jit-rt ] ]]
+GPL-2 [[ note = [ gen/asmstmt.cpp and gen/asm-*.h from GDC ] ]]
+UoI-NCSA [[ note = [ LLVM framework and part of ldc-jit-rt ] ]]
+|| ( MIT UoI-NCSA ) [[ note = [ profile-rt runtime library ] ]]
+"
+
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    ( libc: musl )
+    ( platform: amd64 armv8 )
+"
+DEPENDENCIES="
+    build+run:
+        app-arch/xz
+        dev-lang/llvm:9
+        dev-libs/icu:=
+        dev-libs/libedit
+        dev-libs/libxml2:2.0
+        dev-util/spirv-llvm-translator:9
+        sys-libs/ncurses
+        libc:musl? (
+            dev-libs/libexecinfo
+        )
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+check_boostrap_platform() {
+    if ! has_version --root "dev-lang/ldc:0"; then
+        if [[ $(exhost --target) == *-musl*  ]]; then
+            case $(exhost --build) in
+                x86_64*)
+                    ;;
+                *)
+                    die "Your platform is not supperted for boostrapping ldc"
+                    ;;
+            esac
+        else
+            case $(exhost --build) in
+                x86_64*)
+                    ;;
+                aarch64*)
+                    ;;
+                *)
+                    die "Your platform is not supported for boostrapping ldc"
+                    ;;
+            esac
+        fi
+    fi
+}
+
+# TODO (danyspin97): Check for platform where LDC works
+
+pkg_pretend() {
+    check_boostrap_platform
+}
+
+src_unpack() {
+    cmake_src_unpack
+
+    if ! has_version --root "dev-lang/ldc:0" ; then
+        if [[ $(exhost --target) != *-musl*  ]] ; then
+            edo cd "${WORKBASE}"
+            edo mv ${PN}2-* ${PN}2-bootstrap
+        else
+            pushd usr/lib
+            # Alpine ldc needs its runtime libs
+            # libdruntime-ldc-shared.so is not considered in liking phase
+            # rename it to libdruntime-ldc.so
+            for name in druntime phobos2 ; do
+                edo ln -sf lib${name}-${PN}-shared.so.${DMD_VER} \
+                        lib${name}-${PN}.so.${DMD_VER}
+                edo ln -sf lib${name}-${PN}.so.${DMD_VER} lib${name}-${PN}.so
+            done
+            popd
+
+            edo mv etc/${PN}2.conf usr/bin
+            # Change libs location
+            edo sed -i "s;/usr;${WORKBASE}/usr;" usr/bin/${PN}2.conf
+            # use system ld as linker
+            edo sed -i "s;bfd;ld;" usr/bin/${PN}2.conf
+        fi
+    fi
+}
+
+src_prepare() {
+    cmake_src_prepare
+
+    if ! has_version --root "dev-lang/ldc:0"; then
+        if [[ $(exhost --target) != *-musl*  ]]; then
+            export DMD="${WORKBASE}/${PN}2-bootstrap/bin/ldmd2"
+        else
+            export LD_LIBRARY_PATH="${WORKBASE}/usr/lib/"
+            export DMD="${WORKBASE}/usr/bin/ldmd2"
+        fi
+    else
+        export DMD="/usr/$(exhost --build)/bin/ldmd2"
+    fi
+
+    # Fix compilation with LLVM 9 and LLVM 10
+    # https://github.com/ldc-developers/ldc/pull/3187/commits/a5c453f7668bc84aefdf629561f7e5954feb66b6
+    # Remove in 1.19.0
+    edo sed -i \
+        -e 's;if (TARGET FileCheck);if ((TARGET FileCheck) OR (EXISTS ${LLVM_ROOT_DIR}/bin/FileCheck));' \
+        -e 's;if (TARGET not);if ((TARGET not) OR (EXISTS ${LLVM_ROOT_DIR}/bin/not));' \
+            utils/CMakeLists.txt
+}
+
+src_configure() {
+    local args=(
+        -DSYSCONF_INSTALL_DIR=/etc
+    )
+
+    if [[ $(exhost --target) != *-musl*  ]]; then
+        args+=( -DLDC_EXE_FULL=${WORK}/usr/bin/ldc2 )
+    fi
+    ecmake "${args[@]}"
+}
+
+src_install() {
+    cmake_src_install
+
+    edo rm -rf "${IMAGE}"/usr/$(exhost --target)/include/d/etc/c/zlib
+}
+
