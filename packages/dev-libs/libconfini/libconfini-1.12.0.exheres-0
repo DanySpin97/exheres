@@ -1,0 +1,16 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='madmurphy' release=${PV} \
+                 pnv=${PNV}-with-configure suffix=tar.gz ]
+
+SUMMARY="YET another INI parser"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
