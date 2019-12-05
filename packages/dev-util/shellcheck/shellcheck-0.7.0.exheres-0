@@ -1,0 +1,29 @@
+# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='koalaman' tag=v${PV} ] cabal [ has_bin=true ]
+
+SUMMARY="ShellCheck, a static analysis tool for shell scripts."
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-haskell/aeson
+        dev-haskell/array
+        dev-haskell/bytestring
+        dev-haskell/containers
+        dev-haskell/deepseq[>=1.4.0.0]
+        dev-haskell/Diff[>=0.2.0]
+        dev-haskell/directory[>=1.2.3.0]
+        dev-haskell/filepath
+        dev-haskell/mtl[>=2.2.1]
+        dev-haskell/parsec[>=3.0]
+        dev-haskell/QuickCheck[>=2.7.4]
+        dev-haskell/regex-tdfa
+"
+
