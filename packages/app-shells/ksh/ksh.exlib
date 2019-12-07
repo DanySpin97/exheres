@@ -30,9 +30,10 @@ MESON_SRC_CONFIGURE_TESTS=(
 RESTRICT="test"
 
 ksh_src_install() {
+    edo sed -i "$ a master_doc = 'index'" ../${PNV}/src/cmd/${PN}93/docs/conf.py
     meson_src_install
 
-    doman src/cmd/${PN}93/{${PN}.1,nval.3,shell.3}
-    dodoc src/cmd/ksh93/{RELEASE{88,93,},TYPES}
+    doman src/cmd/${PN}93/docs/{${PN}.1,nval.3,shell.3}
+    dodoc src/cmd/ksh93/{RELEASE{88,93,},TYPES,README}
 }
 
