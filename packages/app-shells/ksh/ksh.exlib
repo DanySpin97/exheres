@@ -22,6 +22,10 @@ DEPENDENCIES="
         )
 "
 
+MESON_SRC_CONFIGURE_PARAMS=(
+    --default-library=static
+)
+
 MESON_SRC_CONFIGURE_TESTS=(
     '-Dbuild-api-tests=true -Dbuild-api-tests=false'
 )
