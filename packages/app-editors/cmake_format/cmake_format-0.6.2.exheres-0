@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='cheshirekow' tag=v${PV} ]
-require setup-py [ import='setuptools' ]
+require setup-py [ import='setuptools' blacklist=" " has_bin=true ]
 
-SUMMARY="Source code formatter for cmake listfiles."
+SUMMARY="Source code formatter for cmake listfiles"
 
 LICENCES="GPL-3"
 SLOT="0"
