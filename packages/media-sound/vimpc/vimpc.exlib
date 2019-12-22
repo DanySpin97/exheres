@@ -1,19 +1,56 @@
 # Copyright 2012 Sergei Shilovsky <sshilovsky@gmail.com>
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require sourceforge [ suffix=tar.gz ]
+require github [ user='boysetsfrog' tag=v${PV} ] \
+        autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.16 ] ]
 
+export_exlib_phases src_prepare
+
+SUMMARY="A vi/vim inspired client for the Music Player Daemon (mpd)"
+
+LICENCES="GPL-3"
 SLOT="0"
-SUMMARY="ncurses based mpd client with vi like key bindings"
-BUGS_TO="sshilovsky@gmail.com"
-LICENCES="GPL-2 GPL-3"
+
+MYOPTIONS="
+    boost [[ description = [ Enable support for boost library ] ]]
+    lyrics [[ description = [ Enable fetching of lyrics using curl ] ]]
+    taglib [[ description = [ Enable support for taglib library ] ]]
+"
 
 DEPENDENCIES="
     build+run:
         sys-libs/ncurses
         dev-libs/pcre
         media-libs/libmpdclient
+        boost? ( dev-libs/boost )
+        lyrics? ( net-misc/curl )
+        taglib? ( media-libs/taglib )
+    test:
+        dev-cpp/cppunit
 "
 
-WORK="${WORKBASE}/${PN}"
+BUGS_TO="danyspin97@protonmail.com"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --disable-warnings
+    --disable-profiler
+)
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    boost
+    lyrics
+    taglib
+)
+
+DEFAULT_SRC_CONFIGURE_TESTS=(
+    '--enable-test --disable-test'
+)
+
+vimpc_src_prepare() {
+    # The check for a working ncursesw.h fails, override it
+    edo sed -i 's;\$mp_cv_curses;yes;' configure.ac
+
+    autotools_src_prepare
+}
 
