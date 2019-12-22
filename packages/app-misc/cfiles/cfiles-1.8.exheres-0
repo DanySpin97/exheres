@@ -1,0 +1,35 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='mananapr' tag=v${PV} ]
+
+SUMMARY="A ncurses file manager written in C with vim like keybindings"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        sys-libs/ncurses
+    suggestion:
+        media/mediainfo
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+DEFAULT_SRC_COMPILE_PARAMS=(
+    CC=$(exhost --tool-prefix)cc
+)
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    bindir=/usr/$(exhost --target)/bin
+)
+
+src_prepare() {
+    default
+
+    edo sed -i "s;pkg-config;$(exhost --tool-prefix)pkg-config;" Makefile
+}
+
