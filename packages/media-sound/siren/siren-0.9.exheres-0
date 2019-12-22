@@ -1,0 +1,93 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Siren is a text-based audio player for UNIX-like operating systems"
+HOMEPAGE="https://www.kariliq.nl/${PN}/"
+DOWNLOADS="${HOMEPAGE}dist/${PNV}.tar.gz"
+
+LICENCES="
+    ISC
+    BSD-2 [[ note = [ for file compat/tree.h ] ]]
+    BSD-3 [[ note = [
+            for files compat/queue.h, compat/strcasestr.c and compat/strsep.c
+    ] ]]
+"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    aac
+    flac
+    ffmpeg
+    mpg123 [[ description = [ Enable support for libmpg123 library ] ]]
+    opus [[ description = [ Enable support for Opus via libopusfile ] ]]
+    sndfile
+    vorbis
+    wav [[ description = [ Enable support for WAV via wavpack ] ]]
+    (
+        alsa
+        pulseaudio
+        sndio [[ description = [ Adds support for sound output through sndio (OpenBSD sound API, also ported to Linux) ] ]]
+    ) [[ number-selected = at-least-one ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        sys-libs/ncurses
+        aac? (
+            media-libs/faad2
+            media-libs/libmp4v2
+        )
+        alsa? ( sys-sound/alsa-lib )
+        flac? ( media-libs/flac[>=1.3.0] )
+        ffmpeg? ( media/ffmpeg )
+        mpg123? ( media-sound/mpg123 )
+        opus? ( media-libs/opusfile )
+        pulseaudio? ( media-sound/pulseaudio )
+        sndio? ( sys-sound/sndio )
+        sndfile? ( media-libs/libsndfile[>=1.0.23] )
+        vorbis? ( media-libs/libvorbis )
+        wav? ( media-sound/wavpack )
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_prepare() {
+    default
+
+    edo sed -i "s;pkg-config;$(exhost --tool-prefix)pkg-config;" configure
+}
+
+src_configure() {
+    local args=(
+        prefix=/usr/$(exhost --target)
+        mandir=/usr/share/man
+
+        mad=no
+
+        ao=no
+        oss=no
+        portaudio=no
+        sun=no
+
+        aac=$(option aac yes no)
+        flac=$(option flac yes no)
+        ffmpeg=$(option ffmpeg yes no)
+        mpg123=$(option mpg123 yes no)
+        opus=$(option opus yes no)
+        sndfile=$(option sndfile yes no)
+        vorbis=$(option vorbis yes no)
+        wavpack=$(option wav yes no)
+
+        alsa=$(option alsa yes no)
+        pulse=$(option pulseaudio yes no)
+        sndio=$(option sndio yes no)
+    )
+    edo "${WORK}"/configure "${args[@]}"
+}
+
+src_install() {
+    default
+
+    keepdir /usr/$(exhost --target)/lib/siren/ip
+}
+
