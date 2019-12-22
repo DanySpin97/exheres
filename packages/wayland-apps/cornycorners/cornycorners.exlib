@@ -1,0 +1,36 @@
+# Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="https://git.sr.ht/~leon_plickat/${PN}"
+require scm-git
+
+export_exlib_phases src_prepare
+
+SUMMARY="Draw rounded corners to Wayland outputs"
+HOMEPAGE="${SCM_REPOSITORY}"
+
+LICENCES="GPL-3 MIT"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        app-doc/scdoc
+    build+run:
+        sys-libs/wayland
+        sys-libs/wayland-protocols
+        x11-libs/cairo
+"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    PREFIX=${IMAGE}/usr
+    BINPREFIX=${IMAGE}/usr/$(exhost --target)/bin
+)
+
+cornycorners_src_prepare() {
+    default
+
+    edo sed -i "s;pkg-config;$(exhost --tool-prefix)pkg-config;" \
+            "${WORK}"/Makefile
+}
+
