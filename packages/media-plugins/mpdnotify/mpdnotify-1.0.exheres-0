@@ -1,0 +1,19 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import=setuptools blacklist="2" has_bin=true ]
+
+SUMMARY="Notifies when mpd's song changes"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/Pillow[python_abis:*(-)?]
+        dev-python/python-mpd2[python_abis:*(-)?]
+        x11-libs/libnotify
+"
+
