@@ -25,10 +25,11 @@ DEPENDENCIES="
         dev-libs/jsoncpp:=
         dev-libs/spdlog[>=1.3.1]
         dev-cpp/libsigc++:=
-        gnome-bindings/gtkmm:3[wayland]
+        gnome-bindings/gtkmm:3[wayland][>=3.22.0]
         sys-libs/libinput
         sys-libs/wayland
         sys-libs/wayland-protocols
+        wayland-libs/gtk-layer-shell
         mpd? ( media-libs/libmpdclient )
         network? ( net-libs/libnl:3.0 )
         pulseaudio? ( media-sound/pulseaudio )
@@ -39,6 +40,10 @@ DEPENDENCIES="
         providers:eudev? ( sys-apps/eudev )
         providers:systemd? ( sys-apps/systemd )
 "
+
+MESON_SRC_CONFIGURE_PARAMS=(
+    -Dgtk-layer-shell=enabled
+)
 
 MESON_SRC_CONFIGURE_OPTION_FEATURES=(
     'mpd'
