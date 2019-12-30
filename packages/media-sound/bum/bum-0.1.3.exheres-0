@@ -1,0 +1,24 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' blacklist="2" ]
+
+SUMMARY="Download and display album art for mpd/mopidy tracks"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/musicbrainzngs[python_abis:*(-)?]
+        dev-python/python-mpv[python_abis:*(-)?]
+        dev-python/python-mpd2[python_abis:*(-)?]
+"
+
+# Test suit fail
+RESTRICT="test"
+
+BUGS_TO="danyspin97@protonmail.com"
+
