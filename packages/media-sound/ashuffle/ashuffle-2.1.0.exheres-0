@@ -1,0 +1,28 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='joshkunz' tag=v${PV} ] meson
+
+SUMMARY="Automatic library-wide shuffle for mpd"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        media-libs/libmpdclient
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+MESON_SRC_CONFIGURE_PARAMS=(
+    -Dtidy_mode=disabled
+)
+
+# tests needs libtab checkout in t/libtap
+#MESON_SRC_CONFIGURE_TESTS=(
+#    "-Dtests=enabled -Dtests=disabled"
+#)
+
