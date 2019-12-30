@@ -1,0 +1,20 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' blacklist="2" ]
+
+SUMMARY="A python interface to the mpv media player"
+
+LICENCES="AGPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    run:
+        media/mpv
+    suggestion:
+        dev-python/Pillow[python_abis:*(-)?]
+"
+
