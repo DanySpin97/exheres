@@ -1,0 +1,47 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require setup-py [ import='setuptools' blacklist="2" has_bin=true ] \
+        github [ user='whipper-team' tag=v${PV} force_git_clone=true ]
+
+SUMMARY="Python CD-DA ripper preferring accuracy over speed"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        app-cdr/cdrdao
+        dev-libs/libcdio[>=2.1.0]
+        dev-libs/libcdio-paranoia
+        gnome-bindings/pygobject[python_abis:*(-)?]
+        gnome-desktop/gobject-introspection[python_abis:*(-)?]
+        media-libs/libsndfile
+        dev-python/musicbrainzngs[python_abis:*(-)?]
+        dev-python/mutagen[python_abis:*(-)?]
+        dev-python/pycdio[>=2.0][python_abis:*(-)?]
+        dev-python/requests[python_abis:*(-)?]
+        dev-python/ruamel-yaml[python_abis:*(-)?]
+        dev-python/setuptools_scm[python_abis:*(-)?]
+    test:
+        media-sound/sox
+        net-twisted/Twisted[python_abis:*(-)?]
+    suggestion:
+        media-libs/flac
+        media-sound/sox
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/whipper-0.7.0-cdparanoia-name-fix.patch
+)
+
+src_test() {
+    esandbox disable_net
+    setup-py_src_test
+    esandbox enable_net
+}
+
