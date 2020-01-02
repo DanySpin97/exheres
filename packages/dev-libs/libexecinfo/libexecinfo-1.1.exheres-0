@@ -29,6 +29,11 @@ DEFAULT_SRC_COMPILE_PARAMS=(
     AR=$(exhost --tool-prefix)ar
 )
 
+DEFAULT_SRC_TEST_PARAMS=(
+    CC=$(exhost --tool-prefix)cc
+    CFLAGS="${CFLAGS} -lexecinfo"
+)
+
 src_install() {
     insinto /usr/$(exhost --target)/include
     doins *.h
