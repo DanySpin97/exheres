@@ -1,0 +1,25 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='Berulacks' ] \
+        setup-py [ import='setuptools' blacklist="2" has_bin=true ]
+
+SUMMARY="A Last.FM scrobbler for MPD (Yet Another Mpd Scrobbler)"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/PyYAML[>=5.1][python_abis:*(-)?]
+        dev-python/psutil[>=5.6.3][python_abis:*(-)?]
+        dev-python/python-mpd2[>=1.0.0][python_abis:*(-)?]
+        dev-python/requests[>=2.21.0][python_abis:*(-)?]
+"
+
+# There is no test suite
+RESTRICT="test"
+
