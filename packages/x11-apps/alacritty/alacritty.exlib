@@ -26,12 +26,7 @@ DEPENDENCIES="
         media-libs/fontconfig
         media-libs/freetype:=
         sys-libs/zlib
-        x11-dri/mesa
-        x11-libs/libX11
-        x11-libs/libXi
-        x11-libs/libXxf86vm
-    run:
-        x11-utils/xclip
+        x11-dri/mesa[?X]
 "
 
 BUGS_TO="danyspin97@protonmail.com"
@@ -51,7 +46,7 @@ alacritty_src_prepare(){
 }
 
 alacritty_src_install(){
-    cargo_src_install
+    dobin "${WORK}"/target/release/alacritty
 
     insinto /usr/share/applications
     doins extra/linux/alacritty.desktop
