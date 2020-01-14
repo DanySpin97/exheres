@@ -8,12 +8,12 @@ SUMMARY="A lightweight Wayland notification daemon"
 LICENCES="MIT"
 SLOT="0"
 MYOPTIONS="
-    ( providers: elogind systemd )
+    ( providers: elogind systemd ) [[ number-selected = exactly-one ]]
 "
 
 DEPENDENCIES="
     build:
-        app-doc/scdoc
+        app-doc/scdoc[>=1.9.7]
     build+run:
         dev-libs/glib:2
         sys-libs/wayland
