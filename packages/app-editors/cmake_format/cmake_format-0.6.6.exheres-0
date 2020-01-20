@@ -13,7 +13,7 @@ PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
-    build+run:
+    recommendation:
         dev-python/PyYAML[python_abis:*(-)?]
     suggestion:
         dev-python/Jinja2[python_abis:*(-)?]
