@@ -5,3 +5,6 @@ require polybar
 
 PLATFORMS="~amd64"
 
+WORK="${WORKBASE}/${PN}"
+CMAKE_SOURCE=${WORK}
+
