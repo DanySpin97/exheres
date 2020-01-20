@@ -25,6 +25,10 @@ DEPENDENCIES="
         providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
 "
 
+MESON_SRC_CONFIGURE_PARAMS=(
+    -Dman-pages=enabled
+)
+
 MESON_SRC_CONFIGURE_OPTION_FEATURES=(
     jpeg
 )
