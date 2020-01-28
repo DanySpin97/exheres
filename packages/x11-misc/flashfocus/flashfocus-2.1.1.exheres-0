@@ -1,0 +1,36 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='fennerm' tag=v${PV} ]
+require setup-py [ import='setuptools' blacklist="2 3.5" has_bin=true \
+                   multibuild=false ]
+
+SUMMARY="Simple focus animation for tiling window managers."
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/PyYAML[>=5.1][python_abis:*(-)?][>=5.1&<6.0]
+        dev-python/cffi[python_abis:*(-)?][>=1.11&<2.0]
+        dev-python/click[python_abis:*(-)?][>=6.7]
+        dev-python/i3ipc[>=2.1.1][python_abis:*(-)?][>=2.1.1&<3.0]
+        dev-python/marshmallow[>=2.0&<3.0][python_abis:*(-)?][>=2.15&<4.0]
+        dev-python/xcffib[python_abis:*(-)?][>=0.6.0&<1.0]
+        dev-python/xpybutil[python_abis:*(-)?][>=0.0.6&<1.0]
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+# Missing test deps
+RESTRICT="test"
+
+src_prepare() {
+    edo sed -i 's/\(click.*\),<7.0/\1/' "${WORK}"/setup.py
+
+    setup-py_src_prepare
+}
+
