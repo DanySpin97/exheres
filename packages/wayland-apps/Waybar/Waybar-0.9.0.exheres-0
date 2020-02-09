@@ -1,7 +1,7 @@
 # Copyright 2018-2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='Alexays' ] meson
+require github [ user='Alexays' ] meson toolchain-funcs
 
 SUMMARY="Highly customizable Wayland bar for Wlroots based compositors."
 
@@ -15,11 +15,15 @@ MYOPTIONS="
     tray
     udev
     udev? ( ( providers: eudev systemd ) [[ number-selected = exactly-one ]] )
+    ( providers: libc++ libstdc++ ) [[ number-selected = exactly-one ]]
 "
 
 DEPENDENCIES="
     build:
         app-doc/scdoc[>=1.9.2]
+        providers:libc++? (
+            dev-lang/clang
+        )
     build+run:
         dev-libs/fmt[>=5.3.0]
         dev-libs/jsoncpp:=
@@ -39,10 +43,22 @@ DEPENDENCIES="
         )
         providers:eudev? ( sys-apps/eudev )
         providers:systemd? ( sys-apps/systemd )
+        providers:libc++? (
+            sys-libs/libc++
+            sys-libs/libc++abi
+        )
+        providers:libstdc++? (
+            sys-libs/libstdc++
+        )
 "
 
 MESON_SRC_CONFIGURE_PARAMS=(
     -Dgtk-layer-shell=enabled
+    -Dman-pages=enabled
+)
+
+MESON_SRC_CONFIGURE_OPTION_SWITCHES=(
+    'providers:libc++ libcxx'
 )
 
 MESON_SRC_CONFIGURE_OPTION_FEATURES=(
@@ -52,4 +68,10 @@ MESON_SRC_CONFIGURE_OPTION_FEATURES=(
     'tray dbusmenu-gtk'
     'udev libudev'
 )
+
+pkg_pretend() {
+    if option providers:libc++ && ! cxx-is-clang ; then
+        die "libc++ is only supported by clang. Please set cc to clang."
+    fi
+}
 
