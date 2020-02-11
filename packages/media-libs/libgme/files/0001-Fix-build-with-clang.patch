@@ -1,0 +1,110 @@
+From: Danilo Spinella <danyspin97@protonmail.com>
+Reason: [PATCH] Fix build with clang
+Upstream: https://github.com/mcfiredrill/libgme/pull/2
+
+Fix Clang error:
+"ISO C++11 does not allow access declarations; use using declarations instead"
+---
+ gme/Gbs_Emu.h   | 2 +-
+ gme/Gym_Emu.h   | 2 +-
+ gme/Music_Emu.h | 2 +-
+ gme/Nsf_Emu.h   | 2 +-
+ gme/Nsfe_Emu.h  | 2 +-
+ gme/Spc_Emu.h   | 2 +-
+ gme/Vgm_Emu.h   | 2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/gme/Gbs_Emu.h b/gme/Gbs_Emu.h
+index f3318dc..30a6604 100644
+--- a/gme/Gbs_Emu.h
++++ b/gme/Gbs_Emu.h
+@@ -41,7 +41,7 @@ public:
+ 	
+ public:
+ 	// deprecated
+-	Music_Emu::load;
++	using Music_Emu::load;
+ 	blargg_err_t load( header_t const& h, Data_Reader& in ) // use Remaining_Reader
+ 			{ return load_remaining_( &h, sizeof h, in ); }
+ 
+diff --git a/gme/Gym_Emu.h b/gme/Gym_Emu.h
+index f2e1323..c9dcd16 100644
+--- a/gme/Gym_Emu.h
++++ b/gme/Gym_Emu.h
+@@ -34,7 +34,7 @@ public:
+ 	
+ public:
+ 	// deprecated
+-	Music_Emu::load;
++	using Music_Emu::load;
+ 	blargg_err_t load( header_t const& h, Data_Reader& in ) // use Remaining_Reader
+ 			{ return load_remaining_( &h, sizeof h, in ); }
+ 	enum { gym_rate = 60 }; 
+diff --git a/gme/Music_Emu.h b/gme/Music_Emu.h
+index c9bed00..fe679d7 100644
+--- a/gme/Music_Emu.h
++++ b/gme/Music_Emu.h
+@@ -58,7 +58,7 @@ public:
+ 	void ignore_silence( bool disable = true );
+ 	
+ 	// Info for current track
+-	Gme_File::track_info;
++	using Gme_File::track_info;
+ 	blargg_err_t track_info( track_info_t* out ) const;
+ 	
+ // Sound customization
+diff --git a/gme/Nsf_Emu.h b/gme/Nsf_Emu.h
+index 6b21352..72452a6 100644
+--- a/gme/Nsf_Emu.h
++++ b/gme/Nsf_Emu.h
+@@ -44,7 +44,7 @@ public:
+ 	
+ public:
+ 	// deprecated
+-	Music_Emu::load;
++	using Music_Emu::load;
+ 	blargg_err_t load( header_t const& h, Data_Reader& in ) // use Remaining_Reader
+ 			{ return load_remaining_( &h, sizeof h, in ); }
+ 
+diff --git a/gme/Nsfe_Emu.h b/gme/Nsfe_Emu.h
+index 7971e47..9a00f14 100644
+--- a/gme/Nsfe_Emu.h
++++ b/gme/Nsfe_Emu.h
+@@ -46,7 +46,7 @@ public:
+ public:
+ 	// deprecated
+ 	struct header_t { char tag [4]; };
+-	Music_Emu::load;
++	using Music_Emu::load;
+ 	blargg_err_t load( header_t const& h, Data_Reader& in ) // use Remaining_Reader
+ 			{ return load_remaining_( &h, sizeof h, in ); }
+ 	void disable_playlist( bool = true ); // use clear_playlist()
+diff --git a/gme/Spc_Emu.h b/gme/Spc_Emu.h
+index ab034ad..b39a422 100644
+--- a/gme/Spc_Emu.h
++++ b/gme/Spc_Emu.h
+@@ -48,7 +48,7 @@ public:
+ 	
+ public:
+ 	// deprecated
+-	Music_Emu::load;
++	using Music_Emu::load;
+ 	blargg_err_t load( header_t const& h, Data_Reader& in ) // use Remaining_Reader
+ 			{ return load_remaining_( &h, sizeof h, in ); }
+ 	byte const* trailer() const; // use track_info()
+diff --git a/gme/Vgm_Emu.h b/gme/Vgm_Emu.h
+index bcfa506..6f36599 100644
+--- a/gme/Vgm_Emu.h
++++ b/gme/Vgm_Emu.h
+@@ -51,7 +51,7 @@ public:
+ 	
+ public:
+ 	// deprecated
+-	Music_Emu::load;
++	using Music_Emu::load;
+ 	blargg_err_t load( header_t const& h, Data_Reader& in ) // use Remaining_Reader
+ 			{ return load_remaining_( &h, sizeof h, in ); }
+ 	byte const* gd3_data( int* size_out = 0 ) const; // use track_info()
+-- 
+2.25.0
+
