@@ -1,4 +1,4 @@
-# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2019-2020 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='sekrit-twc' tag=release-${PV} ]
@@ -10,7 +10,17 @@ LICENCES="WTFPL"
 SLOT="0"
 PLATFORMS="~amd64"
 
-MYOPTIONS=""
+MYOPTIONS="
+    ( providers: libc++ libstc++ ) [[ number-selected = exactly-one ]]
+"
 
 DEPENDENCIES=""
+
+src_configure() {
+    local STL_LIBS=""
+    if option providers:libc++ ; then
+        STL_LIBS="-lc++"
+    fi
+    STL_LIBS="${STL_LIBS}" default
+}
 
