@@ -1,0 +1,53 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='glmark2' ] waf
+export_exlib_phases src_configure
+
+SUMMARY="glmark2 is an OpenGL 2.0 and ES 2.0 benchmark"
+
+LICENCES="GPL-3"
+SLOT="0"
+
+MYOPTIONS="
+    ( X wayland ) [[ number-selected = at-least-one ]]
+    ( providers: eudev systemd  ) [[ number-selected = exactly-one ]]
+"
+
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        media-libs/libpng:=
+        x11-dri/libdrm
+        x11-dri/mesa[X?][wayland?]
+        X? ( x11-server/xorg-server )
+        wayland? ( sys-libs/wayland )
+        providers:eudev? ( sys-apps/eudev )
+        providers:systemd? ( sys-apps/systemd )
+"
+
+# No test is defined
+RESTRICT="test"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+glmark2_src_configure() {
+   local enabled="drm-glesv2"
+   if option X ; then
+       enabled+=",drm-gl,x11-gl,x11-glesv2"
+   fi
+   if option wayland ; then
+       enabled+=",wayland-glesv2"
+   fi
+   if option X && option wayland ; then
+       enabled+=",wayland-gl"
+   fi
+
+    WAF_SRC_CONFIGURE_PARAMS=(
+    --with-flavors=${enabled[@]}
+    )
+
+    waf_src_configure
+}
+
