@@ -1,0 +1,30 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='coelckers' ] cmake
+
+SUMMARY="GZDoom's music system as a standalone library"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS="
+    ( libc: musl )
+"
+
+DEPENDENCIES="
+    build+run:
+        media-libs/libgme
+        sys-libs/zlib
+        libc:musl? ( dev-libs/musl-fts )
+    run:
+        media-libs/libsndfile
+        media-sound/fluidsynth
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DFORCE_INTERNAL_ZLIB:BOOL=OFF
+    -DFORCE_INTERNAL_GME:BOOL=OFF
+)
+
