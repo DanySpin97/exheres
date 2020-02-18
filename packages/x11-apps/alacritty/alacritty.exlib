@@ -9,11 +9,12 @@ require cargo [ disable_default_features=true ] \
 export_exlib_phases src_compile src_install
 
 SUMMARY="A cross-platform, GPU-accelerated terminal emulator"
-DESCRIPTION="Alacritty is focused on simplicity and performance. The
-performance goal means it should be faster than any other terminal emulator
-available. The simplicity goal means that it doesn't have features such as
-tabs or splits (which can be better provided by a window manager or terminal
-multiplexer) nor niceties like a GUI config editor."
+DESCRIPTION="
+Alacritty is focused on simplicity and performance. The performance goal means it should be faster
+than any other terminal emulator available. The simplicity goal means that it doesn't have features
+such as tabs or splits (which can be better provided by a window manager or terminal multiplexer)
+nor niceties like a GUI config editor.
+"
 
 LICENCES="Apache-2.0"
 SLOT="0"
@@ -56,7 +57,7 @@ alacritty_src_compile() {
     edo tic -x -o terminfo extra/alacritty.info
 }
 
-alacritty_src_install(){
+alacritty_src_install() {
     edo cd "${ALACRITTY_ROOT}"
     dobin target/release/${PN}
 
