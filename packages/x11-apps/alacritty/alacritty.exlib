@@ -20,8 +20,6 @@ LICENCES="Apache-2.0"
 SLOT="0"
 
 MYOPTIONS="
-    bash-completion
-    zsh-completion
     ( X wayland ) [[ number-selected = at-least-one ]]
 "
 
@@ -68,7 +66,7 @@ alacritty_src_install() {
 
     emagicdocs
 
-    optionq zsh-completion && zsh-completion_src_install
-    optionq bash-completion && bash-completion_src_install
+    zsh-completion_src_install
+    bash-completion_src_install
 }
 
