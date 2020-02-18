@@ -6,7 +6,7 @@ require cargo [ disable_default_features=true ] \
         github [ user='jwilm' tag=v${PV} ] \
         bash-completion zsh-completion
 
-export_exlib_phases src_compile src_install
+export_exlib_phases src_install
 
 SUMMARY="A cross-platform, GPU-accelerated terminal emulator"
 DESCRIPTION="
@@ -31,6 +31,10 @@ DEPENDENCIES="
         media-libs/freetype:=
         sys-libs/zlib
         x11-dri/mesa[?X]
+    run:
+        sys-libs/ncurses[>=6.2] [[
+            note = [ First version to ship 'alacritty' terminfo ]
+        ]]
 "
 
 BUGS_TO="danyspin97@protonmail.com"
@@ -49,14 +53,6 @@ ECARGO_FEATURE_ENABLES=(
 ZSH_COMPLETIONS=( extra/completions/_${PN} )
 BASH_COMPLETIONS=( extra/completions/${PN}.bash )
 
-alacritty_src_compile() {
-    cargo_src_compile
-
-    edo cd "${ALACRITTY_ROOT}"
-    edo mkdir terminfo
-    edo tic -x -o terminfo extra/alacritty.info
-}
-
 alacritty_src_install() {
     edo cd "${ALACRITTY_ROOT}"
     dobin target/release/${PN}
@@ -66,9 +62,6 @@ alacritty_src_install() {
 
     insinto /usr/share/pixmaps
     newins extra/logo/${PN}-term.svg Alacritty.svg
-
-    insinto /usr/share/terminfo/a
-    doins terminfo/a/*
 
     insinto /usr/share/man/man1
     newins extra/${PN}.man ${PN}.1
