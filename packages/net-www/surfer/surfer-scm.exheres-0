@@ -1,0 +1,40 @@
+# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='nihilowy' ]
+
+SUMMARY="Simple keyboard based web browser."
+
+# Assuming GPL-2, project says GPL
+LICENCES="GPL-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+
+DEPENDENCIES="
+    build+run:
+        net-libs/webkit:4.0
+        x11-libs/gtk+:3
+"
+
+DEFAULT_SRC_INSTALL_PARAMS=(
+    INSTALLDIR="${IMAGE}"
+)
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_prepare() {
+    default
+
+    edo sed -e "s;/usr/bin;/usr/$(exhost --target)/bin;" \
+            -e "s;/usr/lib;/usr/$(exhost --target)/lib;" \
+            -e "s;pkg-config;$(exhost --tool-prefix)pkg-config;" \
+            -i "${WORK}"/Makefile
+}
+
+src_install() {
+    default
+
+    keepdir /usr/$(exhost --target)/lib/${PN}
+}
