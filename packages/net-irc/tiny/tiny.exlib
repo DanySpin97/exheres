@@ -1,0 +1,31 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cargo [ disable_default_features=true channel=beta ] \
+        github [ user='osa1' tag=v${PV}-test ]
+
+SUMMARY="A console IRC client"
+
+LICENCES="MIT"
+SLOT="0"
+MYOPTIONS="
+    dbus [[ description = [ Enable dbus support for desktop notifications ] ]]
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
+"
+
+WORK="${WORK}/${PN}"
+
+ECARGO_FEATURES=(
+    tls-native
+)
+
+ECARGO_FEATURES_ENABLE=(
+    'dbus desktop-notification'
+)
+
