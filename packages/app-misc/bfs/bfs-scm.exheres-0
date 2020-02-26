@@ -1,29 +1,7 @@
-# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2019-2020 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='tavianator' ]
+require bfs
 
-SUMMARY="A breadth-first version of the UNIX find command."
-
-LICENCES="BSD-0"
-SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
-
-DEPENDENCIES="
-    build+run:
-        sys-apps/acl
-        sys-apps/attr
-        sys-libs/libcap
-"
-
-BUGS_TO="danyspin97@protonmail.com"
-
-DEFAULT_SRC_INSTALL_PARAMS=(
-    PREFIX=/usr/$(exhost --target)
-    MANDIR=/usr/share/man
-)
-
-# Tests are failing
-RESTRICT="test"
 
