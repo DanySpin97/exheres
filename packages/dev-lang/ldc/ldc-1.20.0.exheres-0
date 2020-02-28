@@ -7,8 +7,8 @@ require github [ user='ldc-developers' pnv=${PNV}-src release=v${PV} \
 DMD_VER="2.0.88"
 
 MUSL_BOOTSTRAP="
-https://alpine.global.ssl.fastly.net/alpine/edge/testing/x86_64/${PN}-runtime-${PV}-r0.apk -> ${PNV}-alpine-runtime.tar.gz
-https://alpine.global.ssl.fastly.net/alpine/edge/testing/x86_64/${PN}-${PV}-r0.apk -> ${PNV}-alpine.tar.gz
+https://alpine.global.ssl.fastly.net/alpine/edge/testing/x86_64/${PN}-runtime-${PV}-r1.apk -> ${PNV}-alpine-runtime.tar.gz
+https://alpine.global.ssl.fastly.net/alpine/edge/testing/x86_64/${PN}-${PV}-r1.apk -> ${PNV}-alpine.tar.gz
 "
 
 DOWNLOADS+="
@@ -41,7 +41,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build+run:
         app-arch/xz
-        dev-lang/llvm:9
+        dev-lang/llvm:=
         dev-libs/icu:=
         dev-libs/libedit
         dev-libs/libxml2:2.0
