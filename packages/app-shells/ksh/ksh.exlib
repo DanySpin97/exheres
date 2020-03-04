@@ -2,9 +2,9 @@
 # Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='att' pn='ast' ] meson
+require github [ user='ksh2020' ] meson
 
-export_exlib_phases src_install
+export_exlib_phases src_prepare src_install
 
 SUMMARY="The Korn Shell"
 
@@ -32,6 +32,13 @@ MESON_SRC_CONFIGURE_TESTS=(
 
 # Tests are failing
 RESTRICT="test"
+
+ksh_src_prepare() {
+    meson_src_prepare
+
+    edo sed -i -e "s;install_prefix + '/bin';'/usr/$(exhost --target)/bin';" \
+            "${MESON_SOURCE}"/src/cmd/ksh93/meson.build
+}
 
 ksh_src_install() {
     edo sed -i "$ a master_doc = 'index'" ../${PNV}/src/cmd/${PN}93/docs/conf.py
