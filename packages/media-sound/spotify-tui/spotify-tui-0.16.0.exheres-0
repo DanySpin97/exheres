@@ -8,9 +8,17 @@ SUMMARY="Spotify for the terminal written in Rust."
 LICENCES="MIT"
 SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
+MYOPTIONS="
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
+"
 
-DEPENDENCIES=""
+DEPENDENCIES="
+    build+run:
+        sys-libs/ncurses
+        x11-libs/xcb
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
+"
 
 BUGS_TO="danyspin97@protonmail.com"
 
