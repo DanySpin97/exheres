@@ -1,0 +1,41 @@
+# Copyright 2019-2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='hrkfdn' tag=v${PV} ]
+require cargo [ disable_default_features=true ]
+
+SUMMARY="Cross-platform ncurses Spotify client written in Rust."
+
+LICENCES="BSD-2"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    clipboard [[ description = [ Enable clipboard access ] ]]
+    mpris [[ description = [ Enable mpris interface support ] ]]
+    ( alsa pulseaudio ) [[ number-selected = at-least-one ]]
+    ( providers: libressl openssl ) ( providers: libressl openssl )
+"
+
+DEPENDENCIES="
+    build:
+        dev-lang/python:*[>=3.0]
+        virtual/pkg-config
+    build+run:
+        sys-libs/ncurses
+        clipboard? ( x11-libs/libxcb )
+        alsa? ( sys-sound/alsa-lib )
+        mpris? ( sys-apps/dbus )
+        pulseaudio? ( media-sound/pulseaudio )
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+ECARGO_FEATURE_ENABLES=(
+    'alsa alsa_backend'
+    'clipboard share_clipboard'
+    mpris
+    'pulseaudio pulseaudio_backend'
+)
+
