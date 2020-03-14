@@ -13,18 +13,24 @@ MYOPTIONS=""
 
 DEPENDENCIES="
     test:
-        dev-python/pygments[>=2.2][python_abis:*(-)?] [[
+        dev-python/Pygments[>=2.2][python_abis:*(-)?] [[
             description = [ Enable syntax highlighting ]
         ]]
     suggestion:
         dev-python/distro[python_abis:*(-)?] [[
             description = [ Add more information related to linux ]
         ]]
+        dev-python/setproctitle[python_abis:*(-)?] [[
+            description = [ Change title of terminal to the current subprocess ]
+        ]]
         dev-python/prompt_toolkit[python_abis:*(-)?] [[
             description = [ Support for advanced line-editing ]
         ]]
-        dev-python/pygments[>=2.2][python_abis:*(-)?] [[
+        dev-python/Pygments[>=2.2][python_abis:*(-)?] [[
             description = [ Enable syntax highlighting ]
         ]]
 "
+
+# Test suite has syntax errors as of version 0.9.14
+RESTRICT="test"
 
