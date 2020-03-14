@@ -1,11 +1,11 @@
-# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2019-2020 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='orhun' ] cmake [ api=2 ]
+require github [ user='orhun' ] cmake
 
 export_exlib_phases src_install
 
-SUMMARY="A VTE-based terminal emulator that aims to be simple and fast."
+SUMMARY="A VTE-based terminal emulator that aims to be simple and fast"
 
 LICENCES="GPL-3"
 SLOT="0"
