@@ -48,6 +48,5 @@ DEPENDENCIES="
 DEFAULT_SRC_INSTALL_PARAMS=(
     PREFIX=/usr/$(exhost --target)
     MANDIR=/usr/share/man
-    SYSCONFDIR=/etc
 )
 
