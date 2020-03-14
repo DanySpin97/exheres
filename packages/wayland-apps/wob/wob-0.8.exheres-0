@@ -20,5 +20,6 @@ DEPENDENCIES="
 
 MESON_SRC_CONFIGURE_PARAMS=(
     -Dman-pages=enabled
+    -Dseccomp=disabled
 )
 
