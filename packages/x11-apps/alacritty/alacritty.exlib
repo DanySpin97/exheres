@@ -1,10 +1,12 @@
-# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2018-2020 Danilo Spinella <danyspin97@protonmail.com>
 # Copyright 2019 Maxime SORIN <maxime.sorin@clever-cloud.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='jwilm' tag=v${PV} force_git_clone=true ] cargo zsh-completion bash-completion
+require cargo [ disable_default_features=true ] \
+        github [ user='jwilm' tag=v${PV} ] \
+        bash-completion zsh-completion
 
-export_exlib_phases src_prepare src_compile src_install
+export_exlib_phases src_compile src_install
 
 SUMMARY="A cross-platform, GPU-accelerated terminal emulator"
 DESCRIPTION="Alacritty is focused on simplicity and performance. The
@@ -17,8 +19,9 @@ LICENCES="Apache-2.0"
 SLOT="0"
 
 MYOPTIONS="
-    zsh-completion
     bash-completion
+    zsh-completion
+    ( X wayland ) [[ number-selected = at-least-one ]]
 "
 
 DEPENDENCIES="
@@ -31,31 +34,45 @@ DEPENDENCIES="
 
 BUGS_TO="danyspin97@protonmail.com"
 
+# --no-default-features is not allowed in the root of a virtual package
+# such as the root of the git repository
+# move in the alacritty directory instead
+ALACRITTY_ROOT="${WORK}"
+WORK="${WORK}"/${PN}
+
+ECARGO_FEATURE_ENABLES=(
+    'X x11'
+    'wayland wayland'
+)
+
+ZSH_COMPLETIONS=( extra/completions/_${PN} )
+BASH_COMPLETIONS=( extra/completions/${PN}.bash )
+
 alacritty_src_compile() {
     cargo_src_compile
 
+    edo cd "${ALACRITTY_ROOT}"
     edo mkdir terminfo
     edo tic -x -o terminfo extra/alacritty.info
 }
 
-ZSH_COMPLETIONS=( extra/completions/_alacritty )
-BASH_COMPLETIONS=( extra/completions/alacritty.bash )
-
-alacritty_src_prepare(){
-    edo sed -e /Icon/s/Alacritty/Terminal/ -i extra/linux/alacritty.desktop
-}
-
 alacritty_src_install(){
-    dobin "${WORK}"/target/release/alacritty
+    edo cd "${ALACRITTY_ROOT}"
+    dobin target/release/${PN}
 
     insinto /usr/share/applications
-    doins extra/linux/alacritty.desktop
+    doins extra/linux/Alacritty.desktop
+
+    insinto /usr/share/pixmaps
+    newins extra/logo/${PN}-term.svg Alacritty.svg
 
     insinto /usr/share/terminfo/a
     doins terminfo/a/*
 
-    emagicdocs
+    insinto /usr/share/man/man1
+    newins extra/${PN}.man ${PN}.1
 
     optionq zsh-completion && zsh-completion_src_install
     optionq bash-completion && bash-completion_src_install
 }
+
