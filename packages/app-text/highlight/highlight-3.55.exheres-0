@@ -1,5 +1,5 @@
 # Copyright 2014-2016 Alexander Scheuermann <alex+exherbo@tnix.de>
-# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2019-2020 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require lua [ multibuild=false whitelist="5.1 5.2 5.3" ]
@@ -25,6 +25,10 @@ DEPENDENCIES="
         qt5? ( x11-libs/qtbase:5 )
 "
 
+DEFAULT_SRC_INSTALL_PARAMS=(
+    bin_dir=/usr/$(exhost --target)/bin
+)
+
 src_prepare() {
     default
 
@@ -33,6 +37,7 @@ src_prepare() {
         -e '/^AR=/d' \
         -e 's/CFLAGS:=-Wall -O2 ${CFLAGS} -DNDEBUG/CFLAGS:=-Wall ${CFLAGS}/' \
         -e 's/^LDFLAGS =/LDFLAGS +=/' \
+        -e "s/^LUA_PKG_NAME=.*/LUA_PKG_NAME=lua-$(lua_get_abi)/" \
         -e 's/pkg-config/${PKG_CONFIG}/' \
         -i src/makefile
 
@@ -40,10 +45,6 @@ src_prepare() {
         -e "s/LIBS += -llua/LIBS += -llua$(lua_get_abi)/" \
         -i src/gui-qt/highlight.pro
 }
-
-DEFAULT_SRC_INSTALL_PARAMS=(
-    bin_dir=/usr/$(exhost --target)/bin
-    )
 
 src_compile() {
     emake help
