@@ -1,0 +1,23 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cargo github [ user='lotabout' tag=v${PV} ]
+
+SUMMARY="Fuzzy Finder written in Rust"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES=""
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_install() {
+    dobin target/release/sk
+    doman man/man1/sk.1
+
+    emagicdocs
+}
+
