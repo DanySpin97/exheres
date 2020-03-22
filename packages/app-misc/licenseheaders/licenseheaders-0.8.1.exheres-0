@@ -1,0 +1,21 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require pypi setup-py [ import='setuptools' blacklist='2.7' ]
+
+SUMMARY="A tool to update, change or add license headers"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    test:
+        dev-python/regex[python_abis:*(-)?]
+"
+
+# There are no tests
+RESTRICT="test"
+
