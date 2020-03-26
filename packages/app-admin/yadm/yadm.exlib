@@ -1,4 +1,4 @@
-# Copyright 2018 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2018-2020 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v3
 # Based in part upon 'yadm-1.12.0.ebuild', which is:
 #     Copyright 1999-2017 Gentoo Foundation
@@ -6,7 +6,7 @@
 require github [ user='TheLocehiliosan' ]
 require bash-completion zsh-completion
 
-export_exlib_phases src_install
+export_exlib_phases src_compile src_install
 
 SUMMARY="Yet Another Dotfiles Manager"
 HOMEPAGE="https://yadm.io/"
@@ -22,17 +22,26 @@ DEPENDENCIES="
         app-crypt/gnupg [[
             description = [ Support for encrypting confidential files ]
         ]]
-    test:
-        dev-util/bats
-        dev-util/shellcheck
 "
+
+# Test suite is run under docker
+RESTRICT="test"
 
 BASH_COMPLETIONS=( "completion/${PN}.bash_completion" )
 ZSH_COMPLETIONS=( "completion/${PN}.zsh_completion _yadm" )
 
+yadm_src_compile() {
+    :
+}
+
 yadm_src_install() {
     dobin ${PN}
     doman ${PN}.1
+
+    insinto /usr/share/${PN}
+    doins -r contrib
+
+    emagicdocs
 
     bash-completion_src_install
     zsh-completion_src_install
