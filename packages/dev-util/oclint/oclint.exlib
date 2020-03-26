@@ -9,6 +9,7 @@ HOMEPAGE="http://oclint.org"
 
 LICENCES="BSD-3"
 SLOT="0"
+LLVM_SLOT="9"
 
 DEPENDENCIES="
     build:
@@ -16,7 +17,8 @@ DEPENDENCIES="
         sys-devel/cmake
         sys-devel/ninja
     build+run:
-        dev-lang/clang:8
+        dev-lang/clang:${LLVM_SLOT}
+        dev-lang/llvm:${LLVM_SLOT}
 "
 
 src_prepare() {
@@ -24,26 +26,30 @@ src_prepare() {
 
     # upstream script looks for the llvm license in the wrong place (plus we already have it
     # installed), skip this step and we'll handle license installation manually.
-    edo sed -i '/^install_licenses()/d' oclint-scripts/bundle
+    edo sed -i '/^install_licenses()/d' ${PN}-scripts/bundle
+
+    edo sed -i '/-stdlib=libstdc/d' ${PN}-core/cmake/OCLintConfig.cmake
 }
 
 src_compile() {
-    pushd oclint-scripts
-    edo ./build -llvm-root=/usr/$(exhost --target)/lib/llvm/8 -release
+    pushd ${PN}-scripts
+    edo ./build -release \
+            -llvm-root=/usr/$(exhost --target)/lib/llvm/${LLVM_SLOT}
     popd
 }
 
 src_install() {
-    pushd oclint-scripts
-    edo ./bundle -llvm-root=/usr/$(exhost --target)/lib/llvm/8 -release
+    pushd ${PN}-scripts
+    edo ./bundle -release \
+            -llvm-root=/usr/$(exhost --target)/lib/llvm/${LLVM_SLOT}
     popd
 
     # manual install
-    dobin build/oclint-release/bin/*
+    dobin build/${PN}-release/bin/*
 
     for i in reporters rules ; do
         insinto /usr/$(exhost --target)/lib/${PN}/${i}/
-        doins build/oclint-release/lib/${PN}/${i}/*.so
+        doins build/${PN}-release/lib/${PN}/${i}/*.so
     done
 
     insinto /usr/share/doc/${PNV}
