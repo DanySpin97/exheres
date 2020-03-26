@@ -6,7 +6,7 @@
 require github [ user='TheLocehiliosan' ]
 require bash-completion zsh-completion
 
-export_exlib_phases src_compile src_install
+export_exlib_phases src_compile src_test src_install
 
 SUMMARY="Yet Another Dotfiles Manager"
 HOMEPAGE="https://yadm.io/"
@@ -22,9 +22,12 @@ DEPENDENCIES="
         app-crypt/gnupg [[
             description = [ Support for encrypting confidential files ]
         ]]
+    test:
+        app-crypt/gnupg
+        dev-python/pytest
 "
 
-# Test suite is run under docker
+# Tests fail
 RESTRICT="test"
 
 BASH_COMPLETIONS=( "completion/${PN}.bash_completion" )
@@ -32,6 +35,15 @@ ZSH_COMPLETIONS=( "completion/${PN}.zsh_completion _yadm" )
 
 yadm_src_compile() {
     :
+}
+
+yadm_src_test() {
+    # Allow gnupg to run
+    esandbox disable_exec
+    esandbox disable_net
+    pytest
+    esandbox enable_exec
+    esandbox enable_net
 }
 
 yadm_src_install() {
