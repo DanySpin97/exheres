@@ -1,4 +1,4 @@
-# Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
+# Copyright 2019-2020 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user='emersion' tag=v${PV} ] meson
@@ -15,7 +15,6 @@ DEPENDENCIES="
         app-doc/scdoc[>=1.9.2]
     build+run:
         sys-libs/wayland
-        sys-libs/wayland-protocols[>=1.14]
 "
 
 MESON_SRC_CONFIGURE_PARAMS=(
