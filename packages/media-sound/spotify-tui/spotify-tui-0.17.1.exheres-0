@@ -15,7 +15,7 @@ MYOPTIONS="
 DEPENDENCIES="
     build+run:
         sys-libs/ncurses
-        x11-libs/xcb
+        x11-libs/libxcb
         providers:libressl? ( dev-libs/libressl:= )
         providers:openssl? ( dev-libs/openssl )
 "
