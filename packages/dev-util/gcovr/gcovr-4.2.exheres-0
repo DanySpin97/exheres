@@ -3,7 +3,7 @@
 
 require setup-py [ import='setuptools' blacklist=" " ] pypi
 
-SUMMARY="The command-line client for the patchwork patch tracking tool."
+SUMMARY="Generate code coverage reports with gcc/gcov"
 
 LICENCES="BSD-3"
 SLOT="0"
