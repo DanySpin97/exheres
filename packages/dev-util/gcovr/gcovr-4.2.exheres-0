@@ -1,0 +1,22 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require setup-py [ import='setuptools' blacklist=" " ] pypi
+
+SUMMARY="The command-line client for the patchwork patch tracking tool."
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-python/Jinja2[python_abis:*(-)?]
+        dev-python/lxml[python_abis:*(-)?]
+"
+
+# There is no test suite
+RESTRICT="test"
+
