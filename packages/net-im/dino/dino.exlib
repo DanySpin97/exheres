@@ -1,7 +1,7 @@
 # Copyright 2019-2020 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user='dino' ] cmake [ ninja=true ]
+require github [ user='dino' tag=v${PV} ] cmake [ ninja=true ]
 
 export_exlib_phases src_test
 
