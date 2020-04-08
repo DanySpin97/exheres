@@ -1,38 +1,8 @@
 # Copyright 2019 Danilo Spinella <danyspin97@protonmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
-SCM_libsignal_REPOSITORY="https://github.com/WhisperSystems/libsignal-protocol-c.git"
-SCM_SECONDARY_REPOSITORIES="libsignal"
-SCM_EXTERNAL_REFS="plugins/signal-protocol/libsignal-protocol-c:libsignal "
-require github [ user='dino' ]
+SCM_EXTERNAL_REFS="plugins/signal-protocol/libsignal-protocol-c: "
+require dino
 
-SUMMARY="Modern XMPP Char Client using GTK+/Vala"
-
-LICENCES="GPL-3"
-SLOT="0"
 PLATFORMS="~amd64"
-MYOPTIONS=""
-
-DEPENDENCIES="
-    build:
-        dev-lang/vala:=[>=0.34]
-        sys-devel/cmake
-        sys-devel/gettext
-        sys-devel/ninja
-    build+run:
-        app-crypt/gpgme
-        base/libgee:0.8[>=0.10]
-        dev-libs/glib:2[>=2.38]
-        dev-libs/glib-networking
-        dev-libs/libgcrypt
-        gnome-desktop/libsoup
-        media-libs/qrencode:=
-        x11-libs/gtk+:3[>=3.22]
-"
-
-DEFAULT_SRC_CONFIGURE_PARAMS=(
-    --hates=datarootdir
-    --hates=docdir
-    --hates=enable-fast-install
-)
 

@@ -1,0 +1,45 @@
+# Copyright 2019-2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='dino' ] cmake [ ninja=true ]
+
+export_exlib_phases src_test
+
+SUMMARY="Modern XMPP Char Client using GTK+/Vala"
+
+LICENCES="GPL-3"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        base/libgee:0.8
+        dev-lang/vala:=[>=0.34]
+        sys-devel/gettext
+    build+run:
+        app-crypt/gpgme
+        base/libgee:0.8[>=0.10]
+        dev-libs/glib:2[>=2.38]
+        dev-libs/glib-networking
+        dev-libs/libgcrypt
+        dev-libs/libsignal-protocol-c[~2.3.2]
+        gnome-desktop/libsoup
+        media-libs/qrencode:=
+        x11-libs/gtk+:3[>=3.22]
+    run:
+       gnome-desktop/gsettings-desktop-schemas
+"
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DSHARE_INSTALL_PREFIX=/usr/share
+)
+
+CMAKE_SRC_CONFIGURE_TESTS=(
+    '-DBUILD_TESTS=TRUE -DBUILD_TESTS=FALSE'
+)
+
+dino_src_test() {
+    edo ./signal-protocol-vala-test
+    edo ./xmpp-vala-test
+}
+
