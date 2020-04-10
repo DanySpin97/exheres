@@ -66,6 +66,8 @@ alacritty_src_install() {
     insinto /usr/share/man/man1
     newins extra/${PN}.man ${PN}.1
 
+    emagicdocs
+
     optionq zsh-completion && zsh-completion_src_install
     optionq bash-completion && bash-completion_src_install
 }
