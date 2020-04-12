@@ -49,9 +49,9 @@ index 0000000..b9c4623
 +++ b/date.pc.in
 @@ -0,0 +1,10 @@
 +prefix=@CMAKE_INSTALL_PREFIX@
-+exec_prefix=@CMAKE_INSTALL_BINDIR@
-+libdir=@CMAKE_INSTALL_LIB@
-+includedir=@CMAKE_INSTALL_INCLUDE@
++exec_prefix=${prefix}/bin
++libdir=${prefix}/lib
++includedir=${prefix}/include
 +
 +Name: date
 +Description: A date and time library based on the C++11/14/17 <chrono> header
