@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 require github [ user="boothj5" ] autotools [ supported_autoconf=[ 2.5 ] supported_automake=[ 1.13 1.12 1.11 1.10 ] ]
-require python [ blacklist="3.1" with_opt=true multibuild=false ]
+require python [ blacklist=" " with_opt=true multibuild=false ]
 
 SUMMARY="A console based XMPP client"
 HOMEPAGE="http://www.profanity.im"
@@ -11,6 +11,9 @@ LICENCES="GPL-3"
 SLOT="0"
 MYOPTIONS="
     libnotify
+    omemo [[
+        description = [ Support message encryption using OMEMO ( XEP-0163 ) ]
+    ]]
     otr [[ description = [ Support message encryption using OTR (XEP-0364) ] ]]
     pgp [[ description = [ Support message encryption using PGP (XEP-0027) ] ]]
     tray [[ description = [ Enable GTK tray icons ] ]]
@@ -19,13 +22,18 @@ MYOPTIONS="
 
 DEPENDENCIES="
     build+run:
+        dev-db/sqlite[>=3.22.0]
         dev-libs/expat
-        dev-libs/glib:2[>=2.40]
+        dev-libs/glib:2[>=2.56]
         dev-libs/libmesode[>=0.9.2]
         net-misc/curl
         sys-libs/ncurses
         libnotify? ( x11-libs/libnotify )
-        otr? ( net-libs/libotr[>=4.0] )
+        omemo? ( dev-libs/libsignal-protocol-c[>=2.3.2] )
+        otr? (
+            dev-libs/libgcrypt[>=1.7.0]
+            net-libs/libotr[>=4.0]
+        )
         pgp? ( app-crypt/gpgme )
         tray? ( x11-libs/gtk+:2[>=2.24.10] )
         xscreensaver? (
@@ -42,10 +50,11 @@ DEFAULT_SRC_CONFIGURE_PARAMS=( '--enable-plugins' '--enable-c-plugins' )
 DEFAULT_SRC_CONFIGURE_OPTIONS=( "python PYTHON_VERSION=${PYTHON_ABIS}" )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     'libnotify notifications'
+    'omemo'
     'otr'
     'pgp'
     'python python-plugins'
-    'tray icons'
+    'tray icons-and-clipboard'
 )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'xscreensaver' )
 
