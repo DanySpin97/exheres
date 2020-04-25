@@ -19,7 +19,7 @@ MYOPTIONS="static"
 
 DEPENDENCIES="
     build:
-        dev-libs/skalibs[>=2.8.0.0]
+        dev-libs/skalibs[>=2.9.2.0]
     run:
         sys-apps/s6[>=2.8.0.0]
 "
