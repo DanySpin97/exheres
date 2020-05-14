@@ -1,0 +1,36 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='Titor8115' ] toolchain-funcs
+
+SUMMARY="man-page inspired Markdown viewer"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/libxml2:=
+        sys-libs/ncurses
+"
+
+src_prepare() {
+    default
+
+    if ld-is-lld; then
+        edo sed -i 's/-Wl,--copy-dt-needed-entries//' Makefile
+    fi
+}
+
+src_compile() {
+    emake CC=$(exhost --tool-prefix)cc
+}
+
+src_install() {
+    dobin ${PN}
+
+    emagicdocs
+}
+
