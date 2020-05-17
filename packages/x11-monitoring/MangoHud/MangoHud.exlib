@@ -1,0 +1,48 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_imgui_REPOSITORY="https://github.com/flightlessmango/imgui"
+SCM_SECONDARY_REPOSITORIES="imgui"
+SCM_EXTERNAL_REFS="modules/ImGui/src:imgui"
+require github [ user='flightlessmango' tag=v${PV} branch=develop force_git_clone=true ] meson
+
+SUMMARY="A modification of the Mesa Vulkan overaly"
+
+LICENCES="MIT"
+SLOT="0"
+
+MYOPTIONS="
+    ( X wayland ) [[ number-selected = at-least-one ]]
+    dbus
+"
+
+# TODO Check deps
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        sys-libs/vulkan-headers
+        sys-libs/vulkan-loader
+        x11-dri/mesa[X?][wayland?]
+        dbus? ( sys-apps/dbus )
+        X? ( x11-server/xorg-server )
+        wayland? ( sys-libs/wayland[>=1.11] )
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+MESON_SRC_CONFIGURE_PARAMS=(
+    -Dappend_libdir_mangohud=true
+    -Dglibcxx_asserts=false
+    -Dwith_dlsym=disabled
+    -Dwith_xnvctrl=disabled
+    -Duse_system_vulkan=enabled
+    -Duse_system_nvml=false
+)
+
+MESON_SRC_CONFIGURE_OPTION_FEATURES=(
+    'dbus with_dbus'
+    'X with_x11'
+    'wayland with_wayland'
+)
+
