@@ -23,7 +23,7 @@ DEPENDENCIES="
         dev-python/setproctitle[python_abis:*(-)?] [[
             description = [ Change title of terminal to the current subprocess ]
         ]]
-        dev-python/prompt_toolkit[python_abis:*(-)?] [[
+        dev-python/prompt_toolkit[>=2.0][python_abis:*(-)?] [[
             description = [ Support for advanced line-editing ]
         ]]
         dev-python/Pygments[>=2.2][python_abis:*(-)?] [[
@@ -31,6 +31,6 @@ DEPENDENCIES="
         ]]
 "
 
-# Test suite has syntax errors as of version 0.9.14
+# Test suite has syntax errors as of version 0.9.18
 RESTRICT="test"
 
