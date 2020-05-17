@@ -1,0 +1,30 @@
+# Copyright 2020 Danilo Spinella <danyspin97@protonmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ user='blackhole89' ] cmake [ api=2 ]
+
+SUMMARY="A GTK3 hierarchical notetaking application with tablet support"
+
+LICENCES="GPL-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/jsoncpp:=
+        gnome-bindings/gtkmm:3[>=3.20]
+        gnome-bindings/gtksourceviewmm:3.0[>=3.18]
+        media-libs/fontconfig
+"
+
+BUGS_TO="danyspin97@protonmail.com"
+
+src_prepare() {
+    cmake_src_prepare
+
+    edo sed -e "s;share;/usr/share;" \
+            -e "s/pkg-config/$(exhost --tool-prefix)pkg-config/" \
+            -i "${CMAKE_SOURCE}"/CMakeLists.txt
+}
+
